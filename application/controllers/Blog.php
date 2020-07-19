@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller
 {
@@ -12,11 +13,7 @@ class Blog extends CI_Controller
 		$data['title'] = 'Category blog';
 		$data['footer_text'] = 'Text in footer';
 		$data['h1'] = 'Category h1';
-		$users = $this->users->getUsers();
-		/*echo "<pre>";
-		var_dump($users);
-		echo "</pre>";
-		*/
+		$data['users'] = $this->users->getUsers();
 		$this->load->view('blog/category', $data);
 	}
 
@@ -24,6 +21,8 @@ class Blog extends CI_Controller
 		$data['title'] = 'Single blog';
 		$data['footer_text'] = 'Text in footer';
 		$data['h1'] = 'Single blog h1 '.$id;
-		$this->load->view('blog/index', $data);
+		$data['users'] = $this->users->getUsers($id);
+		if(empty($data['users'])) show_404();
+		else $this->load->view('blog/index', $data);
 	}
 }
