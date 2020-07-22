@@ -6,7 +6,7 @@
 				<input type="text"
 					   name="login"
 					   placeholder="Login"
-					   class="input_mm"
+					   class="input_mm js_login"
 				>
 			</div>
 			<div class="inputBox">
@@ -14,7 +14,7 @@
 					type="password"
 					name="password"
 					placeholder="Password"
-					class="input_mm inputBox"
+					class="input_mm js_password"
 				>
 			</div>
             <span class="submit_mm">Login</span>
