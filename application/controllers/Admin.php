@@ -9,12 +9,15 @@ class Admin extends CI_Controller
 			$_SESSION['admin'] = $_COOKIE['admin'];
 		}
 		if(!isset($_SESSION['admin'])) redirect('/login', 'location', 301);
+		$this->load->model('static_page');
 	}
 	public function index() {
 		$this->load->view('admin/admin');
 	}
 	public function page(){
-		$this->load->view('admin/page');
+		$data['h1'] = 'Статические страницы';
+		$data['pages'] = $this->static_page->getAllPage();
+		$this->load->view('admin/page', $data);
 	}
 	public function logout(){
 		$this->output->delete_cache();
@@ -26,9 +29,11 @@ class Admin extends CI_Controller
 		}
 	}
 	public function questionary(){
-		$this->load->view('admin/questionary');
+		$data['h1'] = 'Анкеты';
+		$this->load->view('admin/questionary', $data);
 	}
 	public function tests(){
-		$this->load->view('admin/tests');
+		$data['h1'] = 'Тестирования';
+		$this->load->view('admin/tests', $data);
 	}
 }

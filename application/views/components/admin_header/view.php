@@ -9,6 +9,9 @@
 		<?php
 			include 'style.css';
 			include ROOT_COMPONENTS.'/admin_sidebar/style.css';
+			include ROOT_COMPONENTS.'/admin_title/style.css';
+			include ROOT_COMPONENTS.'/admin_loop_category/style.css';
+			include ROOT_COMPONENTS.'/admin_neon_button/style.css';
 		?>
 	</style>
 </head>
