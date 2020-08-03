@@ -18,6 +18,8 @@ class Login extends CI_Controller
 		$response['status'] = 'false';
 		$data = $this->admins->getAdmins($_POST['login'], $_POST['password']);
 		if(!empty($data)) {
+			session_start();
+			$_SESSION['admin'] = $data[0]['id'];
 			$response['status'] = 'success';
 			$response['id'] = $data[0]['id'];
 		}

@@ -1,15 +1,9 @@
 <?php
+include_once ROOT.'/application/core/Admin_Controller.php';
 
-class Admin extends CI_Controller
-{
+class Admin extends Admin_Controller {
 	public function __construct() {
 		parent::__construct();
-		if(isset($_COOKIE['admin'])) {
-			session_start();
-			$_SESSION['admin'] = $_COOKIE['admin'];
-		}
-		if(!isset($_SESSION['admin'])) redirect('/login', 'location', 301);
-		$this->load->model('static_page');
 	}
 	public function index() {
 		$this->load->view('admin/admin');

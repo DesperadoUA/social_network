@@ -4,5 +4,6 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- include summernote css/js -->
 <script src="/admin_modules/MM_Module_Rich_Text/script.js"></script>
+<script src="/admin_modules/MM_Module_Cyr_To_Lat/script.js"></script>
 </body>
 </html>

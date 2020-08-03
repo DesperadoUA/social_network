@@ -18,10 +18,7 @@ btn.addEventListener('click', function () {
 
 	;(async () => {
 		const data = await DAL.checkLogin(login, password)
-		if(data.status === 'success') {
-			document.cookie = encodeURIComponent('admin') + '=' + encodeURIComponent(data.id)
-			window.location.href = '/admin'
-		}
+		if(data.status === 'success') window.location.href = '/admin'
 		else {
 			document.querySelector('.error_block').innerHTML = 'Не верный логин или пароль'
 		}

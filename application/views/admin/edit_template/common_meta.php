@@ -7,7 +7,7 @@
 	<?php MM_Module_Input::create('permalink', $permalink); ?>
 	<?php MM_Module_Input::create('description', $description); ?>
 	<?php MM_Module_Input::create('keywords', $keywords); ?>
-	<?php MM_Module_Input::create('data_publick', $data_publick, 'date'); ?>
-	<?php MM_Module_Input::create('data_change', $data_change, 'date'); ?>
-	<?php MM_Module_Rich_Text::create(); ?>
+	<?php MM_Module_Input::create('data_publick', $data_publick, 'readonly','date'); ?>
+	<?php MM_Module_Input::create('data_change', $data_change,'readonly', 'date'); ?>
+	<?php MM_Module_Rich_Text::create($content->text, 'Основной контент'); ?>
 </div>

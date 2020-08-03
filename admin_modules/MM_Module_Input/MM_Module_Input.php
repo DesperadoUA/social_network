@@ -3,9 +3,12 @@ class MM_Module_Input {
 	static public function create(
 		$name = 'name',
 		$value = '',
+		$read_only = '',
 		$type = 'text',
 		$class_wrapper = 'wrapper_input',
-		$class_input = 'mm_input'){
+		$class_input = 'mm_input'
+	)
+	{
 
 		if($type === 'date') $value = substr($value, 0, 10);
 
@@ -14,7 +17,8 @@ class MM_Module_Input {
 						<input type='{$type}'
 							   class='{$class_input}'
 							   name='{$name}'
-							   value='{$value}' />
+							   value='{$value} '
+							    {$read_only} />
 					</div>";
 		echo $strHTML;
 	}

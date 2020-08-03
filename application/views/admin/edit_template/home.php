@@ -1,4 +1,7 @@
-<?php $this->load->view('components/admin_header/view.php'); ?>
+<?php
+    include_once ROOT.'/admin_modules/MM_Module_Cyr_To_Lat/MM_Module_Cyr_To_Lat.php';
+
+    $this->load->view('components/admin_header/view.php'); ?>
 	<div class="container-fluid">
 		<div class="row">
 			<?php
@@ -8,6 +11,7 @@
 				<?php
 					$this->load->view('components/admin_title/view.php');
 				    $this->load->view('admin/edit_template/common_meta.php');
+                    MM_Module_Cyr_To_Lat::create();
 				?>
 			</div>
 		</div>
