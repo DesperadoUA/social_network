@@ -22,4 +22,11 @@ class MM_Module_Input {
 					</div>";
 		echo $strHTML;
 	}
+	static public function getData($name){
+		$data = '';
+		if(array_key_exists($name, $_POST)) {
+			$data = $_POST[$name];
+		}
+		return $data;
+	}
 }

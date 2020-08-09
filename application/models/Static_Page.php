@@ -20,4 +20,9 @@ class Static_Page extends CI_Model
 		);
 		return $query->result_array();
 	}
+	public function updateDateById($id, $data) {
+		$this->db->set($data);
+		$this->db->where('id', $id);
+		$this->db->update(self::NAME_DB);
+	}
 }

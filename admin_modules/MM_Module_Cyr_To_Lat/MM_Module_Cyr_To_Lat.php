@@ -10,13 +10,20 @@ class MM_Module_Cyr_To_Lat {
 		        <div class='wrapper_input'>
 				   <label for='title'>{$title}</label>
 					<input type='text' class='mm_input mm_module_cyr_to_lat_one' 
-						 name='{$name_1}' value=''>
+						 name='cyr_to_lat_{$name_1}' value=''>
 				</div>
 				<div class='wrapper_input'>
 				   <label for='title'>{$permalink}</label>
 					<input type='text' class='mm_input mm_module_cyr_to_lat_two' 
-						 name='{$name_2}' value=''>
+						 name='cyr_to_lat_{$name_2}' value=''>
 				</div>
 			  </div>";
-	}
+		}
+		static public function getData($name){
+			$data = '';
+		    if(array_key_exists('cyr_to_lat_'.$name, $_POST)) {
+		    	$data = $_POST['cyr_to_lat_'.$name];
+			}
+			return $data;
+		}
 }

@@ -16,9 +16,7 @@ if(cyrToLat){
 	const cyrToLat = document.querySelector('.mm_module_cyr_to_lat')
 	const firstInput = document.querySelector('.mm_module_cyr_to_lat_one')
 	const secondInput = document.querySelector('.mm_module_cyr_to_lat_two')
-
 	firstInput.addEventListener('change', updateInput)
-
 	function updateInput() {
 		const strCyr = firstInput.value.toUpperCase()
 		let strLat = ''

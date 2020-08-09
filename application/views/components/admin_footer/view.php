@@ -5,5 +5,6 @@
 <!-- include summernote css/js -->
 <script src="/admin_modules/MM_Module_Rich_Text/script.js"></script>
 <script src="/admin_modules/MM_Module_Cyr_To_Lat/script.js"></script>
+<script src="/admin_modules/MM_Module_Two_Input/script.js"></script>
 </body>
 </html>

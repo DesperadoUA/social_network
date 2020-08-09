@@ -6,6 +6,78 @@
     padding: 15px;
     flex-wrap: wrap;
 }
+.mm_row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+.delete_module {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-size: 14px;
+    font-family: Forum,cursive;
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #f15b5a;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 70px;
+}
+.up_module {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-size: 14px;
+    font-family: Forum,cursive;
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    background: rgba(5,181,229,.7);
+}
+.bottom_module {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-size: 14px;
+    font-family: Forum,cursive;
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    background: rgba(5,181,229,.7);
+}
+.mm_container {
+    width: 100%;
+}
 .wrapper_input {
     width: 50%;
     padding: 10px;
@@ -17,4 +89,22 @@
     border-bottom: 4px solid #25bcff;
     width: 100%;
     padding: 10px;
+}
+.wrapper_button_add {
+    border-top:3px solid #fff;
+    padding: 15px;
+    width: 100%;
+}
+.btn_add {
+    padding: 10px 20px;
+    background: #ff4a39;
+    color: #fff;
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.7s;
+    border-radius: 4px;
+}
+.btn_add:hover {
+    background: #25bcff;
 }
