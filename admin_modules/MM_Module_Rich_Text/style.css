@@ -6,13 +6,6 @@
  width: 100%;
 }
 
-.rich_text_title {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 22px;
-}
 @font-face {
     font-family: "summernote";
     font-style: normal;

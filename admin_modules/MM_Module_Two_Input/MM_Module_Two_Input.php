@@ -1,11 +1,20 @@
 <?php
-class MM_Module_Two_Input {
-	static function create($data, $name, $title, $label_1, $label_2){
+class MM_Module_Two_Input extends MM_Module {
+	static function create($name, $settings, $data){
+		$title = '';
+		$label_1 = '';
+		$label_2 = '';
+
+		if(array_key_exists('title', $settings)) $title = $settings['title'];
+		if(array_key_exists('label_1', $settings)) $label_1 = $settings['label_1'];
+		if(array_key_exists('label_2', $settings)) $label_2 = $settings['label_2'];
+
 		$strHTML = '<div class="meta_wrapper mm_module_two_input">';
+		$strHTML .= "<div class='rich_text_title'>{$title}</div>
+					 <div class='mm_open_close'>&#9660;</div>
+					 <div class='mm_module_container hide'>";
 		$strHTML .= "<div class='mm_container' 
                         data-type='mm_module_two_input_{$name}'>";
-		$strHTML .= "<div class='rich_text_title'>{$title}</div>";
-
 		foreach ($data as $item) {
 			$strHTML .= "<div class='mm_row'>
 							<span class='delete_module'>X</span>
@@ -37,21 +46,29 @@ class MM_Module_Two_Input {
 							Добавить
 						</span>
 					</div>";
-		$strHTML .= '</div>';
+		$strHTML .= '</div></div>';
 		echo $strHTML;
 	}
 	static function getData($name){
 		$data = [];
-		if(array_key_exists('first_input_'.$name, $_POST)){
-			$first_input = $_POST['first_input_'.$name];
-			$second_input = $_POST['second_input_'.$name];
-			for($i=0; $i<count($first_input); $i++){
-				$data[] = [
-					'value_1' => $first_input[$i],
-					'value_2' => $second_input[$i],
-				];
-			}
+
+		$settings = [
+			'input_name' => 'first_input_'.$name
+		];
+		$first_input = self::getDataFromMultipleInput($settings);
+
+		$settings = [
+			'input_name' => 'second_input_'.$name
+		];
+		$second_input = self::getDataFromMultipleInput($settings);
+
+		for($i=0; $i<count($first_input); $i++){
+			$data[] = [
+				'value_1' => $first_input[$i],
+				'value_2' => $second_input[$i],
+			];
 		}
+
 		return $data;
 	}
 }

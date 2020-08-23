@@ -1,0 +1,10 @@
+(async()=>{
+	const cyrToLat = await import('./../MM_Module_Cyr_To_Lat/script.js')
+	cyrToLat.initial()
+	const twoInput = await import('./../MM_Module_Two_Input/script.js')
+	twoInput.initial()
+	const multipleImg = await import('./../MM_Module_Multiple_Image/script.js')
+	multipleImg.initial()
+	const common = await import('./../common/script.js')
+	common.initial()
+})()

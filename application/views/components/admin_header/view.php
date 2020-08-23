@@ -12,10 +12,9 @@
 			include ROOT_COMPONENTS.'/admin_title/style.css';
 			include ROOT_COMPONENTS.'/admin_loop_category/style.css';
 			include ROOT_COMPONENTS.'/admin_neon_button/style.css';
-			include ROOT.'/admin_modules/MM_Module_Input/style.css';
-			include ROOT.'/admin_modules/MM_Module_Rich_Text/style.css';
 		?>
 	</style>
+    <link href="/admin_modules/bundle/style.css" rel="stylesheet">
 </head>
 <body>
 <header class="header">
