@@ -50,9 +50,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'main';
-$router['blog'] = 'blog/index';
-$route['blog/(:any)'] = 'blog/single/$1';
+$route['how-it-works'] = 'main';
+$route['for-specialists'] = 'main';
+$route['thx'] = 'main';
+$route['api/mailer'] = 'API_Controller/mailer';
+$route['api/clinics'] = 'API_Controller/clinics';
+$route['api/research'] = 'API_Controller/research';
+
+$route['research'] = 'Research_Controller';
+$route['research/page/(:any)'] = 'Research_Controller';
+$route['research/(:any)'] = 'Research_Controller/single/$1';
+
+$route['city/(:any)'] = 'City_Controller/single/$1';
+
+$route['clinics'] = 'Clinic_Controller';
+$route['clinics/page/(:any)'] = 'Clinic_Controller';
+$route['clinics/page'] = 'Clinic_Controller';
+$route['clinic/(:any)/page'] = 'Clinic_Controller/single/$1/$2';
+$route['clinic/(:any)/page/(:any)'] = 'Clinic_Controller/single/$1/$2';
+$route['clinic/(:any)'] = 'Clinic_Controller/single/$1/$2';
+
+$route['blog'] = 'Blog_Controller/index';
+$route['blog/page/(:any)'] = 'Blog_Controller/index';
+$route['blog/(:any)'] = 'Blog_Controller/single/$1';
+
+
+/* Admin */
 $route['admin/static-page/update'] = 'admin/staticPageUpdate';
 $route['admin/static-page/(:any)'] = 'admin/pageEdit/$1';
-$route['404_override'] = '';
+$route['admin/settings'] = 'admin/settings';
+$route['admin/settings/update'] = 'admin/settingsUpdate';
+$route['admin/settings/(:any)'] = 'admin/settingsEdit/$1';
+$route['admin/options'] = 'admin/options';
+$route['admin/options/update'] = 'admin/optionsUpdate';
+$route['admin/options/(:any)'] = 'admin/optionsEdit/$1';
+
+$route['admin/research'] = 'Admin_research';
+$route['admin/research/update'] = 'admin_research/update';
+$route['admin/research/delete'] = 'admin_research/delete';
+$route['admin/research/add'] = 'admin_research/add';
+$route['admin/research/add-post'] = 'admin_research/addPost';
+$route['admin/research/(:any)'] = 'admin_research/single/$1';
+
+$route['admin/post/update'] = 'admin_post/update';
+$route['admin/post/delete'] = 'admin_post/delete';
+$route['admin/post/add-post'] = 'admin_post/addPost';
+
+$route['admin/clinic'] = 'admin_post';
+$route['admin/clinic/add'] = 'admin_post/add';
+$route['admin/clinic/(:any)'] = 'admin_post/single/$1';
+
+$route['admin/city'] = 'admin_post';
+$route['admin/city/add'] = 'admin_post/add';
+$route['admin/city/(:any)'] = 'admin_post/single/$1';
+
+$route['admin/blog'] = 'admin_post';
+$route['admin/blog/add'] = 'admin_post/add';
+$route['admin/blog/(:any)'] = 'admin_post/single/$1';
+
+
+$route['404_override'] = 'main/show_404';
 $route['translate_uri_dashes'] = FALSE;

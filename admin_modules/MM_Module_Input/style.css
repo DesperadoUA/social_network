@@ -9,6 +9,8 @@
     border-bottom: 4px solid var(--color_1);
     width: 100%;
     padding: 10px;
+    font-family: 'Podkova', Serif;
+    font-weight: bold;
 }
 .wrapper_button_add {
     border-top:3px solid var(--color_3);
@@ -24,6 +26,7 @@
     cursor: pointer;
     transition: 0.7s;
     border-radius: 4px;
+    font-family: 'Podkova', Serif;
 }
 .btn_add:hover {
     background: var(--color_1);

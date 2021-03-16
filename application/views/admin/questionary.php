@@ -3,7 +3,7 @@
 		<div class="row background_gray">
 			<?php
 			$this->load->view('components/admin_sidebar/view.php');
-			$this->load->view('components/admin_title/view.php');
+			//$this->load->view('components/admin_title/view.php');
 			?>
 		</div>
 	</div>

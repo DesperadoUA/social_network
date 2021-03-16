@@ -1,0 +1,33 @@
+.pagination {
+    margin-bottom: 150px;
+    margin-top: 30px;
+    font-family: Noah-regular;
+    font-size: 20px;
+}
+.pagination a {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-decoration: none;
+    color: #333333;
+}
+.pagination a[rel=next] {
+    margin-left: 30px;
+}
+.pagination a[rel=prev] {
+    margin-right: 30px;
+}
+.pagination strong {
+    color: #fa5e66;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .pagination {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .pagination {
+        margin-bottom: 60px;
+
+    }
+}

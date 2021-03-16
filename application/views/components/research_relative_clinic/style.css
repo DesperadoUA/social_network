@@ -1,0 +1,81 @@
+.relative_clinics {
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.relative_clinics_title {
+    font-family: 'Noah-Grotesque';
+    font-size: 42px;
+    font-weight: 100;
+    line-height: 54px;
+    position: relative;
+    margin-bottom: 70px;
+}
+.relative_clinics_title::before {
+    content: '';
+    width: 80px;
+    height: 5px;
+    background: #fa5e66;
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%);
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5e66', endColorstr='#00beb0',GradientType=1 );
+    position: absolute;
+    left: -20px;
+    bottom: -20px;
+}
+.relative_clinic_item {
+    display: flex;
+    flex-wrap: wrap;
+}
+.relative_clinic_item_left {
+    padding-top: 10px;
+    width: 25%;
+    padding-bottom: 10px;
+    font-family: Noah-Bold;
+    font-size: 18px;
+    padding-right: 70px;
+    box-sizing: border-box;
+}
+.relative_clinic_item_right {
+    width: 75%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Noah-regular;
+    font-size: 18px;
+}
+.relative_clinics .research_single_line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.relative_clinic_permalink {
+    font-family: Noah-regular;
+    font-size: 27px;
+    color: #00a2b4;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .relative_clinics_title {
+        line-height: 45px;
+        text-align: center;
+    }
+    .relative_clinics_title:before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .relative_clinic_item_left, .relative_clinic_item_right {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 0px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .relative_clinic_item_left {
+        width: 40%;
+        padding-right: 15px;
+    }
+    .relative_clinic_item_right {
+        width: 60%;
+    }
+}

@@ -1,6 +1,3 @@
-<header>
-	<h1>Header</h1>
-	<button>
-		<?= TRANSLATE['CALL_BACK'][LANG]; ?>
-	</button>
-</header>
+<?php
+    if(IS_MOBILE) include 'view_mob.php';
+    else include 'view.php';

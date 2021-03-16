@@ -1,39 +1,38 @@
 <?php
 class MM_Module_Cyr_To_Lat extends MM_Module {
 	static public function create(
-		$title = 'title',
-		$permalink = 'permalink',
-		$name_1 = 'title',
-		$name_2 = 'permalink',
+		$name = [ 'title', 'permalink'],
+		$settings = [
+			'module_title' => 'Default header',
+			'title' => ['title', 'permalink']
+		],
 		$value = [
 			'title' => 'value Title',
 			'permalink' => 'value Permalink'
 		]
 ){
-		echo "<div class='meta_wrapper mm_module_cyr_to_lat'>
-				<div class='rich_text_title'>Permalink</div>
-				<div class='mm_open_close'>▼</div>
-				<div class='mm_module_container hide'>
-					<div class='wrapper_input'>
-					   <label for='title'>{$title}</label>
-						<input type='text' 
-						       class='mm_input mm_module_cyr_to_lat_one' 
-							   name='cyr_to_lat_{$name_1}' 
-							   value='{$value['title']}' />
-					</div>
-					<div class='wrapper_input'>
-					   <label for='title'>{$permalink}</label>
-						<input type='text' 
-						       class='mm_input mm_module_cyr_to_lat_two' 
-							   name='cyr_to_lat_{$name_2}' 
-							   value='{$value['permalink']}' />
-					</div>
-				</div>
-			  </div>";
+		if(array_key_exists('class_wrapper', $settings)) {
+			$settings['class_wrapper'] = $settings['class_wrapper'].' mm_module_cyr_to_lat';
+		} else {
+			$settings['class_wrapper'] = 'mm_module_cyr_to_lat';
+		}
+
+		$strHtml = self::openMetaWrapper($settings);
+		$strHtml .= self::createInput('cyr_to_lat_'.$name[0], [
+			'title' => $settings['title'][0],
+			'class_input' => 'mm_module_cyr_to_lat_one',
+		], $value['title']);
+		$strHtml .= self::createInput('cyr_to_lat_'.$name[1], [
+			'title' => $settings['title'][1],
+			'class_input' => 'mm_module_cyr_to_lat_two'
+		], $value['permalink']);
+		$strHtml .= self::closeMetaWrapper();
+
+		echo $strHtml;
 		}
 		static public function getData($name){
 			$settings = [
-				'input_name' => $name
+				'input_name' => 'cyr_to_lat_'.$name
 			];
 			$data = self::getDataFromInput($settings);
 

@@ -87,5 +87,11 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 //------------------- MY CONST ----------------------------------------------------//
 define( 'TRANSLATE', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/translate/index.php');
 define( 'LANG', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/index.php');
+define( 'ARRAY_LANG', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/config.php');
+define( 'LANG_PREFIX_LINK', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/lang_prefix_link.php');
+define( 'DEFAULT_LANG', 'ru');
+define( 'DEFAULT_STATUS', '1');
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT']);
 define( 'ROOT_COMPONENTS', $_SERVER['DOCUMENT_ROOT'].'/application/views/components/');
+define( 'IS_MOBILE', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/check_mobile/index.php');
+define( 'SRC', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/check_mobile/img_src.php');

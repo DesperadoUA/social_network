@@ -1,0 +1,114 @@
+.profile_ad {
+    display: flex;
+}
+.profile_ad_left, .profile_ad_right {
+    padding-top: 230px;
+    padding-bottom: 230px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.row_profile_ad {
+    flex-wrap: wrap;
+    max-width: 580px;
+    text-align: center;
+}
+.profile_ad_title {
+    color: white;
+    font-size: 52px;
+    text-align: center;
+    font-family: 'Noah-Grotesque';
+}
+.profile_ad_btn {
+    width: 220px;
+    display: flex;
+    height: 70px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    border: 1px solid white;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    margin: 0 auto;
+    margin-top: 60px;
+    font-family: 'Noah-Bold';
+    font-size: 13px;
+}
+.btn_viber, .btn_telegram {
+    background: #7f4ca0;
+    height: 70px;
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    color: white;
+    border:none;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.btn_telegram {
+    background: #159bc9;
+}
+.row_profile_ad_social {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+.profile_ad_icon {
+    margin-right: 10px;
+}
+@media (min-width: 767px) {
+    .profile_ad_left {
+        background: url('/uploads/left_bg.jpg') no-repeat 100% 100%;
+    }
+    .profile_ad_right {
+        background: url('/uploads/right_bg.jpg') no-repeat 100% 100%;
+    }
+}
+@media (max-width: 767px) {
+    .profile_ad_left {
+        background: url('/uploads/left_bg_mobile.jpg') no-repeat 100% 100%;
+        background-size: cover;
+    }
+    .profile_ad_right {
+        background: url('/uploads/right_bg_mobile.jpg') no-repeat 100% 100%;
+        background-size: cover;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .profile_ad {
+        flex-wrap: wrap;
+    }
+    .profile_ad_left, .profile_ad_right {
+        width: 100%;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    .profile_ad_title {
+        font-size: 40px;
+    }
+    .row_profile_ad_social {
+        flex-wrap: wrap;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .btn_telegram {
+        margin-top: 30px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .profile_ad {
+        flex-wrap: wrap;
+    }
+    .profile_ad_left, .profile_ad_right {
+        width: 100%;
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+}

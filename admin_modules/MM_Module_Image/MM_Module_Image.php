@@ -16,62 +16,43 @@ class MM_Module_Image extends MM_Module {
 			$class_input = $settings['class_input'];
 		}
 
-		$strHTML = "<div class='meta_wrapper {$class_wrapper}'>
-						<div class='rich_text_title'>{$title}</div>
-						<div class='mm_open_close'>&#9660;</div>
-						<div class='mm_module_container hide'>
-						 <div class='wrapper_input space_between'>
-						    <div>
-								<label>Desctop</label>
-								<input type='file'
-									   class='{$class_input}'
-									   name='mm_module_image_desctop_{$name}'
-									   />
-								<input 
-									   type='hidden'
-									   name='mm_module_image_desctop_src_{$name}'  
-									   value='{$img_data['src']}'>
-							</div>";
-		if(!empty($img_data['src'])){
-			$strHTML .= "<div>
-				           <img src='{$img_data['src']}' class='mm_thumbnail'>
-				        </div>";
-		}
-		$strHTML .= "</div>
-					     <div class='wrapper_input space_between'>
-					        <div>
-								<label>Mobile</label>
-								<input type='file'
-									   class='{$class_input}'
-									   name='mm_module_image_mobile_{$name}'
-									   />
-								<input 
-									   type='hidden'
-									   name='mm_module_image_mobile_src_{$name}'  
-									   value='{$img_data['mobile_src']}'>
-							</div>";
-		if(!empty($img_data['mobile_src'])){
-			$strHTML .= "<div>
-							<img src='{$img_data['mobile_src']}' class='mm_thumbnail'>
-						 </div>";
-		}
-		$strHTML .= "</div>
-					     <div class='wrapper_input'>
-							<label for='description'>Title</label>
-							<input type='text' 
-							       class='mm_input' 
-							       name='mm_module_image_title_{$name}' 
-							       value='{$img_data['title']}'>
-				    	</div>
-				    	 <div class='wrapper_input'>
-							<label for='description'>Alt</label>
-							<input type='text' 
-							       class='mm_input' 
-							       name='mm_module_image_alt_{$name}' 
-							       value='{$img_data['alt']}'>
-				    	</div>
-				    	</div>
-					</div>";
+		$settings_wrapper = [
+			'class_wrapper' => $class_wrapper,
+			'module_title' => $title,
+		];
+		$strHTML = self::openMetaWrapper($settings_wrapper);
+
+		$settings_img = [
+			'title' => 'Desctop',
+			'class_input' => $class_input
+		];
+		$strHTML .= self::createImage('mm_module_image_desctop_'.$name, $settings_img ,$img_data['src']);
+
+		$settings_img = [
+			'title' => 'Mobile',
+			'class_input' => $class_input
+		];
+		$strHTML .= self::createImage('mm_module_image_mobile_'.$name, $settings_img ,$img_data['mobile_src']);
+
+		$settingsInput = [
+			'title' => 'Title',
+			'read_only' => '',
+			'type' => 'text',
+			'class_wrapper_input' => '',
+			'class_input' => ''
+		];
+		$strHTML .= self::createInput('mm_module_image_title_'.$name, $settingsInput, $img_data['title']);
+
+		$settingsInput = [
+			'title' => 'Alt',
+			'read_only' => '',
+			'type' => 'text',
+			'class_wrapper_input' => '',
+			'class_input' => ''
+		];
+		$strHTML .= self::createInput('mm_module_image_alt_'.$name, $settingsInput, $img_data['alt']);
+
+		$strHTML .= self::closeMetaWrapper();
 		echo $strHTML;
 	}
 	static public function getData($name){
@@ -79,13 +60,13 @@ class MM_Module_Image extends MM_Module {
 
 		$settings = [
 			'file_input_name'    => 'mm_module_image_desctop_'.$name,
-			'default_input_name' => 'mm_module_image_desctop_src_'.$name
+			'default_input_name' => 'mm_module_image_desctop_'.$name.'_src'
 		];
 		$desctop_src = self::uploadImage($settings);
 
 		$settings = [
 			'file_input_name'    => 'mm_module_image_mobile_'.$name,
-			'default_input_name' => 'mm_module_image_mobile_src_'.$name
+			'default_input_name' => 'mm_module_image_mobile_'.$name.'_src'
 		];
 		$mobile_src = self::uploadImage($settings);
 

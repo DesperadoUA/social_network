@@ -3,9 +3,10 @@
     padding: 30px 15px;
 }
 .admin_title h1 {
-    font-family: 'Forum', cursive;
+    font-family: 'Podkova', serif;
     font-weight: bold;
 }
 .admin_edit_container {
     min-height: 100vh!important;
+    padding-bottom: 40px;
 }

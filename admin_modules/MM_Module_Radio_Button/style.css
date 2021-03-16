@@ -1,0 +1,8 @@
+.meta_wrapper input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.mm_margin_bottom_none {
+    margin-bottom: 0px;
+}

@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Noah-Bold';
+    src: url('/fonts/Noah-Bold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noah-regular';
+    src: url('/fonts/Noah-Regular.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noah-Grotesque';
+    src: url('/fonts/NoahGrotesque-Light.ttf') format("truetype");
+    font-display: swap;
+}

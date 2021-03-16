@@ -262,7 +262,8 @@
 }
 
 .note-editor {
-    position: relative
+    position: relative;
+    font-family: Podkova, serif;
 }
 
 .note-editor .note-dropzone {

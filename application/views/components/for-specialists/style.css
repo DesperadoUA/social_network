@@ -1,0 +1,106 @@
+.for_specialist {
+    position: relative;
+}
+.for_specialist_img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-width: 50%;
+}
+.for_specialist_row {
+    display: flex;
+}
+.for_specialist_left, .for_specialist_right {
+    width: 50%;
+}
+.for_specialist_right {
+    padding-top: 125px;
+}
+.for_specialist_title {
+    font-family: 'Noah-Grotesque';
+    font-size: 52px;
+    font-weight: 100;
+    margin-bottom: 55px;
+    position: relative;
+}
+.for_specialist_title::before {
+    content: '';
+    width: 80px;
+    height: 5px;
+    background: #fa5e66; /* Old browsers */
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5e66', endColorstr='#00beb0',GradientType=1 );
+    position: absolute;
+    left: -30px;
+    bottom: -30px;
+}
+.for_specialist_item {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.for_specialist_item_left {
+    min-width: 100px;
+}
+.for_specialist_item_left img {
+    max-width: 90px;
+}
+.for_specialist_item p {
+    font-family: Noah-regular;
+    font-size:15px;
+    margin-bottom: 15px;
+}
+.for_specialist_item p b {
+    font-size: 20px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .for_specialist_img {
+        max-width: 100%;
+        width: 100%;
+        position: static;
+        min-height: 390px;
+    }
+    .for_specialist_title {
+        font-size: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+    .for_specialist_row {
+        flex-wrap: wrap;
+    }
+    .for_specialist_left, .for_specialist_right {
+        width: 100%;
+    }
+    .for_specialist_right {
+        padding-top: 5px;
+    }
+    .for_specialist_title::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .for_specialist_item {
+        flex-wrap: wrap;
+    }
+    .for_specialist_item_left, .for_specialist_item_right {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .for_specialist_img {
+        max-width: 100%;
+        width: 100%;
+        position: static;
+    }
+    .for_specialist_row {
+        flex-wrap: wrap;
+    }
+    .for_specialist_left, .for_specialist_right {
+        width: 100%;
+    }
+    .for_specialist_right {
+        padding-top: 5px;
+    }
+}

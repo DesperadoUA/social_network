@@ -1,0 +1,55 @@
+.medical_directions {
+    padding-top: 105px;
+    padding-bottom: 120px;
+    background-image: -webkit-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+}
+.row_medical_directions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 90px;
+}
+.medical_directions_item {
+    text-align: center;
+    max-width: 170px;
+}
+.medical_directions_item img {
+    width:170px;
+}
+.medical_directions_desc {
+    margin-top: 35px;
+    font-family: 'Noah-Grotesque';
+    font-size: 22px;
+}
+@media (min-width: 767px) {
+    .medical_directions {
+        background: url('/uploads/direction_bg.png') 100% 100%;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .medical_directions{
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    .row_medical_directions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .medical_directions_item {
+        margin: 10px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .medical_directions {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+
+    .row_medical_directions {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .medical_directions_item {
+        margin: 10px;
+    }
+}
