@@ -7,12 +7,12 @@
             <?php
 			foreach ($research as $item) {
 			    echo "<div class='current_research_item'>
-                        <div class='card_img'>
-                            <img src='{$item['thumbnail'][SRC]}' />
-                            <div class='card_img_line'></div>
+                        <div class='card_img'>";
+                if(!empty($item['thumbnail'][SRC])) echo "<img src='{$item['thumbnail'][SRC]}' />";
+                echo "<div class='card_img_line'></div>
                         </div>
                         <div class='card_desc'>
-                            <a href='/{$item['slug']}/{$item['permalink']}' class='card_permalink'>
+                            <a href='".LANG_PREFIX_LINK."/{$item['slug']}/{$item['permalink']}' class='card_permalink'>
                             {$item['title']}
                             </a>
                         </div>

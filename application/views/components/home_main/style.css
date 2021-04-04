@@ -52,6 +52,13 @@
     font-size: 13px;
     width: 270px;
     margin-right: 25px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+}
+.home_main_btn_profile {
+    text-decoration: none;
+    color: #373737;
 }
 .home_main_btn_profile::before {
     content: '';

@@ -1,6 +1,6 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
-include ROOT_COMPONENTS . 'for-specialists/index.php';
-include ROOT_COMPONENTS . 'cities/for-specialist.php';
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
+$this->load->view('components/for-specialists/index.php');
+$this->load->view('components/cities/for-specialist.php');
+$this->load->view('components/footer/index.php');

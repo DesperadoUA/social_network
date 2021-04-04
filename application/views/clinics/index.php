@@ -1,7 +1,7 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
-include ROOT_COMPONENTS . 'clinic_main_screen/index.php';
-if(!empty($posts)) include ROOT_COMPONENTS . 'clinical_loop/index.php';
-include ROOT_COMPONENTS . 'pagination/index.php';
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
+$this->load->view('components/clinic_main_screen/index.php');
+if(!empty($posts)) $this->load->view('components/clinical_loop/index.php');
+$this->load->view('components/pagination/index.php');
+$this->load->view('components/footer/index.php');

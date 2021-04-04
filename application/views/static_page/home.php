@@ -1,20 +1,22 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
-include ROOT_COMPONENTS . 'home_main/index.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
+$this->load->view('components/home_main/index.php');
 if(!empty($settings['pluses']['images_and_text'])) {
-	include ROOT_COMPONENTS . 'advantages/index.php';
+	$this->load->view('components/advantages/index.php');
 }
 if(!empty($settings['how_it_work']['list'])) {
-	include ROOT_COMPONENTS . 'how_it_work/index.php';
+	$this->load->view('components/how_it_work/index.php');
 }
 if(!empty($research)) {
-	include ROOT_COMPONENTS . 'current_research/index.php';
+	$this->load->view('components/current_research/index.php');
 }
-include ROOT_COMPONENTS . 'medical_directions/index.php';
-include ROOT_COMPONENTS . 'cities/index.php';
-include ROOT_COMPONENTS . 'profile_ad/index.php';
+if(!empty($settings['directions']['images_and_text'])) {
+	$this->load->view('components/medical_directions/index.php');
+}
+$this->load->view('components/cities/index.php');
+$this->load->view('components/profile_ad/index.php');
 if(!empty($body['content']['text'])){
-	include ROOT_COMPONENTS . 'content/index.php';
+	$this->load->view('components/content/index.php');
 }
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/footer/index.php');

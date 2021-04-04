@@ -11,64 +11,68 @@
     <link rel="icon" href="<?= $options['icon']['image']['src']; ?>" sizes="32x32" />
     <style>
     <?php
-        include ROOT_COMPONENTS . 'fonts/style.css';
-        include ROOT_COMPONENTS . 'common/style.css';
-        include ROOT_COMPONENTS . 'header/style.css';
-        include ROOT_COMPONENTS . 'content/style.css';
-        include ROOT_COMPONENTS . 'footer/style.css';
-        include ROOT_COMPONENTS . 'forms/style.css';
+        $this->load->view('components/variable/style.css');
+        $this->load->view('components/fonts/style.css');
+        $this->load->view('components/common/style.css');
+        $this->load->view('components/header/style.css');
+        $this->load->view('components/content/style.css');
+        $this->load->view('components/footer/style.css');
+        $this->load->view('components/forms/style.css');
 
         if($body['post_type'] === 'home') {
-             include ROOT_COMPONENTS . 'home_main/style.css';
-             include ROOT_COMPONENTS . 'advantages/style.css';
-             include ROOT_COMPONENTS . 'how_it_work/style.css';
-             include ROOT_COMPONENTS . 'current_research/style.css';
-             include ROOT_COMPONENTS . 'medical_directions/style.css';
-             include ROOT_COMPONENTS . 'cities/style.css';
-             include ROOT_COMPONENTS . 'profile_ad/style.css';
+             $this->load->view('components/home_main/style.css');
+             $this->load->view('components/advantages/style.css');
+             $this->load->view('components/how_it_work/style.css');
+             $this->load->view('components/current_research/style.css');
+             $this->load->view('components/medical_directions/style.css');
+             $this->load->view('components/cities/style.css');
+             $this->load->view('components/profile_ad/style.css');
         }
         elseif ($body['post_type'] === 'research') {
-             include ROOT_COMPONENTS . 'research_main_screen/style.css';
-             include ROOT_COMPONENTS . 'research_loop/style.css';
-             include ROOT_COMPONENTS . 'pagination/style.css';
-             include ROOT_COMPONENTS . 'research_single/style.css';
-             include ROOT_COMPONENTS . 'research_relative_clinic/style.css';
+             $this->load->view('components/research_main_screen/style.css');
+             $this->load->view('components/research_loop/style.css');
+             $this->load->view('components/pagination/style.css');
+             $this->load->view('components/research_single/style.css');
+             $this->load->view('components/research_relative_clinic/style.css');
         }
         elseif ($body['post_type'] === 'city') {
-          include ROOT_COMPONENTS . 'research_main_screen/style.css';
-          include ROOT_COMPONENTS . 'research_loop/style.css';
-          include ROOT_COMPONENTS . 'pagination/style.css';
+             $this->load->view('components/research_main_screen/style.css');
+             $this->load->view('components/research_loop/style.css');
+             $this->load->view('components/pagination/style.css');
         }
         elseif ($body['post_type'] === 'clinics') {
-             include ROOT_COMPONENTS . 'research_main_screen/style.css';
-             include ROOT_COMPONENTS . 'clinical_loop/style.css';
-             include ROOT_COMPONENTS . 'pagination/style.css';
+             $this->load->view('components/research_main_screen/style.css');
+             $this->load->view('components/clinical_loop/style.css');
+             $this->load->view('components/pagination/style.css');
         }
         elseif ($body['post_type'] === 'clinic') {
-             include ROOT_COMPONENTS . 'single_clinic_main_screen/style.css';
-             include ROOT_COMPONENTS . 'research_loop/style.css';
-             include ROOT_COMPONENTS . 'pagination/style.css';
+             $this->load->view('components/single_clinic_main_screen/style.css');
+             $this->load->view('components/research_loop/style.css');
+             $this->load->view('components/pagination/style.css');
         }
         elseif ($body['post_type'] === 'how-it-works') {
-             include ROOT_COMPONENTS . 'how_it_work/style.css';
-             include ROOT_COMPONENTS . 'how_it_work_step/style.css';
-             include ROOT_COMPONENTS . 'cities/style.css';
-             include ROOT_COMPONENTS . 'profile_ad/style.css';
+             $this->load->view('components/how_it_work/style.css');
+             $this->load->view('components/how_it_work_step/style.css');
+             $this->load->view('components/cities/style.css');
+             $this->load->view('components/profile_ad/style.css');
         }
         elseif ($body['post_type'] === 'for-specialists') {
-             include ROOT_COMPONENTS . 'for-specialists/style.css';
-             include ROOT_COMPONENTS . 'cities/style.css';
+             $this->load->view('components/for-specialists/style.css');
+             $this->load->view('components/cities/style.css');
         }
         elseif ($body['post_type'] === 'blog') {
-             include ROOT_COMPONENTS . 'blog_main_loop/style.css';
-             include ROOT_COMPONENTS . 'pagination/style.css';
-             include ROOT_COMPONENTS . 'blog_single_top/style.css';
+             $this->load->view('components/blog_main_loop/style.css');
+             $this->load->view('components/pagination/style.css');
+             $this->load->view('components/blog_single_top/style.css');
         }
         elseif ($body['post_type'] === 'thx') {
-            include ROOT_COMPONENTS . 'thx/style.css';
+             $this->load->view('components/thx/style.css');
         }
         elseif ($body['post_type'] === '404') {
-            include ROOT_COMPONENTS . '404/style.css';
+             $this->load->view('components/404/style.css');
+        }
+        elseif ($body['post_type'] === 'default') {
+             $this->load->view('components/blog_single_top/style.css');
         }
     ?>
     </style>

@@ -10,6 +10,9 @@ class Front_Controller extends CI_Controller {
 		$this->load->model('post');
 		$this->load->model('post_meta');
 		$this->load->model('research_meta');
+		$this->load->model('relative_research');
+		$this->load->model('relative_static_page');
+		$this->load->model('relative_post');
 		$this->data_settings = $this->settings->getAllPagesByLang(LANG);
 		foreach ($this->data_settings as $setting) {
 			$this->data['settings'][$setting['type']] = json_decode($setting['content'], true);

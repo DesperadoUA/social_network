@@ -14,7 +14,14 @@ class Research_Controller extends Front_Controller
 		$path_lang = '';
 		$total_posts = $this->research->getTotalPublicPostsByLang(LANG);
 		if(LANG === 'ua') $path_lang = '/ua';
-		$config['base_url'] = "{$path_lang}/research/page/";
+		$CURRENT_SEGMENT = 1;
+		$PAGE_SEGMENT = 3;
+		if(LANG === 'ua') {
+			$CURRENT_SEGMENT = 2;
+			$PAGE_SEGMENT = 4;
+		}
+		$page_url = '/'.$this->uri->segment($CURRENT_SEGMENT);
+		$config['base_url'] = "{$path_lang}{$page_url}/page/";
 		$config['total_rows'] = $total_posts;
 		$config['per_page'] = self::LIMIT_POSTS;
 		$config['num_links'] = 2;
@@ -22,13 +29,16 @@ class Research_Controller extends Front_Controller
 		$config['last_link'] = false;
 		$config['first_link'] = false;
 		$this->pagination->initialize($config);
-
+		
 		/*----- Filters -----*/
+		
 		$this->data['filter']['city'] = $this->research->getDistinctValueForPublicPosts(LANG, 'city');
 		$this->data['filter']['region'] = $this->research->getDistinctValueForPublicPosts(LANG, 'region');
 		$this->data['filter']['disease'] = $this->research->getDistinctValueForPublicPosts(LANG, 'disease');
+		
 		$this->data['filter']['clinics'] = [];
 		$arr_clinic_id = $this->research->getDistinctClinics(LANG);
+		$clinics_id = [];
 		foreach ($arr_clinic_id as $item) $clinics_id[] = $item['value'];
 		$clinics = $this->post->getPublicPostsByArrId($clinics_id);
 		foreach ($clinics as $item) {
@@ -39,14 +49,20 @@ class Research_Controller extends Front_Controller
 		}
 		/*----- Filters End -----*/
 
-		$page_url = '/'.$this->uri->segment(1);
 		$data = $this->static_page->getDataByUrl($page_url)[0];
 		$this->data['body'] = $data;
 		$this->data['body']['content'] = json_decode($data['content'], true);
 		$this->data['body']['h1'] = $this->data['body']['content']['h1'];
 		$this->data['body']['total_posts'] = $total_posts;
+		$translate_id = $this->relative_static_page->getDataByKey($data['id'], 'translate');
+		if(!empty($translate_id)) {
+			$url = $this->static_page->getDataById($translate_id)[0]['permalink'];
+			$this->data['body']['permalink'] = LANG_PREFIX_LINK.$this->data['body']['permalink'];
+			LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+			$this->data['body']['translate'] = $PREFIX_TRANSLATE.$url;
+		}
 
-		$page = $this->uri->segment(3);
+		$page = $this->uri->segment($PAGE_SEGMENT);
 		if(empty($page)) {
 			$page = 0;
 			$offset = 0;
@@ -65,15 +81,14 @@ class Research_Controller extends Front_Controller
 	}
 
 	public function single($id) {
-		$data = $this->research->getDataByPermalink($id);
+		$data = $this->research->getDataByPermalink($id, LANG);
 		if(!empty($data)){
 			$data = $data[0];
-			$data_meta['additional_fields'] = $this->research_meta->getDataByKey($data['id'], 'additional_fields');
-			if(!empty($data_meta['additional_fields'])) {
-				$data_meta['additional_fields'] = json_decode($data_meta['additional_fields'], true);
+			if(!empty($data['additional_fields'])) {
+				$data['additional_fields'] = json_decode($data['additional_fields'], true);
 			}
 			$relative_clinic = [];
-			$relative_clinic_id = $this->research_meta->getArrByKey($data['id'], 'clinic_id');
+			$relative_clinic_id = $this->relative_research->getArrByKey($data['id'], 'clinic_id');
 			if(!empty($relative_clinic_id)) {
 				$clinics = $this->post->getPublicPostsByArrId($relative_clinic_id);
 				foreach ($clinics as $item)  {
@@ -89,8 +104,17 @@ class Research_Controller extends Front_Controller
 			$this->data['body'] = $data;
 			$this->data['body']['data_start'] = mb_substr($data['data_start'], 0, 10);
 			$this->data['body']['data_finish'] = mb_substr($data['data_finish'], 0, 10);
-			$this->data['body']['additional_fields'] = $data_meta['additional_fields'];
 			$this->data['body']['relative_clinic'] = $relative_clinic;
+
+			$translate_id = $this->relative_research->getDataByKey($data['id'], 'translate');
+			if(!empty($translate_id)) {
+				$translate = $this->research->getPublicDataById($translate_id);
+				if(!empty($translate)) {
+					$this->data['body']['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['body']['slug'].'/'.$this->data['body']['permalink'];
+					LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+					$this->data['body']['translate'] = $PREFIX_TRANSLATE.'/'.$translate[0]['slug'].'/'.$translate[0]['permalink'];
+				}
+			}
 			$this->load->view('research/single', $this->data);
 		}
 		else {
@@ -98,20 +122,3 @@ class Research_Controller extends Front_Controller
 		}
 	}
 }
-
-/*
- * регион * +
- * город * +
- * заболевание * +
- * исследователи * +
- * мед учереждение * +
- * с открытым набором *
- * для здоровых добровольцев *
- *
- * название протокола  +
- * терапевтическая область +
- * дата начала ки +
- * дата конца ки +
- * связь с клиникой +
- * активность исследования +
- * */

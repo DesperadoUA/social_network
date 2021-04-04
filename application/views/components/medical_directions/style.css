@@ -20,6 +20,10 @@
     font-family: 'Noah-Grotesque';
     font-size: 22px;
 }
+.medical_directions_desc a {
+    text-decoration: none;
+    color: #373737;
+}
 @media (min-width: 767px) {
     .medical_directions {
         background: url('/uploads/direction_bg.png') 100% 100%;

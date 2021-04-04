@@ -1,6 +1,6 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
-include ROOT_COMPONENTS . 'research_single/index.php';
-include ROOT_COMPONENTS . 'research_relative_clinic/index.php';
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
+$this->load->view('components/research_single/index.php');
+$this->load->view('components/research_relative_clinic/index.php');
+$this->load->view('components/footer/index.php');

@@ -20,8 +20,8 @@ class Clinic_Controller extends Front_Controller
 			$CURRENT_SEGMENT = 2;
 			$PAGE_SEGMENT = 4;
 		}
-
-		$config['base_url'] = LANG_PREFIX_LINK.'/'."clinics/page";
+		$page_url = '/'.$this->uri->segment($CURRENT_SEGMENT);
+		$config['base_url'] = LANG_PREFIX_LINK.$page_url."/page";
 		$config['total_rows'] = $this->post->getTotalPublicPostsByLang(self::POST_TYPE, LANG);
 		$config['per_page'] = self::LIMIT_POSTS;
 		$config['num_links'] = 2;
@@ -55,11 +55,20 @@ class Clinic_Controller extends Front_Controller
 				$this->data['posts'][$i]['address'] = $this->post_meta->getDataByKey($this->data['posts'][$i]['id'], 'address');
 				$this->data['posts'][$i]['researchers'] = $this->post_meta->getDataByKey($this->data['posts'][$i]['id'], 'researchers');
 				$this->data['posts'][$i]['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['posts'][$i]['slug'].'/'.$this->data['posts'][$i]['permalink'];
-				$total_research = $this->research_meta->getArrByKeyValue( 'clinic_id', $this->data['posts'][$i]['id']);
-				$this->data['posts'][$i]['total_research'] = count($total_research);
-				$relative_research_id = [];
-				foreach ($total_research as $item) $relative_research_id[] = $item['post_id'];
-				$this->data['posts'][$i]['total_active_research'] = $this->research->getTotalPublicActivePostsByArrId($relative_research_id);
+				$total_research = $this->relative_research->getArrByKeyValue( 'clinic_id', $this->data['posts'][$i]['id']);
+				$arr_id_research_public = [];
+				foreach($total_research as $item) $arr_id_research_public[] = $item['post_id'];
+				$this->data['posts'][$i]['total_research'] = count($this->research->getPostsByArrId($arr_id_research_public));
+				$this->data['posts'][$i]['total_active_research'] = $this->research->getTotalPublicActivePostsByArrId($arr_id_research_public);
+				
+			}
+
+			$translate_id = $this->relative_static_page->getDataByKey($data['id'], 'translate');
+			if(!empty($translate_id)) {
+				$url = $this->static_page->getDataById($translate_id)[0]['permalink'];
+				$this->data['body']['permalink'] = LANG_PREFIX_LINK.$this->data['body']['permalink'];
+				LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+				$this->data['body']['translate'] = $PREFIX_TRANSLATE.$url;
 			}
 			$this->load->view('clinics/index', $this->data);
 		}
@@ -69,7 +78,7 @@ class Clinic_Controller extends Front_Controller
 		}
 	}
 	public function single($id, $page) {
-		$data = $this->post->getDataByPermalink($id);
+		$data = $this->post->getDataByPermalink($id, LANG);
 		if(!empty($data)){
 			$data = $data[0];
 			if(empty($page)) {
@@ -80,12 +89,11 @@ class Clinic_Controller extends Front_Controller
 				$offset = ($page-1) * self::LIMIT_POSTS;
 			}
 
-			$relative_research = $this->research_meta->getArrByKeyValue( 'clinic_id', $data['id']);
+			$relative_research = $this->relative_research->getArrByKeyValue( 'clinic_id', $data['id']);
 			$research_id = [];
-
 			foreach ($relative_research as $item) $research_id[] = $item['post_id'];
 			$relative_posts = $this->research->getDataPublicActivePostsByArrId($research_id);
-
+			
 			$this->data['research'] = array_slice($relative_posts, $offset, self::LIMIT_POSTS);
 
 			if(!empty($this->data['research'])) {
@@ -115,6 +123,16 @@ class Clinic_Controller extends Front_Controller
 			$this->data['body']['city'] = $this->post_meta->getDataByKey($data['id'], 'city');
 			$this->data['body']['address'] = $this->post_meta->getDataByKey($data['id'], 'address');
 			$this->data['body']['therapeutic_area'] = $this->post_meta->getDataByKey($data['id'], 'therapeutic_area');
+
+			$translate_id = $this->relative_post->getDataByKey($data['id'], 'translate');
+			if(!empty($translate_id)) {
+				$translate = $this->post->getPublicDataById($translate_id);
+				if(!empty($translate)) {
+					$this->data['body']['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['body']['slug'].'/'.$this->data['body']['permalink'];
+					LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+					$this->data['body']['translate'] = $PREFIX_TRANSLATE.'/'.$translate[0]['slug'].'/'.$translate[0]['permalink'];
+				}
+			}
 
 			$this->load->view('clinics/single', $this->data);
 		} else {

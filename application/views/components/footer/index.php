@@ -15,12 +15,12 @@
                 ?>
             </div>
             <div class="footer_item">
-                <p><?= TRANSLATE['POPULAR_CITIES'][LANG] ?></p>
+                <p><?= TRANSLATE['INFORMATION_FOR_PATIENTS'][LANG] ?></p>
                 <?php
-                    if(!empty($settings['cities_menu']['menu'])) {
+                    if(!empty($settings['footer_menu_1']['menu'])) {
                         echo "<nav>
                                 <ul class='footer_menu'>";
-                        foreach ($settings['cities_menu']['menu'] as $item) {
+                        foreach ($settings['footer_menu_1']['menu'] as $item) {
                             echo "<li class='footer_menu_item'>
                                     <a href='{$item['value_1']}' >{$item['value_2']}</a>
                                   </li>";
@@ -31,12 +31,12 @@
                 ?>
             </div>
             <div class="footer_item">
-                <p><?= TRANSLATE['CURRENT_RESEARCH'][LANG] ?>:</p>
+                <p><?= TRANSLATE['LEGAL_INFORMATION'][LANG] ?></p>
                 <?php
-                    if(!empty($settings['research_menu']['menu'])) {
+                    if(!empty($settings['footer_menu_2']['menu'])) {
 						echo "<nav>
                                 <ul class='footer_menu'>";
-						foreach ($settings['research_menu']['menu'] as $item) {
+						foreach ($settings['footer_menu_2']['menu'] as $item) {
 							echo "<li class='footer_menu_item'>
                                     <a href='{$item['value_1']}' >{$item['value_2']}</a>
                                   </li>";

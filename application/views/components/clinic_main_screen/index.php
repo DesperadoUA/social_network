@@ -11,7 +11,7 @@
 						<select class="js_search_clinic_region">
 							<option><?= TRANSLATE['CHOOSE_REGION'][LANG]; ?></option>
 							<?php
-							    foreach ($filter['region'] as $item) echo "<option>{$item['value']}</option>";
+							    foreach ($filter['region'] as $item) if(!empty($item['value'])) echo "<option>{$item['value']}</option>";
 							?>
 						</select>
 					</div>
@@ -19,7 +19,7 @@
 						<select class="js_search_clinic_city">
 							<option><?= TRANSLATE['CHOOSE_CITY'][LANG]; ?></option>
 							<?php
-							    foreach ($filter['city'] as $item) echo "<option>{$item['value']}</option>";
+							    foreach ($filter['city'] as $item) if(!empty($item['value'])) echo "<option>{$item['value']}</option>";
 							?>
 						</select>
 					</div>
@@ -32,7 +32,7 @@
 						<select class="js_search_clinic_therapeutic_area">
 							<option><?= TRANSLATE['THERAPEUTIC_AREA'][LANG]; ?></option>
 							<?php
-							    foreach ($filter['therapeutic_area'] as $item) echo "<option>{$item['value']}</option>";
+							    foreach ($filter['therapeutic_area'] as $item) if(!empty($item['value'])) echo "<option>{$item['value']}</option>";
 							?>
 						</select>
 					</div>

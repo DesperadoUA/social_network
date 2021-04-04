@@ -23,12 +23,12 @@ class Post_Meta extends CI_Model
 				'key_meta' => $key
 			)
 		);
-		if(empty($query->result_array())) return '';
+		if(empty($query->result_array())) return NULL;
 		return $query->result_array()[0]['value'];
 	}
 	public function addDataByKey($post_id, $key, $data) {
 		$candidate = $this->getDataByKey($post_id, $key);
-		if(empty($candidate)) {
+		if($candidate === NULL){
 			$obj_data = [
 				'post_id' => $post_id,
 				'key_meta' => $key,

@@ -3,10 +3,10 @@ export const initial = function() {
 	const body = document.getElementsByTagName('body')[0]
 	const popUpParticipate = document.getElementById('pop_up_participate')
 	const formParticipate = document.getElementById('form_participate')
-	const LANG = window.location.pathname.startsWith('/ua/') ? 'ua' : 'ru'
+	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
 	const PAGE_REDIRECT = {
 		'ru': 'thx',
-		'ua': '/ua/thx'
+		'ua': '/ua/thx-ua'
 	}
 	let currentId = 0
 

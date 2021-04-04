@@ -5,6 +5,7 @@ include ROOT.'/admin_modules/index.php';
 
 class Admin_Post extends Admin_Controller
 {
+	const NAME_DB = 'posts';
 	const ARR_POST_TYPE_KEY = [
 		'clinic' => [
 			[
@@ -38,13 +39,7 @@ class Admin_Post extends Admin_Controller
 				'key' => 'therapeutic_area'
 			]
 		],
-		'blog' => [
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Rich_Text',
-				'key' => 'content_2'
-			],
-		],
+		'blog' => [], 
 		'city' => []
 	];
 	const DEFAULT_VALUE = [
@@ -74,6 +69,39 @@ class Admin_Post extends Admin_Controller
 				else $data[$value['key']] = $item;
 
 			}
+			/* Translate */
+			if($data['lang'] === 'ru') $lang_translate = 'ua';
+			else $lang_translate = 'ru';
+
+			$post_without_translate = $this->post->getPostWithOutTranslate($lang_translate, $data['post_type']);
+			$current_translate = $this->relative_post->getDataByKey($data['id'], 'translate');
+
+			$post_translate = [];
+			foreach ($post_without_translate as $post) {
+				$post_translate[] = [
+					'id' => $post['id'],
+					'post_title' => $post['title']
+				];
+			}
+			if($current_translate === '0') {
+				$data['post_translate'] = [
+					'all_data' => $post_translate,
+					'id' => 0
+				];
+			}
+			else {
+				$current = $this->post->getDataById($current_translate)[0];
+				$current_post_translate = [
+					'id' => $current['id'],
+					'post_title' => $current['title']
+				];
+				$post_translate[] = $current_post_translate;
+				$data['post_translate'] = [
+					'all_data' => $post_translate,
+					'id' => $current['id']
+				];
+			}
+			/* End Translate */
 			$this->load->view('admin/edit_template/index', $data);
 		}
 	}
@@ -94,7 +122,8 @@ class Admin_Post extends Admin_Controller
 		$data['data_change'] = MM_Module_Input::getData('data_change');
 		$data['content'] = MM_Module_Rich_Text::getData('main_content');
 		$data['thumbnail'] = json_encode(MM_Module_Image::getData('thumbnail'), JSON_UNESCAPED_UNICODE);
-		$data['lang'] = MM_Module_Radio_Button::getData('lang');
+		//$data['lang'] = MM_Module_Radio_Button::getData('lang');
+		$data_relative['translate'] = MM_Module_Select::getData('translate');
 
         //--------- Post meta -----------//
 		foreach (self::ARR_POST_TYPE_KEY[$post_type] as $value){
@@ -103,6 +132,7 @@ class Admin_Post extends Admin_Controller
 		}
 
 		$this->post->updateDateById($id, $data);
+		$this->relative_post->updateTranslateById($id, $data_relative['translate']);
 		redirect('/admin/'.$post_type.'/'.$id, 'location', 301);
 	}
 	public function add() {
@@ -115,7 +145,7 @@ class Admin_Post extends Admin_Controller
 	public function addPost(){
 		$data['post_type'] = $_POST['post_type'];
 		$data['title'] = MM_Module_Cyr_To_Lat::getData('title');
-		$data['permalink'] = $this->newPermalink('research', MM_Module_Cyr_To_Lat::getData('permalink'));
+		$data['permalink'] = $this->newPermalink(self::NAME_DB, MM_Module_Cyr_To_Lat::getData('permalink'));
 		$data['status'] = MM_Module_Checkbox::getData('public');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['meta_title'] = MM_Module_Input::getData('meta_title');
@@ -131,15 +161,15 @@ class Admin_Post extends Admin_Controller
 		$data['slug'] = $_POST['post_type'];
 
 		$insert_id = $this->post->insert($data);
+		$this->relative_post->addDataByKey($insert_id, 'translate', '0');
 		redirect('/admin/'.$data['post_type'].'/'.$insert_id, 'location', 301);
 
 	}
 	public function delete(){
 		$id = $_POST['id'];
 		$post_type = $this->post->getPostTypeById($id);
+		$this->relative_post->deleteTranslateById($id);
 		$this->post->delete($id);
-		$this->post_meta->delete($id);
 		redirect('/admin/'.$post_type.'/', 'location', 301);
 	}
-
 }

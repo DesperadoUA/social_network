@@ -11,16 +11,7 @@
 					>
 				</a>
 			</div>
-			<div class="lang">
-				<ul class="lang_list">
-					<li class="lang_item">
-						<a href='/'>ru</a>
-					</li>
-					<li class="lang_item">
-						<a href='/ua/'>ua</a>
-					</li>
-				</ul>
-			</div>
+			<?php if(!empty($body['translate'])) include 'lang.php'; ?>
 			<?php
 			if(!empty($settings['header_menu']['menu'])) {
 				echo "<nav>
@@ -35,9 +26,9 @@
 			}
 			?>
 			<div class="btn_profile_wrapper">
-				<button class="btn_profile">
+				<a href="https://telegram.im/<?= $options['telegram']['text'] ?>" target="_blank" class="btn_profile">
 					<?= TRANSLATE['BTN_PROFILE'][LANG]; ?>
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

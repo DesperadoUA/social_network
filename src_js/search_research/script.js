@@ -14,10 +14,15 @@ export const initial = function() {
 		})
 	}
 	const API_URL = '/api/research'
-	const LANG = window.location.pathname.startsWith('/ua/') ? 'ua' : 'ru'
+	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
 	const btnSearch = document.querySelector('.js_search_research')
 	const container = document.querySelector('.research_loop')
 	const numberResearch = document.querySelector('.js_search_research_total')
+	const clearFilters = document.querySelector('.clear_filters')
+	const EMPTY_REQUEST = {
+		ru: 'Ничего не найдено',
+		ua: 'Нічого не знайдено'
+	}
 
 	if(btnSearch) {
 		btnSearch.addEventListener('click', ()=>{
@@ -31,7 +36,7 @@ export const initial = function() {
 				clinic: document.querySelector('.js_search_research_clinic').value,
 				open: document.querySelector('.js_open_research').dataset.value
 			}
-			console.log(TDO)
+
 			fetch(API_URL, {
 				method: 'POST',
 				body: JSON.stringify(TDO)
@@ -56,11 +61,51 @@ export const initial = function() {
 				})
 		})
 	}
+	if(clearFilters){
+		clearFilters.addEventListener('click', () => {
+			const optionsRegion = document.querySelectorAll('.js_search_research_region option');
+			for (let i = 0, l = optionsRegion.length; i < l; i++) {
+				optionsRegion[i].selected = optionsRegion[i].defaultSelected
+			}
+
+			const optionsCity = document.querySelectorAll('.js_search_research_city option');
+			for (let i = 0, l = optionsCity.length; i < l; i++) {
+				optionsCity[i].selected = optionsCity[i].defaultSelected
+			}
+			document.querySelector('.js_search_research_keyword').value = ''
+
+			const optionsDisease = document.querySelectorAll('.js_search_research_disease option');
+			for (let i = 0, l = optionsDisease.length; i < l; i++) {
+				optionsDisease[i].selected = optionsDisease[i].defaultSelected
+			}
+
+			const optionsHeld = document.querySelectorAll('.js_search_research_held option');
+			for (let i = 0, l = optionsHeld.length; i < l; i++) {
+				optionsHeld[i].selected = optionsHeld[i].defaultSelected
+			}
+
+			const optionsClinic = document.querySelectorAll('.js_search_research_clinic option');
+			for (let i = 0, l = optionsClinic.length; i < l; i++) {
+				optionsClinic[i].selected = optionsClinic[i].defaultSelected
+			}
+			
+			genderCheckbox[0].classList.add('js_open_research')
+			genderCheckbox[0].classList.add('active_checkbox')
+
+			genderCheckbox[1].classList.remove('js_open_research')
+			genderCheckbox[1].classList.remove('active_checkbox')
+			
+		})
+	}
 	function removePagination(){
 		const pagination = document.querySelector('.pagination')
 		if(pagination) pagination.remove()
 	}
-	
+	function createEmptyRequest() {
+		container.innerHTML = `<div class="container">
+                                    <p class="empty_result">${EMPTY_REQUEST[LANG]}</p>
+                               </div>`
+	} 
 	function createResearchItem(data) {
 		let strHTML = ''
 		data.forEach(item => {

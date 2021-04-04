@@ -1,7 +1,7 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
 if(!empty($content['text'])){
-	include ROOT_COMPONENTS . 'content/index.php';
+	$this->load->view('components/content/index.php');
 }
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/footer/index.php');

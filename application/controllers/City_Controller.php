@@ -10,14 +10,16 @@ class City_Controller extends Front_Controller
 		$this->load->model('relative_research');
 	}
 	public function single($id) {
-		$data = $this->post->getDataByPermalink($id);
+		$data = $this->post->getDataByPermalink($id, LANG);
 		if(!empty($data)){
 			$data = $data[0];
 			$arr_research = $this->relative_research->getArrByKeyValue('city_id', $data['id']);
 			$arr_research_id = [];
 			foreach($arr_research as $item) $arr_research_id[] = $item['post_id'];
-	
+
+
 			$this->data['research'] = $this->research->getPostsByArrId($arr_research_id);
+
 			for($i = 0; $i<count($this->data['research']); $i++) {
 				$this->data['research'][$i]['thumbnail'] = json_decode($this->data['research'][$i]['thumbnail'], true);
 				$this->data['research'][$i]['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['research'][$i]['slug'].'/'.$this->data['research'][$i]['permalink'];
@@ -39,6 +41,16 @@ class City_Controller extends Front_Controller
 				  'title' => $item['title'],
 				  'id' => $item['id']
 				];
+			}
+
+			$translate_id = $this->relative_post->getDataByKey($data['id'], 'translate');
+			if(!empty($translate_id)) {
+				$translate = $this->post->getPublicDataById($translate_id);
+				if(!empty($translate)) {
+					$this->data['body']['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['body']['slug'].'/'.$this->data['body']['permalink'];
+					LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+					$this->data['body']['translate'] = $PREFIX_TRANSLATE.'/'.$translate[0]['slug'].'/'.$translate[0]['permalink'];
+				}
 			}
 
 			$this->load->view('city/single', $this->data);

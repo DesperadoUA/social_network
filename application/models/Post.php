@@ -24,6 +24,16 @@ class Post extends CI_Model
 		);
 		return $query->result_array();
 	}
+	public function getPublicDataById($id){
+		$query = $this->db->get_where(
+			self::NAME_DB,
+			array(
+				'id' => $id,
+				'status' => 1
+			)
+		);
+		return $query->result_array();
+	}
 	public function updateDateById($id, $data) {
 		$this->db->set($data);
 		$this->db->where('id', $id);
@@ -83,10 +93,11 @@ class Post extends CI_Model
 		$query = $this->db->get(self::NAME_DB);
 		return $query->result_array();
 	}
-	public function getDataByPermalink($permalink) {
+	public function getDataByPermalink($permalink, $lang) {
 		$this->db->where(
 			[
 				'status' => 1,
+				'lang' => $lang,
 				'permalink' => $permalink
 			]
 		);
@@ -94,9 +105,20 @@ class Post extends CI_Model
 		return $query->result_array();
 	}
 	public function getPublicPostsByArrId($arr_id){
-		$this->db->where_in('id', $arr_id);
-		$this->db->where(['status' => 1]);
-		$query = $this->db->get(self::NAME_DB);
+		if(!empty($arr_id)) {
+			$this->db->where_in('id', $arr_id);
+			$this->db->where(['status' => 1]);
+			$query = $this->db->get(self::NAME_DB);
+			return $query->result_array();
+		}
+		return [];
+	}
+	public function getPostWithOutTranslate($lang, $post_type){
+		$this->db->select('t1.id, t1.title')
+			->from('posts as t1')
+			->where(['status' => 1, 'lang' => $lang, 'post_type' => $post_type])
+			->join('relative_post as t2', "t1.id = t2.post_id AND t2.key_meta = 'translate' AND t2.value = 0");
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 }

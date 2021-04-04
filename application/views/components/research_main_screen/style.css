@@ -43,6 +43,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.row_research_main_filters select {
+    font-family: 'Noah-Regular';
+} 
 .research_main_item {
     width: 30%;
     margin-bottom: 20px;
@@ -79,6 +82,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Noah-Regular';
 }
 .research_main_item_checkbox_wrapper:nth-child(2) {
     margin-left:25px;
@@ -118,6 +122,7 @@
     font-family: 'Noah-regular';
     font-size: 15px;
     color: #fa5e66;
+    cursor: pointer;
 }
 .row_research_main_buttons {
     margin-top: 20px;

@@ -8,9 +8,9 @@
 					<?= $body['short_desc']; ?>
 				</p>
 				<div class="row_home_main_buttons">
-					<button class="home_main_btn_profile">
+					<a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="home_main_btn_profile">
 						<?= TRANSLATE['BTN_PROFILE'][LANG] ?>
-					</button>
+					</a>
 					<a class="home_main_btn_research" href="<?= TRANSLATE['RESEARCH_LINK'][LANG] ?>">
 						<?= TRANSLATE['RESEARCH'][LANG] ?>
 					</a>

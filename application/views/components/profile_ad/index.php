@@ -4,9 +4,9 @@
             <div class="profile_ad_title">
                 <?= TRANSLATE['SUBMIT_PROFILE'][LANG] ?>
             </div>
-            <button class="profile_ad_btn">
+            <a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="profile_ad_btn">
                 <?= TRANSLATE['BTN_PROFILE'][LANG] ?>
-            </button>
+            </a>
         </div>
     </div>
     <div class="profile_ad_right">
@@ -18,7 +18,7 @@
                 <a href="#" class="btn_viber">
                    <img src="/uploads/viber.jpg" class="profile_ad_icon"> Viber
                 </a>
-                <a href="#" class="btn_telegram">
+                <a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="btn_telegram">
                     <img src="/uploads/telega.jpg" class="profile_ad_icon">
                     Telegram
                 </a>

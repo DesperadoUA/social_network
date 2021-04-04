@@ -7,6 +7,6 @@
 	formParticipate.initial()
 	const searchClinic = await import('/src_js/search_clinic/script.js')
 	searchClinic.initial()
-	const searchResearch = await import('/src_js/search_research/script.js')
+	const searchResearch = await import('/src_js/search_research/script.js?v=1')
 	searchResearch.initial()
 })()

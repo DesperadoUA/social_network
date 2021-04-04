@@ -6,11 +6,11 @@ return $translate = [
 	],
 	'MAIN_LINK' => [
 		'ru' => '/',
-		'ua' => '/ua/'
+		'ua' => '/ua'
 	],
 	'RESEARCH_LINK' => [
 		'ru' => '/research',
-		'ua' => '/ua/research'
+		'ua' => '/ua/research-ua'
 	],
 	'BTN_PROFILE' => [
 		'ru' => 'разместить анкету',
@@ -223,5 +223,13 @@ return $translate = [
 	'TO_MAIN' => [
 		'ru' => 'На главную',
 		'ua' => 'На головну'
+	],
+	'INFORMATION_FOR_PATIENTS' => [
+		'ru' => 'ИНФОРМАЦИЯ ПАЦИЕНТАМ',
+		'ua' => 'ІНФОРМАЦІЯ ПАЦІЄНТІВ'
+	],
+	'LEGAL_INFORMATION' => [
+		'ru' => 'ПРАВОВАЯ ИНФОРМАЦИЯ',
+		'ua' => 'ПРАВОВА ІНФОРМАЦІЯ'
 	]
 ];

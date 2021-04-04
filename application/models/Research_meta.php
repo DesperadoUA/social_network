@@ -6,6 +6,18 @@ class Research_Meta extends CI_Model
 	public function __construct() {
 		$this->load->database();
 	}
+	public function updateDateByForeignId($id, $data) {
+		$candidate = $this->getDataByForeignId($id);
+		if(empty($candidate)) {
+			$data['post_id'] = $id;
+			$this->db->insert(self::NAME_DB, $data);
+		}
+		else {
+			$this->db->set($data);
+			$this->db->where('post_id', $id);
+			$this->db->update(self::NAME_DB);
+		}
+	}
 	public function getDataById($id) {
 		$query = $this->db->get_where(
 			self::NAME_DB,
@@ -84,5 +96,14 @@ class Research_Meta extends CI_Model
 	public function delete($post_id) {
 		$this->db->where('post_id', $post_id);
 		$this->db->delete(self::NAME_DB);
+	}
+	public function getDataByForeignId($id) {
+		$query = $this->db->get_where(
+			self::NAME_DB,
+			array(
+				'post_id' => $id,
+			)
+		);
+		return $query->result_array();
 	}
 }

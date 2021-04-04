@@ -1,5 +1,5 @@
 <?php
-include ROOT_COMPONENTS . 'head/head.php';
-include ROOT_COMPONENTS . 'header/header.php';
-include ROOT_COMPONENTS . '404/index.php';
-include ROOT_COMPONENTS . 'footer/index.php';
+$this->load->view('components/head/head.php');
+$this->load->view('components/header/header.php');
+$this->load->view('components/404/index.php');
+$this->load->view('components/footer/index.php');

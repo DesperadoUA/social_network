@@ -4,54 +4,18 @@
             <?= TRANSLATE['MEDICAL_DIRECTIONS'][LANG] ?>
         </div>
         <div class="row_medical_directions">
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
-            <div class="medical_directions_item">
-                <div class="medical_directions_img">
-                    <img src='/uploads/direction.png' />
-                </div>
-                <div class="medical_directions_desc">
-                    Кардиология
-                </div>
-            </div>
+            <?php 
+                foreach($settings['directions']['images_and_text'] as $item) {
+                    echo "<div class='medical_directions_item'>
+                            <div class='medical_directions_img'>
+                                <img src='{$item[SRC]}' />
+                            </div>
+                            <div class='medical_directions_desc'>
+                                {$item['description']}
+                            </div>
+                        </div>";
+                }
+            ?>
         </div>
     </div>
 </section>

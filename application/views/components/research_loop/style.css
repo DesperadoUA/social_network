@@ -67,6 +67,14 @@
     z-index: -1;
     border-radius: 50px;
 }
+.empty_result {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #00a2b4;
+    text-decoration: none;
+    font-size: 40px;
+    font-family: Noah-regular;
+}
 @media (min-width: 320px) and (max-width: 767px) {
     .research_loop_item_left, .research_loop_item_right {
         width: 100%;

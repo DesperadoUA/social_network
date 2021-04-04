@@ -5,7 +5,10 @@
 .textarea_wrapper textarea {
  width: 100%;
 }
-
+.note-editor ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
 @font-face {
     font-family: "summernote";
     font-style: normal;

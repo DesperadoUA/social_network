@@ -9,6 +9,7 @@ class API_Controller extends CI_Controller
 		$this->load->model('options');
 		$this->load->model('research');
 		$this->load->model('research_meta');
+		$this->load->model('relative_research');
 		$this->load->model('post');
 		$this->load->model('post_meta');
 		$this->load->model('mails');
@@ -45,34 +46,35 @@ class API_Controller extends CI_Controller
 		echo json_encode($confirm);
 	}
 	public function clinics() {
-/*
+		/*
 		$_POST['lang'] = 'ru';
-		$_POST['city'] = 'New city';
+		$_POST['city'] = 'Киев';
 		//$_POST['city'] = 'Выберите город';
 		$_POST['region'] = 'Выберите регион';
 		//$_POST['region'] = 'Киевский';
 		$_POST['therapeutic_area'] = 'Терапевтическая область';
 		//$_POST['therapeutic_area'] = 'Кардиология, Пульманология';
 		$_POST['keyword'] = '';
-*/
+        */
 		if(isset($_POST)) {
 			$confirm['status'] = 'error';
 
-			if($_POST['lang'] === 'ru') $lang_prefix = '';
+			if($this->input->post('lang') === 'ru') $lang_prefix = '';
 			else $lang_prefix = '/ua';
 
 			$strQuery = '';
-			if($_POST['city'] !== TRANSLATE['CHOOSE_CITY'][$_POST['lang']]) {
-				$strQuery .= " AND t2.key_meta = 'city' AND t2.value='{$_POST['city']}' ";
+			if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.key_meta = 'city' AND t2.value='{$this->input->post('city')}' ";
 			}
+		
 			if(empty($strQuery)) {
-				if($_POST['region'] !== TRANSLATE['CHOOSE_REGION'][$_POST['lang']]) {
-					$strQuery .= " AND t2.key_meta = 'region' AND t2.value='{$_POST['region']}' ";
+				if($this->input->post('region') !== TRANSLATE['CHOOSE_REGION'][$this->input->post('lang')]) {
+					$strQuery .= " AND t2.key_meta = 'region' AND t2.value='{$this->input->post('region')}' ";
 				}
 			}
 			if(empty($strQuery)) {
-				if($_POST['therapeutic_area'] !== TRANSLATE['THERAPEUTIC_AREA'][$_POST['lang']]) {
-					$strQuery .= " AND t2.key_meta = 'therapeutic_area' AND t2.value='{$_POST['therapeutic_area']}' ";
+				if($this->input->post('therapeutic_area') !== TRANSLATE['THERAPEUTIC_AREA'][$this->input->post('lang')]) {
+					$strQuery .= " AND t2.key_meta = 'therapeutic_area' AND t2.value='{$this->input->post('therapeutic_area')}' ";
 				}
 			}
 
@@ -98,26 +100,26 @@ class API_Controller extends CI_Controller
 
 				for($i=0; $i<count($data); $i++) {
 					$city = $this->post_meta->getDataByKey($data[$i]['id'], 'city');
-					if($_POST['city'] !== TRANSLATE['CHOOSE_CITY'][$_POST['lang']]) {
-						if($city !== $_POST['city']) continue;
+					if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {
+						if($city !== $this->input->post('city')) continue;
 					}
 
 					$region = $this->post_meta->getDataByKey($data[$i]['id'], 'region');
-					if($_POST['region'] !== TRANSLATE['CHOOSE_REGION'][$_POST['lang']]) {
-						if($region !== $_POST['region']) continue;
+					if($this->input->post('region') !== TRANSLATE['CHOOSE_REGION'][$this->input->post('lang')]) {
+						if($region !== $this->input->post('region')) continue;
 					}
 
 					$therapeutic_area = $this->post_meta->getDataByKey($data[$i]['id'], 'therapeutic_area');
-					if($_POST['therapeutic_area'] !== TRANSLATE['THERAPEUTIC_AREA'][$_POST['lang']]) {
-						if($therapeutic_area !== $_POST['therapeutic_area']) continue;
+					if($this->input->post('therapeutic_area') !== TRANSLATE['THERAPEUTIC_AREA'][$this->input->post('lang')]) {
+						if($therapeutic_area !== $this->input->post('therapeutic_area')) continue;
 					}
 
 					$full_name = $this->post_meta->getDataByKey($data[$i]['id'], 'full_name');
-					if(!empty($_POST['keyword'])) {
-						if(stristr($full_name, $_POST['keyword']) === FALSE) continue;
+					if(!empty($this->input->post('keyword'))) {
+						if(stristr($full_name, $this->input->post('keyword')) === FALSE) continue;
 					}
 
-					$total_research = $this->research_meta->getArrByKeyValue( 'clinic_id', $data[$i]['id']);
+					$total_research = $this->relative_research->getArrByKeyValue( 'clinic_id', $data[$i]['id']);
 					$relative_research_id = [];
 					foreach ($total_research as $item) $relative_research_id[] = $item['post_id'];
 
@@ -144,25 +146,25 @@ class API_Controller extends CI_Controller
 	}
 	public function research() {
 		$confirm['status'] = 'error';
-		/*
+/*
 		$_POST['lang'] = 'ru';
 
-		//$_POST['region'] = 'Московский';
-		$_POST['region'] = 'Выберите регион';
+		$_POST['region'] = 'Test research 3';
+		//$_POST['region'] = 'Выберите регион';
 
 
 		//$_POST['city'] = 'Москва';
 		$_POST['city'] = 'Выберите город';
 
-		//$_POST['disease'] = 'Заболевание 1';
+		//$_POST['disease'] = 'Test research 1';
 		$_POST['disease'] = 'Заболевание';
 
 
 		$_POST['held'] = 'Проводится';
 		//$_POST['held'] = 'Проводится';
 
-		$_POST['clinic'] = '';
-		//$_POST['clinic'] = 4;
+		//$_POST['clinic'] = '';
+		$_POST['clinic'] = 36;
 
 		$_POST['open'] = 'С открытым набором';
 		//$_POST['open'] = 'Для здоровых добровольцев';
@@ -171,41 +173,40 @@ class API_Controller extends CI_Controller
 		//$_POST['keyword'] = 'test';
 */
 		if(isset($_POST)){
-			if($_POST['lang'] === 'ru') $lang_prefix = '';
+			if($this->input->post('lang') === 'ru') $lang_prefix = '';
 			else $lang_prefix = '/ua';
 
-			$arrQuery = [
-				'lang' => $_POST['lang'],
-				'status' => 1
-			];
-			if($_POST['city'] !== TRANSLATE['CHOOSE_CITY'][$_POST['lang']]) {
-				$arrQuery['city'] = $_POST['city'];
+			$strQuery = '';
+			if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.city = '{$this->input->post('city')}' ";
 			}
 
-			if($_POST['region'] !== TRANSLATE['CHOOSE_REGION'][$_POST['lang']]) {
-				$arrQuery['region'] = $_POST['region'];
+			if($this->input->post('region') !== TRANSLATE['CHOOSE_REGION'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.region = '{$this->input->post('region')}' ";
 			}
 
-			if($_POST['disease'] !== TRANSLATE['DISEASE'][$_POST['lang']]) {
-				$arrQuery['disease'] = $_POST['disease'];
+			if($this->input->post('disease') !== TRANSLATE['DISEASE'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.disease = '{$this->input->post('disease')}' ";
 			}
 
-			if($_POST['open'] === TRANSLATE['OPEN_SET'][$_POST['lang']]) {
-				$arrQuery['open_set'] = 1;
+			if($this->input->post('open') === TRANSLATE['OPEN_SET'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.open_set = '1' ";
 			}
 			else {
-				$arrQuery['for_volunteers'] = 1;
+				$strQuery .= " AND t2.for_volunteers = '1' ";
 			}
 
-			if($_POST['held'] === TRANSLATE['HELD'][$_POST['lang']]) {
-				$arrQuery['active'] = 1;
+			if($this->input->post('held') === TRANSLATE['HELD'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.active = '1' ";
 			}
 			else {
-				$arrQuery['active'] = 0;
+				$strQuery .= " AND t2.active = '0' ";
 			}
+
 			$confirm['status'] = 'ok';
 			if(empty($_POST['clinic'])) {
-				$result = $this->research->getSearchPublicPosts($arrQuery);
+				$result = $this->research->getSearchPublicPosts($this->input->post('lang'), $strQuery);
+
 				$response = [];
 				if(!empty($_POST['keyword'])) {
 					foreach($result as $item) {
@@ -222,27 +223,23 @@ class API_Controller extends CI_Controller
 				$confirm['data'] = $response;
 				echo json_encode($confirm);
 
-			} else {
-				$query = [];
-				foreach ($arrQuery as $key => $value) $query['t1.'.$key] = $value;
+			}
+			else {
 
-				$this->db->distinct('t1.id');
-				$this->db->select('t1.id')
-					->from('research as t1')
-					->where($query)
-					->join('research_meta as t2', "t1.id = t2.post_id AND t2.key_meta = 'clinic_id' AND t2.value = '{$_POST['clinic']}'");
-				$query = $this->db->get();
-				$ids = $query->result_array();
-				$research_ids = [];
-				foreach ($ids as $item) $research_ids[] = $item['id'];
-				$posts = $this->research->getPostsByArrId($research_ids);
+				$posts = $this->research->getPostsByClinicIdAndQueryParams(
+					                    $this->input->post('lang'),
+										$this->input->post('clinic'),
+										$strQuery);
 				$response = [];
+
 				if(!empty($_POST['keyword'])) {
 					foreach($posts as $item) {
 						$str = json_encode($item);
 						if(stristr($str, $_POST['keyword']) !== FALSE) $response[] = $item;
 					}
 				} else $response = $posts;
+
+
 				for ($i=0; $i<count($response); $i++){
 					$response[$i]['permalink'] = $lang_prefix.'/'.$response[$i]['slug'].'/'.$response[$i]['permalink'];
 					$response[$i]['data_start'] = mb_substr($response[$i]['data_start'], 0, 10);
@@ -251,7 +248,6 @@ class API_Controller extends CI_Controller
 
 				$confirm['data'] = $response;
 				echo json_encode($confirm);
-
 			}
 		}
 		else {

@@ -8,6 +8,7 @@ class Admin_Controller extends CI_Controller {
 		$this->load->model('settings');
 		$this->load->model('options');
 		$this->load->model('research');
+		$this->load->model('relative_post');
 	}
 	public function permalinkExist($name_db, $permalink){
 		$query = $this->db->get_where(
