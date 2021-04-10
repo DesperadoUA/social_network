@@ -44,6 +44,20 @@
 					<?= $total_research; ?>
                 </div>
             </div>
+            <?php
+            if(!empty($body['additional_fields'])) {
+                foreach ($body['additional_fields'] as $item) {
+                    echo "<div class='single_clinic_main_item'>
+                            <div class='single_clinic_main_item_left'>
+                                {$item['value_1']}
+                            </div>
+                            <div class='single_clinic_main_item_right'>
+                                {$item['value_2']}
+                            </div>
+                          </div>";
+                }
+            }
+            ?>
 		</div>
 	</div>
 </section>

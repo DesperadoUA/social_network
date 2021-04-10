@@ -37,6 +37,11 @@ class Admin_Post extends Admin_Controller
 				'type' => 'string',
 				'editor' => 'MM_Module_Input',
 				'key' => 'therapeutic_area'
+			],
+			[
+				'type' => 'array',
+				'editor' => 'MM_Module_Two_Input',
+				'key' => 'additional_fields'
 			]
 		],
 		'blog' => [], 
@@ -65,9 +70,15 @@ class Admin_Post extends Admin_Controller
 			$data = $data[0];
 			foreach (self::ARR_POST_TYPE_KEY[$data['post_type']] as $value) {
 				$item = $this->post_meta->getDataByKey($data['id'], $value['key']);
+
 				if(empty($item)) $data[$value['key']] =  self::DEFAULT_VALUE[$value['type']];
 				else $data[$value['key']] = $item;
 
+				if($value['type'] === 'array') {
+					if(!empty($item)) {
+						$data[$value['key']] = json_decode($data[$value['key']], true);
+					}
+				}
 			}
 			/* Translate */
 			if($data['lang'] === 'ru') $lang_translate = 'ua';
@@ -128,6 +139,9 @@ class Admin_Post extends Admin_Controller
         //--------- Post meta -----------//
 		foreach (self::ARR_POST_TYPE_KEY[$post_type] as $value){
 			$result = call_user_func_array([$value['editor'], 'getData'], [$value['key']]);
+			if($value['type'] === 'array') {
+				$result = json_encode($result, JSON_UNESCAPED_UNICODE);
+			}
 			$this->post_meta->addDataByKey($id, $value['key'], $result);
 		}
 

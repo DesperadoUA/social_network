@@ -109,6 +109,6 @@
 		'class_wrapper_input' => 'full_size',
         'value' => ARRAY_LANG
 	];
-	MM_Module_Radio_Button::create('lang', $settings, $lang);
+	//MM_Module_Radio_Button::create('lang', $settings, $lang);
 	?>
 </div>

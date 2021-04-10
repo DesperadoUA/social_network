@@ -195,9 +195,9 @@ class Admin_Research extends Admin_Controller
 				'id' => $this->relative_research->getArrByKey($id, 'clinic_id')
 			];
 
-			$cityes = $this->post->getPostsByLang('city', $data['lang']);
+			$cities = $this->post->getPostsByLang('city', $data['lang']);
 			$relative_city = [];
-			foreach ($cityes as $city) {
+			foreach ($cities as $city) {
 				$relative_city[] = [
 					'id' => $city['id'],
 					'post_title' => $city['title']

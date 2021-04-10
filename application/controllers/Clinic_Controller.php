@@ -123,6 +123,10 @@ class Clinic_Controller extends Front_Controller
 			$this->data['body']['city'] = $this->post_meta->getDataByKey($data['id'], 'city');
 			$this->data['body']['address'] = $this->post_meta->getDataByKey($data['id'], 'address');
 			$this->data['body']['therapeutic_area'] = $this->post_meta->getDataByKey($data['id'], 'therapeutic_area');
+			$this->data['body']['additional_fields'] = $this->post_meta->getDataByKey($data['id'], 'additional_fields');
+			if(!empty($this->data['body']['additional_fields'])) {
+				$this->data['body']['additional_fields'] = json_decode($this->data['body']['additional_fields'], true);
+			}
 
 			$translate_id = $this->relative_post->getDataByKey($data['id'], 'translate');
 			if(!empty($translate_id)) {

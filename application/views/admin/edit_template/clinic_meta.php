@@ -49,6 +49,14 @@
 	];
 	MM_Module_Input::create('therapeutic_area', $settings, $therapeutic_area); ?>
 	<?php
+        $settings = [
+            'module_title' => 'Дополнительные поля клиники',
+            'title' => ['text 1', 'text 2']
+        ];
+        if(!isset($additional_fields) or empty($additional_fields)) $additional_fields = [];
+        MM_Module_Two_Input::create('additional_fields', $settings, $additional_fields);
+	?>
+	<?php
 	$settings = [
 		'class_wrapper' => 'full_size',
 		'module_title' => 'Переводы'
