@@ -5,8 +5,8 @@ export const initial = function() {
 	const formParticipate = document.getElementById('form_participate')
 	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
 	const PAGE_REDIRECT = {
-		'ru': 'thx',
-		'ua': '/ua/thx-ua'
+		'ru': 'https://'+document.domain+'/thx',
+		'ua': 'https://'+document.domain+'/ua/thx-ua'
 	}
 	let currentId = 0
 

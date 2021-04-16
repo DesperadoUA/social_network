@@ -75,6 +75,11 @@
     font-size: 40px;
     font-family: Noah-regular;
 }
+.research_single_btn_wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px 40px 20px;
+}
 @media (min-width: 320px) and (max-width: 767px) {
     .research_loop_item_left, .research_loop_item_right {
         width: 100%;
