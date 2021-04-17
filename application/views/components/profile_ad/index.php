@@ -4,7 +4,7 @@
             <div class="profile_ad_title">
                 <?= TRANSLATE['SUBMIT_PROFILE'][LANG] ?>
             </div>
-            <a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="profile_ad_btn">
+            <a href="<?= $options['google_doc']['text'] ?>" class="profile_ad_btn">
                 <?= TRANSLATE['BTN_PROFILE'][LANG] ?>
             </a>
         </div>
