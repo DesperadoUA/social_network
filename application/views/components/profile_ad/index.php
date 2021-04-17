@@ -15,7 +15,7 @@
                 <?= TRANSLATE['GET_VACATIONS'][LANG] ?>
             </div>
             <div class="row_profile_ad_social">
-                <a href="#" class="btn_viber">
+                <a href="<?= $options['viber']['text'] ?>" class="btn_viber">
                    <img src="/uploads/viber.jpg" class="profile_ad_icon"> Viber
                 </a>
                 <a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="btn_telegram">
