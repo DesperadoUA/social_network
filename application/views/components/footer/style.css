@@ -85,6 +85,13 @@
     font-family: 'Noah-Grotesque';
     font-size: 20px;
 }
+.footer_phone a {
+    color: white;
+    text-decoration: none;
+} 
+.mt-20 {
+    margin-top: 20px;
+}
 @media (min-width: 320px) and (max-width: 767px) {
     .footer {
         padding-top: 60px;

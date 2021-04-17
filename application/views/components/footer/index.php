@@ -13,6 +13,27 @@
                               </p>";
                     }
                 ?>
+                 <?php
+                    if(!empty($options['phone']['text'])) {
+                        if(IS_MOBILE) {
+                            echo "<p class='footer_phone mt-20'>
+                                    <a href='tel:{$options['phone']['text']}'>{$options['phone']['text']}</a>
+                                </p>";
+                        }
+                        else {
+                            echo "<p class='footer_phone mt-20'>
+                                {$options['phone']['text']}
+                            </p>";
+                        }
+                    }
+                ?>
+                <?php
+                    if(!empty($options['mail_footer']['text'])) {
+                        echo "<p class='footer_phone mt-20'>
+                                  E-mail: <a href='mailto:{$options['mail_footer']['text']}'>{$options['mail_footer']['text']}</a>
+                                </p>";
+                    }
+                ?>
             </div>
             <div class="footer_item">
                 <p><?= TRANSLATE['INFORMATION_FOR_PATIENTS'][LANG] ?></p>

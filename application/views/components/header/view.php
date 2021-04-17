@@ -11,7 +11,7 @@
 					>
 				</a>
 			</div>
-			<?php if(!empty($body['translate'])) include 'lang.php'; ?>
+			    <?php if(!empty($body['translate'])) include 'lang.php'; ?>
 			<?php
 			if(!empty($settings['header_menu']['menu'])) {
 				echo "<nav>
