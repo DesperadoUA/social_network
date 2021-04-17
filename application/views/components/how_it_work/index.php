@@ -15,9 +15,9 @@
                              }
                             ?>
                         </ul>
-                            <button class="btn_watch_video">
-                                <?= TRANSLATE['WATCH_VIDEO'][LANG]; ?>
-                            </button>
+                          <!--  <button class="btn_watch_video">
+                                <?=  TRANSLATE['WATCH_VIDEO'][LANG]; ?>
+                            </button> -->
                     </div>
                 </div>
             </div>

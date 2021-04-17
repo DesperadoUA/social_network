@@ -1,5 +1,6 @@
 .how_it_work {
     position: relative;
+    min-height: 750px;
 }
 .how_it_work_men {
     position: absolute;
@@ -83,6 +84,9 @@
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
+    .how_it_work {
+        min-height: auto;
+    }
     .how_it_work_men {
         position: static;
         max-width: 100%;
@@ -119,6 +123,9 @@
     }
 }
 @media (min-width: 768px) and (max-width: 1200px) {
+    .how_it_work {
+        min-height: auto;
+    }
     .how_it_work_men {
         position: static;
         max-width: 100%;
