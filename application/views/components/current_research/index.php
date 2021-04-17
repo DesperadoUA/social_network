@@ -20,5 +20,10 @@
             }
             ?>
         </div>
+        <div class='current_research_link'>
+            <a href="<?= TRANSLATE['RESEARCH_LINK'][LANG]; ?>">
+                <?= TRANSLATE['ALL_RESEARCH'][LANG] ?>
+            </a>
+        </div>
     </div>
 </section>

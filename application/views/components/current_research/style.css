@@ -66,6 +66,15 @@
     font-weight: bold;
     text-align: center;
 }
+.current_research_link {
+    text-align: center;
+    padding-top: 20px;
+}
+.current_research_link  a{
+    color: #fa5e66;
+    font-size: 24px;
+    font-family: 'Noah-Grotesque';
+}
 @media (min-width: 320px) and (max-width: 767px) {
     .current_research {
         padding-bottom: 60px;
