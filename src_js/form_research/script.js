@@ -4,6 +4,7 @@ export const initial = function() {
 	const popUpResearch = document.getElementById('pop_up_active')
 	const formResearch = document.getElementById('form_active')
 	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
+	const btnClosePopUp = document.querySelector('.close_research')
 	const PAGE_REDIRECT = {
 		'ru': 'https://'+document.domain+'/thx',
 		'ua': 'https://'+document.domain+'/ua/thx-ua'
@@ -50,5 +51,9 @@ export const initial = function() {
 			popUpResearch.classList.remove('pop_up_show')
 			currentId = 0
 		}
+	})
+	btnClosePopUp.addEventListener('click', () => {
+		popUpResearch.classList.remove('pop_up_show')
+		currentId = 0
 	})
 }

@@ -4,6 +4,7 @@ export const initial = function() {
 	const popUpParticipate = document.getElementById('pop_up_participate')
 	const formParticipate = document.getElementById('form_participate')
 	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
+	const btnClosePopUp = document.querySelector('.close_participate')
 	const PAGE_REDIRECT = {
 		'ru': 'https://'+document.domain+'/thx',
 		'ua': 'https://'+document.domain+'/ua/thx-ua'
@@ -71,5 +72,9 @@ export const initial = function() {
 			popUpParticipate.classList.remove('pop_up_show')
 			currentId = 0
 		}
+	})
+	btnClosePopUp.addEventListener('click', () => {
+		popUpParticipate.classList.remove('pop_up_show')
+		currentId = 0
 	})
 }

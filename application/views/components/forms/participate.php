@@ -1,5 +1,6 @@
 <section class="pop_up" id="pop_up_participate">
 	<div class="form_wrapper">
+        <div class="form_close_btn close_participate">&#10006;</div>
 		<form id="form_participate">
 			<div class="form_title">
 				<?= TRANSLATE['WANT_PARTICIPATE'][LANG]; ?>

@@ -92,7 +92,26 @@
 .mt-20 {
     margin-top: 20px;
 }
+.form_wrapper {
+    position: relative;
+}
+.form_close_btn {
+    width: 40px;
+    height: 40px;
+    background: #fa5e66;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    right: 0px;
+    top:-20px;
+}
 @media (min-width: 320px) and (max-width: 767px) {
+    .form_close_btn {
+        top:-40px;
+    }
     .footer {
         padding-top: 60px;
         padding-bottom: 20px;

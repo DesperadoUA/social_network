@@ -13,7 +13,7 @@
                               </p>";
                     }
                 ?>
-                 <?php
+                <?php
                     if(!empty($options['phone']['text'])) {
                         if(IS_MOBILE) {
                             echo "<p class='footer_phone mt-20'>
