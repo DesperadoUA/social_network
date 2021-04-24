@@ -9,6 +9,11 @@
     <meta name="keywords" content="<?= $body['keywords']; ?>" />
     <meta name="description" content="<?= $body['description']; ?>" />
     <link rel="icon" href="<?= $options['icon']['image']['src']; ?>" sizes="32x32" />
+    <?php
+    if($options['indexing']['status'] === 0) {
+        echo "<meta name='robots' content='noindex, nofollow'/>";
+    }
+    ?>
     <style>
     <?php
         $this->load->view('components/variable/style.css');

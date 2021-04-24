@@ -1,7 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Костя
- * Date: 24.04.2021
- * Time: 11:39
- */
+$settings = [
+	'module_title' => 'Public',
+	'title' => 'public',
+];
+if(!isset($content['status'])) $content['status'] = "1";
+MM_Module_Checkbox::create('status', $settings, $content['status']);
+?>

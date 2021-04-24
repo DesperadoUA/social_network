@@ -191,6 +191,12 @@ class Admin extends Admin_Controller {
 				'text' => $request['text']
 			];
 		}
+		elseif ($template === 'checkbox') {
+			$request['text'] = MM_Module_Checkbox::getData('status');
+			$data['content'] = [
+				'status' => $request['text']
+			];
+		}
 
 		$data['content'] = json_encode($data['content'], JSON_UNESCAPED_UNICODE);
 		$this->options->updateDateById($id, $data);
