@@ -35,6 +35,17 @@ class Front_Controller extends CI_Controller {
 			$arr = explode ( '/page' , $currentURL);
 			redirect($arr[0], 'location', 301);
 		}
+
+		/* Redirect */
+		if(isset($this->data['options']['redirects'])) {
+			$uri = '/'.uri_string().'/';
+			$arr_redirects = $this->data['options']['redirects']['menu'];
+			foreach ($arr_redirects as $item) {
+				if($item['value_1'] === $uri) {
+					redirect($item['value_2'], 'location', 301);
+				}
+			}
+		}
 	}
 	public function show_404(){
 		$this->output->set_status_header('404');
