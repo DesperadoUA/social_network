@@ -93,6 +93,8 @@
     ?>
 </footer>
 <script src="/js/script.js" ></script>
-<script async src="https://crm.streamtele.com/widget/getwidget/743fa3a587babcc683e775673ad9d339" type="text/javascript" charset="UTF-8"></script>
+<script async src="https://crm.streamtele.com/widget/getwidget/743fa3a587babcc683e775673ad9d339"
+        type="text/javascript" charset="UTF-8"></script>
+<script async defer data-domain="luckytrials.com" src="https://plausible.io/js/plausible.js"></script>
 </body>
 </html>
