@@ -227,16 +227,25 @@ class Admin_Research extends Admin_Controller
 				];
 			}
 			else {
-				$current = $this->research->getDataById($current_translate)[0];
-				$current_post_translate = [
-					'id' => $current['id'],
-					'post_title' => $current['title']
-				];
-				$post_translate[] = $current_post_translate;
-				$data['post_translate'] = [
-					'all_data' => $post_translate,
-					'id' => $current['id']
-				];
+				$current = $this->research->getDataById($current_translate);
+				if(!empty($current)) {
+					$current_post_translate = [
+						'id' => $current[0]['id'],
+						'post_title' => $current[0]['title']
+					];
+					$post_translate[] = $current_post_translate;
+					$data['post_translate'] = [
+						'all_data' => $post_translate,
+						'id' => $current[0]['id']
+					];
+				} else {
+					$post_translate = [];
+					$data['post_translate'] = [
+						'all_data' => $post_translate,
+						'id' => 0
+					];
+				}
+
 			}
 
 			if(empty($data['additional_fields'])) $data['additional_fields'] = [];
