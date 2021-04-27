@@ -220,6 +220,7 @@ class Admin_Research extends Admin_Controller
 					'post_title' => $post['title']
 				];
 			}
+
 			if($current_translate === '0') {
 				$data['post_translate'] = [
 					'all_data' => $post_translate,
@@ -239,7 +240,6 @@ class Admin_Research extends Admin_Controller
 						'id' => $current[0]['id']
 					];
 				} else {
-					$post_translate = [];
 					$data['post_translate'] = [
 						'all_data' => $post_translate,
 						'id' => 0
