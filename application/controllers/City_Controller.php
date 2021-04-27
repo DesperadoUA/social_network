@@ -34,6 +34,7 @@ class City_Controller extends Front_Controller
 		    $this->data['filter']['disease'] = $this->research->getDistinctValueForPublicPosts(LANG, 'disease');
 		    $this->data['filter']['clinics'] = [];
 		    $arr_clinic_id = $this->research->getDistinctClinics(LANG);
+			$clinics_id = [];
 		    foreach ($arr_clinic_id as $item) $clinics_id[] = $item['value'];
 		    $clinics = $this->post->getPublicPostsByArrId($clinics_id);
 		    foreach ($clinics as $item) {

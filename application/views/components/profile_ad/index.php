@@ -4,7 +4,7 @@
             <div class="profile_ad_title">
                 <?= TRANSLATE['SUBMIT_PROFILE'][LANG] ?>
             </div>
-            <a href="<?= $options['google_doc']['text'] ?>" class="profile_ad_btn">
+            <a href="<?= $options['google_doc']['text'] ?>" target="_blank" class="profile_ad_btn">
                 <?= TRANSLATE['BTN_PROFILE'][LANG] ?>
             </a>
         </div>

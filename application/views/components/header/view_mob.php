@@ -21,7 +21,7 @@
 							<a href='/'>ru</a>
 						</li>
 						<li class="lang_item">
-							<a href='/ua/'>ua</a>
+							<a href='/ua'>ua</a>
 						</li>
 					</ul>
 				</div>
@@ -39,9 +39,9 @@
 				}
 				?>
 				<div class="btn_profile_wrapper">
-					<button class="btn_profile">
+					<a href="<?= $options['google_doc']['text'] ?>" target="_blank" class="btn_profile">
 						<?= TRANSLATE['BTN_PROFILE'][LANG]; ?>
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>

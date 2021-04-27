@@ -26,7 +26,7 @@
 			}
 			?>
 			<div class="btn_profile_wrapper">
-				<a href="https://telegram.im/<?= $options['telegram']['text'] ?>" target="_blank" class="btn_profile">
+				<a href="<?= $options['google_doc']['text'] ?>" target="_blank" class="btn_profile">
 					<?= TRANSLATE['BTN_PROFILE'][LANG]; ?>
 				</a>
 			</div>

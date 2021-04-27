@@ -8,7 +8,7 @@
 					<?= $body['short_desc']; ?>
 				</p>
 				<div class="row_home_main_buttons">
-					<a href="https://telegram.im/<?= $options['telegram']['text'] ?>" class="home_main_btn_profile">
+					<a href="<?= $options['google_doc']['text'] ?>" target="_blank" class="home_main_btn_profile">
 						<?= TRANSLATE['BTN_PROFILE'][LANG] ?>
 					</a>
 					<a class="home_main_btn_research" href="<?= TRANSLATE['RESEARCH_LINK'][LANG] ?>">
