@@ -6,6 +6,7 @@
                     echo "<div class='advantages_item'>
                             <img src='{$item[SRC]}'
                             title='{$item['title']}' 
+                            loading='lazy' 
                             alt='{$item['alt']}' 
                             class='advantages_icon'>
                             <p class='advantages_desc'>

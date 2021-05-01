@@ -8,7 +8,7 @@
                 foreach($settings['directions']['images_and_text'] as $item) {
                     echo "<div class='medical_directions_item'>
                             <div class='medical_directions_img'>
-                                <img src='{$item[SRC]}' />
+                                <img src='{$item[SRC]}' loading='lazy' />
                             </div>
                             <div class='medical_directions_desc'>
                                 {$item['description']}

@@ -1,5 +1,7 @@
 <section class="how_it_work">
-        <img src='<?= $options['men']['image'][SRC]; ?>' class="how_it_work_men">
+        <img src='<?= $options['men']['image'][SRC]; ?>'
+             loading='lazy'
+             class="how_it_work_men">
         <div class="container">
             <div class="row_how_it_work">
                 <div class="how_it_work_left"></div>
