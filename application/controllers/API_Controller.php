@@ -210,8 +210,15 @@ class API_Controller extends CI_Controller
 				$response = [];
 				if(!empty($_POST['keyword'])) {
 					foreach($result as $item) {
-						$str = json_encode($item);
-						if(stristr($str, $_POST['keyword']) !== FALSE) $response[] = $item;
+						if(stristr($item['title'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['h1'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['content'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['protocol_name'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['therapeutic_area'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['name_organization'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['disease'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['researchers'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['clinic_name'], $_POST['keyword']) !== FALSE) $response[] = $item;
 					}
 				} else $response = $result;
 
@@ -231,11 +238,17 @@ class API_Controller extends CI_Controller
 										$this->input->post('clinic'),
 										$strQuery);
 				$response = [];
-
 				if(!empty($_POST['keyword'])) {
 					foreach($posts as $item) {
-						$str = json_encode($item);
-						if(stristr($str, $_POST['keyword']) !== FALSE) $response[] = $item;
+						if(stristr($item['title'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['h1'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['content'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['protocol_name'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['therapeutic_area'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['name_organization'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['disease'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['researchers'], $_POST['keyword']) !== FALSE) $response[] = $item;
+						elseif(stristr($item['clinic_name'], $_POST['keyword']) !== FALSE) $response[] = $item;
 					}
 				} else $response = $posts;
 
