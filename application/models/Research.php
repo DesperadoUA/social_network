@@ -218,7 +218,8 @@ class Research extends CI_Model
 			->join('relative_research as t3',
 				    "t1.id = t3.post_id 
 				     AND t3.key_meta = 'clinic_id' 
-					 AND t3.value = '{$clinic_id}'");
+					 AND t3.value = '{$clinic_id}'
+					 ");
 		$query = $this->db->get();
 		return $query->result_array();
 	}

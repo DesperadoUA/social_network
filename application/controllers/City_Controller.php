@@ -29,7 +29,13 @@ class City_Controller extends Front_Controller
 		
 			$this->data['body'] = $data;
 			$this->data['body']['total_posts'] = count($this->data['research']);
-		    $this->data['filter']['city'] = $this->research->getDistinctValueForPublicPosts(LANG, 'city');
+			$arr_city = [];
+			$city = $this->post->getPublicPosts('city', 0, 0, LANG);
+			if(!empty($city)) {
+				foreach ($city as $item) $arr_city[] = $item['title'];
+			}
+
+			$this->data['filter']['city'] = $arr_city;
 		    $this->data['filter']['region'] = $this->research->getDistinctValueForPublicPosts(LANG, 'region');
 		    $this->data['filter']['disease'] = $this->research->getDistinctValueForPublicPosts(LANG, 'disease');
 		    $this->data['filter']['clinics'] = [];

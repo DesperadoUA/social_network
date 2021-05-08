@@ -178,7 +178,7 @@ class API_Controller extends CI_Controller
 
 			$strQuery = '';
 			if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {
-				$strQuery .= " AND t2.city = '{$this->input->post('city')}' ";
+				$strQuery .= " AND t2.city LIKE '%{$this->input->post('city')}%' ";
 			}
 
 			if($this->input->post('region') !== TRANSLATE['CHOOSE_REGION'][$this->input->post('lang')]) {

@@ -22,7 +22,7 @@
 							<option><?= TRANSLATE['CHOOSE_CITY'][LANG]; ?></option>
 							<?php
 							foreach($filter['city'] as $item) {
-								if(!empty($item['city'])) echo "<option>{$item['city']}</option>";
+							    echo "<option>{$item}</option>";
 							}
 							?>
 						</select>
