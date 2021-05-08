@@ -6,8 +6,8 @@ class Main extends Front_Controller
 {
 	const LIMIT_MAIN = 6;
 	public function index() {
-		if(base_url() === current_url() or base_url().'ua' === current_url()) $PAGE_SEGMENT = 1;
-		else LANG === 'ua' ? $PAGE_SEGMENT = 2 : $PAGE_SEGMENT = 1;
+		if(base_url() === current_url() or base_url().'ru' === current_url()) $PAGE_SEGMENT = 1;
+		else LANG === 'ru' ? $PAGE_SEGMENT = 2 : $PAGE_SEGMENT = 1;
 
 		$page_url = '/'.$this->uri->segment($PAGE_SEGMENT);
 		$data = $this->static_page->getDataByUrl($page_url)[0];
@@ -22,7 +22,7 @@ class Main extends Front_Controller
 				$this->data['body']['translate'] = $url;
 			} else {
 				$this->data['body']['permalink'] = LANG_PREFIX_LINK.$this->data['body']['permalink'];
-				LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+				LANG === 'ru' ? $PREFIX_TRANSLATE = '' : $PREFIX_TRANSLATE = '/ru';
 				$this->data['body']['translate'] = $PREFIX_TRANSLATE.$url;
 			}
 		}

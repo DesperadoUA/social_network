@@ -5,12 +5,12 @@ return $translate = [
 		'ua' => 'Замовити дзвінок'
 	],
 	'MAIN_LINK' => [
-		'ru' => '/',
-		'ua' => '/ua'
+		'ru' => '/ru',
+		'ua' => '/'
 	],
 	'RESEARCH_LINK' => [
-		'ru' => '/research',
-		'ua' => '/ua/research-ua'
+		'ru' => '/ru/research',
+		'ua' => '/research-ua'
 	],
 	'BTN_PROFILE' => [
 		'ru' => 'разместить анкету',

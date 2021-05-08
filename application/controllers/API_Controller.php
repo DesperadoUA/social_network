@@ -59,8 +59,8 @@ class API_Controller extends CI_Controller
 		if(isset($_POST)) {
 			$confirm['status'] = 'error';
 
-			if($this->input->post('lang') === 'ru') $lang_prefix = '';
-			else $lang_prefix = '/ua';
+			if($this->input->post('lang') === 'ua') $lang_prefix = '';
+			else $lang_prefix = '/ru';
 
 			$strQuery = '';
 			if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {
@@ -173,8 +173,8 @@ class API_Controller extends CI_Controller
 		//$_POST['keyword'] = 'test';
 */
 		if(isset($_POST)){
-			if($this->input->post('lang') === 'ru') $lang_prefix = '';
-			else $lang_prefix = '/ua';
+			if($this->input->post('lang') === 'ua') $lang_prefix = '';
+			else $lang_prefix = '/ru';
 
 			$strQuery = '';
 			if($this->input->post('city') !== TRANSLATE['CHOOSE_CITY'][$this->input->post('lang')]) {

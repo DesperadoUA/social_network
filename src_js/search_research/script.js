@@ -14,7 +14,7 @@ export const initial = function() {
 		})
 	}
 	const API_URL = '/api/research'
-	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
+	const LANG = window.location.pathname.startsWith('/ru') ? 'ru' : 'ua'
 	const btnSearch = document.querySelector('.js_search_research')
 	const container = document.querySelector('.research_loop')
 	const numberResearch = document.querySelector('.js_search_research_total')

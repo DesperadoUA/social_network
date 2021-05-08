@@ -89,7 +89,7 @@ define( 'TRANSLATE', include $_SERVER['DOCUMENT_ROOT'].'/application/views/compo
 define( 'LANG', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/index.php');
 define( 'ARRAY_LANG', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/config.php');
 define( 'LANG_PREFIX_LINK', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/lang_prefix_link.php');
-define( 'DEFAULT_LANG', 'ru');
+define( 'DEFAULT_LANG', 'ua');
 define( 'DEFAULT_STATUS', '1');
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT']);
 define( 'ROOT_COMPONENTS', $_SERVER['DOCUMENT_ROOT'].'/application/views/components/');

@@ -50,56 +50,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'main';
-$route['how-it-works'] = 'main';
-$route['ua/how-it-works-ua'] = 'main';
-$route['for-specialists'] = 'main';
-$route['ua/for-specialists-ua'] = 'main';
-$route['thx'] = 'main';
-$route['ua/thx-ua'] = 'main';
-$route['o-platforme'] ='main';
-$route['ua/o-platforme-ua'] ='main';
-$route['o-klinicheskih-issledovaniyah'] ='main';
-$route['ua/o-klinicheskih-issledovaniyah-ua'] ='main';
-$route['prava-i-obyazannosti-uchastnikov'] ='main';
-$route['ua/prava-i-obyazannosti-uchastnikov-ua'] ='main';
-$route['bezopasnost-patsientov'] ='main';
-$route['ua/bezopasnost-patsientov-ua'] ='main';
-$route['kontakty'] ='main';
-$route['ua/kontakty-ua'] ='main';
-$route['ua'] ='main';
+$route['ru/how-it-works'] = 'main';
+$route['how-it-works-ua'] = 'main';
+$route['ru/for-specialists'] = 'main';
+$route['for-specialists-ua'] = 'main';
+$route['ru/thx'] = 'main';
+$route['thx-ua'] = 'main';
+$route['ru/o-platforme'] ='main';
+$route['o-platforme-ua'] ='main';
+$route['ru/o-klinicheskih-issledovaniyah'] ='main';
+$route['o-klinicheskih-issledovaniyah-ua'] ='main';
+$route['ru/prava-i-obyazannosti-uchastnikov'] ='main';
+$route['prava-i-obyazannosti-uchastnikov-ua'] ='main';
+$route['ru/bezopasnost-patsientov'] ='main';
+$route['bezopasnost-patsientov-ua'] ='main';
+$route['ru/kontakty'] ='main';
+$route['kontakty-ua'] ='main';
+$route['ru'] ='main';
 
 
 $route['api/mailer'] = 'API_Controller/mailer';
 $route['api/clinics'] = 'API_Controller/clinics';
 $route['api/research'] = 'API_Controller/research';
 
-$route['research'] = 'Research_Controller';
-$route['ua/research-ua'] = 'Research_Controller';
-$route['research/page/(:any)'] = 'Research_Controller';
-$route['ua/research-ua/page/(:any)'] = 'Research_Controller';
+$route['ru/research'] = 'Research_Controller';
+$route['research-ua'] = 'Research_Controller';
+$route['ru/research/page/(:any)'] = 'Research_Controller';
+$route['research-ua/page/(:any)'] = 'Research_Controller';
+$route['ru/research/(:any)'] = 'Research_Controller/single/$1';
 $route['research/(:any)'] = 'Research_Controller/single/$1';
-$route['ua/research/(:any)'] = 'Research_Controller/single/$1';
 
+$route['ru/city/(:any)'] = 'City_Controller/single/$1';
 $route['city/(:any)'] = 'City_Controller/single/$1';
-$route['ua/city/(:any)'] = 'City_Controller/single/$1';
 
-$route['clinics'] = 'Clinic_Controller';
-$route['ua/clinics-ua'] = 'Clinic_Controller';
-$route['clinics/page/(:any)'] = 'Clinic_Controller';
-$route['ua/clinics-ua/page/(:any)'] = 'Clinic_Controller';
+$route['ru/clinics'] = 'Clinic_Controller';
+$route['clinics-ua'] = 'Clinic_Controller';
+$route['ru/clinics/page/(:any)'] = 'Clinic_Controller';
+$route['clinics-ua/page/(:any)'] = 'Clinic_Controller';
 $route['clinics/page'] = 'Clinic_Controller';
-$route['clinic/(:any)/page'] = 'Clinic_Controller/single/$1/$2';
+$route['ru/clinic/(:any)/page'] = 'Clinic_Controller/single/$1/$2';
+$route['ru/clinic/(:any)/page/(:any)'] = 'Clinic_Controller/single/$1/$2';
 $route['clinic/(:any)/page/(:any)'] = 'Clinic_Controller/single/$1/$2';
-$route['ua/clinic/(:any)/page/(:any)'] = 'Clinic_Controller/single/$1/$2';
+$route['ru/clinic/(:any)'] = 'Clinic_Controller/single/$1/$2';
 $route['clinic/(:any)'] = 'Clinic_Controller/single/$1/$2';
-$route['ua/clinic/(:any)'] = 'Clinic_Controller/single/$1/$2';
 
-$route['blog'] = 'Blog_Controller/index';
-$route['ua/blog-ua'] = 'Blog_Controller/index';
-$route['blog/page/(:any)'] = 'Blog_Controller/index';
-$route['ua/blog-ua/page/(:any)'] = 'Blog_Controller/index';
+$route['ru/blog'] = 'Blog_Controller/index';
+$route['blog-ua'] = 'Blog_Controller/index';
+$route['ru/blog/page/(:any)'] = 'Blog_Controller/index';
+$route['blog-ua/page/(:any)'] = 'Blog_Controller/index';
+$route['ru/blog/(:any)'] = 'Blog_Controller/single/$1';
 $route['blog/(:any)'] = 'Blog_Controller/single/$1';
-$route['ua/blog/(:any)'] = 'Blog_Controller/single/$1';
 
 
 /* Admin */

@@ -3,11 +3,11 @@ export const initial = function() {
 	const body = document.getElementsByTagName('body')[0]
 	const popUpParticipate = document.getElementById('pop_up_participate')
 	const formParticipate = document.getElementById('form_participate')
-	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
+	const LANG = window.location.pathname.startsWith('/ru') ? 'ru' : 'ua'
 	const btnClosePopUp = document.querySelector('.close_participate')
 	const PAGE_REDIRECT = {
-		'ru': 'https://'+document.domain+'/thx',
-		'ua': 'https://'+document.domain+'/ua/thx-ua'
+		'ru': 'https://'+document.domain+'/ru/thx',
+		'ua': 'https://'+document.domain+'/thx-ua'
 	}
 	let currentId = 0
 

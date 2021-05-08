@@ -1,6 +1,6 @@
 export const initial = function() {
 	const API_URL = '/api/clinics'
-	const LANG = window.location.pathname.startsWith('/ua') ? 'ua' : 'ru'
+	const LANG = window.location.pathname.startsWith('/ru') ? 'ru' : 'ua'
 	const btnSearch = document.querySelector('.js_search_clinic')
 	const container = document.querySelector('.clinic_loop_wrapper')
 	const numberClinic = document.querySelector('.js_search_clinic_total')

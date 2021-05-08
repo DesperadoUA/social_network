@@ -13,10 +13,10 @@ class Research_Controller extends Front_Controller
 		$this->load->library('pagination');
 		$path_lang = '';
 		$total_posts = $this->research->getTotalPublicPostsByLang(LANG);
-		if(LANG === 'ua') $path_lang = '/ua';
+		if(LANG === 'ru') $path_lang = '/ru';
 		$CURRENT_SEGMENT = 1;
 		$PAGE_SEGMENT = 3;
-		if(LANG === 'ua') {
+		if(LANG === 'ru') {
 			$CURRENT_SEGMENT = 2;
 			$PAGE_SEGMENT = 4;
 		}
@@ -63,7 +63,7 @@ class Research_Controller extends Front_Controller
 		if(!empty($translate_id)) {
 			$url = $this->static_page->getDataById($translate_id)[0]['permalink'];
 			$this->data['body']['permalink'] = LANG_PREFIX_LINK.$this->data['body']['permalink'];
-			LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+			LANG === 'ru' ? $PREFIX_TRANSLATE = '' : $PREFIX_TRANSLATE = '/ru';
 			$this->data['body']['translate'] = $PREFIX_TRANSLATE.$url;
 		}
 
@@ -116,7 +116,7 @@ class Research_Controller extends Front_Controller
 				$translate = $this->research->getPublicDataById($translate_id);
 				if(!empty($translate)) {
 					$this->data['body']['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['body']['slug'].'/'.$this->data['body']['permalink'];
-					LANG === 'ru' ? $PREFIX_TRANSLATE = '/ua' : $PREFIX_TRANSLATE = '';
+					LANG === 'ru' ? $PREFIX_TRANSLATE = '' : $PREFIX_TRANSLATE = '/ru';
 					$this->data['body']['translate'] = $PREFIX_TRANSLATE.'/'.$translate[0]['slug'].'/'.$translate[0]['permalink'];
 				}
 			}
