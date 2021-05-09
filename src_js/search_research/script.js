@@ -23,6 +23,32 @@ export const initial = function() {
 		ru: 'Ничего не найдено',
 		ua: 'Нічого не знайдено'
 	}
+	const TRANSLATE = {
+		    PROTOCOL_NAME: {
+			    'ru': 'Название протокола',
+			    'ua': 'Назва протоколу'
+            },
+		    THERAPEUTIC_AREA: {
+			    'ru': 'Терапевтическая область',
+			    'ua': 'Терапевтична область'
+            },
+		    START_END_DATE: {
+		    	'ru': 'Дата начала и окончания КИ',
+		        'ua': 'Дата початку і закінчення КІ'
+			},
+		    NAME_ORGANIZATION_CONDUCTING: {
+				'ru': 'Название организации проводящей КИ',
+		        'ua': 'Назва організації провідної КІ'
+			},
+			WANT_PARTICIPATE: {
+				'ru': 'Хочу участвовать',
+		        'ua': 'Хочу брати участь'
+            },
+	        WRITE_RESEARCHERS: {
+		        'ru': 'Написать исследователям',
+		        'ua': 'Написати дослідникам'
+		    }
+	     }
 
 	if(btnSearch) {
 		btnSearch.addEventListener('click', ()=>{
@@ -115,31 +141,31 @@ export const initial = function() {
 									<a href="${item.permalink}">${item.title}</a>
 								</div>
 								<div class="research_loop_item_row">
-									<div class="research_loop_item_left">Название протокола</div>
+									<div class="research_loop_item_left">${TRANSLATE.PROTOCOL_NAME[LANG]}</div>
 									<div class="research_loop_item_right">${item.protocol_name}</div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row">
-									<div class="research_loop_item_left">Терапевтическая область</div>
+									<div class="research_loop_item_left">${TRANSLATE.THERAPEUTIC_AREA[LANG]}</div>
 									<div class="research_loop_item_right">${item.therapeutic_area}</div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row">
-									<div class="research_loop_item_left">Дата начала и окончания КИ</div>
+									<div class="research_loop_item_left">${TRANSLATE.START_END_DATE[LANG]}</div>
 									<div class="research_loop_item_right">${item.data_start} - ${item.data_finish}</div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row">
-									<div class="research_loop_item_left">Название организации проводящей КИ</div>
+									<div class="research_loop_item_left">${TRANSLATE.NAME_ORGANIZATION_CONDUCTING[LANG]}</div>
 									<div class="research_loop_item_right">${item.name_organization}</div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row_btn">
 									<button class="research_loop_btn research_participate border_gradient" data-id="${item.id}">
-									Хочу участвовать
+									${TRANSLATE.WANT_PARTICIPATE[LANG]}
 									</button>
 									<button class="research_loop_btn research_active border_gradient" data-id="${item.id}">
-									Написать исследователям
+									${TRANSLATE.WRITE_RESEARCHERS[LANG]}
 									</button>
 								</div>
 							</div>
