@@ -74,7 +74,7 @@ class API_Controller extends CI_Controller
 			}
 			if(empty($strQuery)) {
 				if($this->input->post('therapeutic_area') !== TRANSLATE['THERAPEUTIC_AREA'][$this->input->post('lang')]) {
-					$strQuery .= " AND t2.key_meta = 'therapeutic_area' AND t2.value='{$this->input->post('therapeutic_area')}' ";
+					$strQuery .= " AND t2.key_meta = 'therapeutic_area' AND t2.value LIKE '%{$this->input->post('therapeutic_area')}%' ";
 				}
 			}
 
@@ -111,7 +111,7 @@ class API_Controller extends CI_Controller
 
 					$therapeutic_area = $this->post_meta->getDataByKey($data[$i]['id'], 'therapeutic_area');
 					if($this->input->post('therapeutic_area') !== TRANSLATE['THERAPEUTIC_AREA'][$this->input->post('lang')]) {
-						if($therapeutic_area !== $this->input->post('therapeutic_area')) continue;
+						if(stristr(mb_strtolower($therapeutic_area), mb_strtolower($this->input->post('therapeutic_area'))) === FALSE) continue;
 					}
 
 					$full_name = $this->post_meta->getDataByKey($data[$i]['id'], 'full_name');

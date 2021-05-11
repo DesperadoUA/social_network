@@ -33,9 +33,16 @@ class Clinic_Controller extends Front_Controller
 		$page_url = '/'.$this->uri->segment($CURRENT_SEGMENT);
 		$data = $this->static_page->getDataByUrl($page_url)[0];
 		if(!empty($data)) {
+			$therapeutic_area = [];
+			if(!empty($this->data['settings']['therapeutic_area'])) {
+				foreach ($this->data['settings']['therapeutic_area']['list'] as $item) {
+					$therapeutic_area[] = ['value' => $item['text']];
+				}
+			}
+
 			$this->data['filter']['city'] = $this->post_meta->getDistinctValueForPublicPosts(self::POST_TYPE, LANG, 'city');
 			$this->data['filter']['region'] = $this->post_meta->getDistinctValueForPublicPosts(self::POST_TYPE, LANG, 'region');
-			$this->data['filter']['therapeutic_area'] = $this->post_meta->getDistinctValueForPublicPosts(self::POST_TYPE, LANG, 'therapeutic_area');
+			$this->data['filter']['therapeutic_area'] = $therapeutic_area;
 			$this->data['body'] = $data;
 			$this->data['body']['content'] = json_decode($data['content'], true);
 		    $page = $this->uri->segment($PAGE_SEGMENT);
