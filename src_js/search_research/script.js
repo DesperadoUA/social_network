@@ -47,8 +47,12 @@ export const initial = function() {
 	        WRITE_RESEARCHERS: {
 		        'ru': 'Написать исследователям',
 		        'ua': 'Написати дослідникам'
-		    }
-	     }
+		    },
+		    DISEASE: {
+				'ru': 'Заболевание',
+				'ua': 'Захворювання'
+			},
+	}
 
 	if(btnSearch) {
 		btnSearch.addEventListener('click', ()=>{
@@ -143,6 +147,11 @@ export const initial = function() {
 								<div class="research_loop_item_row">
 									<div class="research_loop_item_left">${TRANSLATE.PROTOCOL_NAME[LANG]}</div>
 									<div class="research_loop_item_right">${item.protocol_name}</div>
+									<div class="research_line"></div>
+								</div>
+								<div class="research_loop_item_row">
+									<div class="research_loop_item_left">${TRANSLATE.DISEASE[LANG]}</div>
+									<div class="research_loop_item_right">${item.disease}</div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row">

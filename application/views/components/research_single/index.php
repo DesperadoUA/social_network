@@ -5,6 +5,7 @@ var_dump($body);
 echo "</pre>";
 */
 ?>
+
 <section class="research_single">
 	<div class="container">
 		<h1 class="research_single_title"><?= $body['h1']; ?></h1>
@@ -22,6 +23,19 @@ echo "</pre>";
 						</div>";
 				}
 			?>
+            <?php
+                if(!empty($body['disease'])) {
+					echo "<div class='research_single_item'>
+                                <div class='research_single_left'>
+                                " . TRANSLATE['DISEASE'][LANG] . "
+                                </div>
+                                <div class='research_single_right'>
+                                    {$body['disease']}
+                                </div>
+                                <div class='research_single_line'></div>
+                            </div>";
+				}
+            ?>
 			<?php
 			if(!empty($body['therapeutic_area'])) {
 				echo "<div class='research_single_item'>

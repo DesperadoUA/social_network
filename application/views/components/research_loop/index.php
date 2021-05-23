@@ -12,6 +12,11 @@
                         <div class='research_line'></div>
                     </div>
                     <div class='research_loop_item_row'>
+                        <div class='research_loop_item_left'>".TRANSLATE['DISEASE'][LANG]."</div>
+                        <div class='research_loop_item_right'>{$item['disease']}</div>
+                        <div class='research_line'></div>
+                    </div>
+                    <div class='research_loop_item_row'>
                         <div class='research_loop_item_left'>".TRANSLATE['THERAPEUTIC_AREA'][LANG]."</div>
                         <div class='research_loop_item_right'>{$item['therapeutic_area']}</div>
                         <div class='research_line'></div>
