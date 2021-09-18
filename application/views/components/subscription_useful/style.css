@@ -1,0 +1,24 @@
+.subscription_description {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+.row_subscription_description {
+    display: flex;
+    flex-wrap: wrap;
+}
+.subscription_description_item {
+    width: 50%;
+    padding: 40px 25px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.subscription_description_item_text {
+    font-family: 'Noah-Grotesque';
+    font-size: 20px;
+    margin-top: 15px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .subscription_description_item {
+        width: 100%;
+    }
+}
