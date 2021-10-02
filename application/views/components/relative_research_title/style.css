@@ -1,0 +1,33 @@
+.research_ttl_wrapper {
+    padding: 30px 0px;
+}
+.research_ttl {
+    font-family: 'Noah-Grotesque';
+    font-size: 52px;
+    font-weight: 100;
+    margin-bottom: 55px;
+    position: relative;
+}
+.research_ttl::before {
+    content: '';
+    width: 80px;
+    height: 5px;
+    background: #fa5e66; /* Old browsers */
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5e66', endColorstr='#00beb0',GradientType=1 );
+    position: absolute;
+    left: -30px;
+    bottom: -30px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .research_ttl {
+        line-height: 45px;
+        text-align: center;
+    }
+    .research_ttl::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

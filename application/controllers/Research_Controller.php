@@ -38,8 +38,8 @@ class Research_Controller extends Front_Controller
 		}
 
 		$this->data['filter']['city'] = $arr_city;
-		$this->data['filter']['region'] = $this->research->getDistinctValueForPublicPosts(LANG, 'region');
-		$this->data['filter']['disease'] = $this->research->getDistinctValueForPublicPosts(LANG, 'disease');
+		//$this->data['filter']['region'] = $this->research->getDistinctValueForPublicPosts(LANG, 'region');
+		//$this->data['filter']['disease'] = $this->research->getDistinctValueForPublicPosts(LANG, 'disease');
 		
 		$this->data['filter']['clinics'] = [];
 		$arr_clinic_id = $this->research->getDistinctClinics(LANG);
@@ -79,8 +79,8 @@ class Research_Controller extends Front_Controller
 		for($i = 0; $i<count($this->data['research']); $i++) {
 			$this->data['research'][$i]['thumbnail'] = json_decode($this->data['research'][$i]['thumbnail'], true);
 			$this->data['research'][$i]['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['research'][$i]['slug'].'/'.$this->data['research'][$i]['permalink'];
-			$this->data['research'][$i]['data_start'] = mb_substr($this->data['research'][$i]['data_start'], 0, 10);
-			$this->data['research'][$i]['data_finish'] = mb_substr($this->data['research'][$i]['data_finish'], 0, 10);
+			$this->data['research'][$i]['data_start'] = substr($this->data['research'][$i]['data_start'], 0, 10);
+			$this->data['research'][$i]['data_finish'] = substr($this->data['research'][$i]['data_finish'], 0, 10);
 		}
 		$this->load->view('research/index', $this->data);
 	}
@@ -106,10 +106,24 @@ class Research_Controller extends Front_Controller
 					];
 				}
 			}
+
+			$research = [];
+			$relative_research_id = $this->relative_research->getArrByKey($data['id'], 'research_id');
+			if(!empty($relative_research_id)) {
+				$research = $this->research->getPostsByArrId($relative_research_id);
+				for($i = 0; $i<count($research); $i++) {
+					$research[$i]['thumbnail'] = json_decode($research[$i]['thumbnail'], true);
+					$research[$i]['permalink'] = LANG_PREFIX_LINK.'/'.$research[$i]['slug'].'/'.$research[$i]['permalink'];
+					$research[$i]['data_start'] = mb_substr($research[$i]['data_start'], 0, 10);
+					$research[$i]['data_finish'] = mb_substr($research[$i]['data_finish'], 0, 10);
+				}
+			}
+
 			$this->data['body'] = $data;
 			$this->data['body']['data_start'] = mb_substr($data['data_start'], 0, 10);
 			$this->data['body']['data_finish'] = mb_substr($data['data_finish'], 0, 10);
 			$this->data['body']['relative_clinic'] = $relative_clinic;
+			$this->data['research'] = $research;
 
 			$translate_id = $this->relative_research->getDataByKey($data['id'], 'translate');
 			if(!empty($translate_id)) {

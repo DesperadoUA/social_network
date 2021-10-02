@@ -33,7 +33,8 @@ class Research extends CI_Model
 		'clinic_name',
 		'open_set',
 		'for_volunteers',
-		'additional_fields'
+		'additional_fields',
+		'paid'
 	];
 	public function __construct() {
 		$this->load->database();
@@ -228,6 +229,16 @@ class Research extends CI_Model
 			->from('research as t1')
 			->where(['status' => 1, 'lang' => $lang])
 			->join('relative_research as t2', "t1.id = t2.post_id AND t2.key_meta = 'translate' AND t2.value = 0");
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function getPostsByLang($lang) {
+		$this->db->select(implode(',', self::ALL_FIELDS_RESEARCH))
+			->from('research as t1')
+			->where('t1.status', 1)
+			->where('t1.lang', $lang)
+			->join('research_meta as t2', "t1.id = t2.post_id")
+			->order_by('data_publick', 'DESC');
 		$query = $this->db->get();
 		return $query->result_array();
 	}

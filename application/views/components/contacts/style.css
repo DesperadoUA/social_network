@@ -1,0 +1,40 @@
+.contacts_main_screen
+{
+    padding-top: 75px;
+    padding-bottom: 100px;
+}
+.contacts_main_screen h2 {
+    margin-bottom: 5px;
+    margin-top: 30px;
+}
+.contacts_main_screen p {
+    font-size: 15px;
+    font-family: 'Noah-regular';
+    color: #333;
+}
+.contacts_main_screen .blue {
+    color: #00a1b9;
+}
+.contacts_main_screen .red {
+    color: #fa5e66;
+}
+.form_contacts {
+    padding-top: 45px;
+    width: 90%;
+    max-width: 650px;
+}
+@media (min-width: 1200px) {
+    .contacts_main_screen {
+        background: url('/uploads/map_bg.png') no-repeat 100% 100%;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .contacts_main_screen
+    {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .form_contacts {
+        width: 100%;
+    }
+}

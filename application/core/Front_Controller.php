@@ -7,10 +7,12 @@ class Front_Controller extends CI_Controller {
 		$this->load->model('settings');
 		$this->load->model('options');
 		$this->load->model('research');
+		$this->load->model('stories');
 		$this->load->model('post');
 		$this->load->model('post_meta');
 		$this->load->model('research_meta');
 		$this->load->model('relative_research');
+		$this->load->model('relative_stories');
 		$this->load->model('relative_static_page');
 		$this->load->model('relative_post');
 		$this->data_settings = $this->settings->getAllPagesByLang(LANG);

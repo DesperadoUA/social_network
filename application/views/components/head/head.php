@@ -23,6 +23,7 @@
         $this->load->view('components/content/style.css');
         $this->load->view('components/footer/style.css');
         $this->load->view('components/forms/style.css');
+        $this->load->view('components/cookies/style.css');
 
         if($body['post_type'] === 'home') {
              $this->load->view('components/home_main/style.css');
@@ -39,6 +40,7 @@
              $this->load->view('components/pagination/style.css');
              $this->load->view('components/research_single/style.css');
              $this->load->view('components/research_relative_clinic/style.css');
+             $this->load->view('components/relative_research_title/style.css');
         }
         elseif ($body['post_type'] === 'city') {
              $this->load->view('components/research_main_screen/style.css');
@@ -78,6 +80,31 @@
         }
         elseif ($body['post_type'] === 'default') {
              $this->load->view('components/blog_single_top/style.css');
+        }
+        elseif ($body['post_type'] === 'subscription') {
+             $this->load->view('components/subscription_banner/style.css');
+             $this->load->view('components/subscription_description/style.css');
+             $this->load->view('components/subscription_form/style.css');
+             $this->load->view('components/research_loop/style.css');
+             $this->load->view('components/subscription_useful/style.css');
+             $this->load->view('components/subscription_how_it_work/style.css');
+             $this->load->view('components/subscription_form_main/style.css');
+        }
+        elseif ($body['post_type'] === 'contacts') {
+            $this->load->view('components/contacts/style.css');
+        }
+        elseif ($body['post_type'] === 'stories') {
+            $this->load->view('components/stories_main_screen/style.css');
+            $this->load->view('components/stories_main_loop/style.css');
+            $this->load->view('components/stories_single_top/style.css');
+        }
+        elseif ($body['post_type'] === 'security') {
+            $this->load->view('components/security_main_screen/style.css');
+            $this->load->view('components/security_get_consultation/style.css');
+        }
+        elseif ($body['post_type'] === 'referral') {
+            $this->load->view('components/referral_main_screen/style.css');
+            $this->load->view('components/referral_get_consultation/style.css');
         }
     ?>
     </style>

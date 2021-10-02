@@ -50,6 +50,19 @@ echo "</pre>";
 			}
 			?>
 			<?php
+            $paid = $body['paid'] === '1' ? TRANSLATE['YES'][LANG] : TRANSLATE['NO'][LANG];
+            echo "<div class='research_single_item'>
+							<div class='research_single_left'>
+							".TRANSLATE['PAID'][LANG]."
+							</div>
+							<div class='research_single_right'>
+								{$paid}
+							</div>
+							<div class='research_single_line'></div>
+						</div>";
+
+			?>
+			<?php
 				echo "<div class='research_single_item'>
 							<div class='research_single_left'>
 							".TRANSLATE['START_END_DATE'][LANG]."

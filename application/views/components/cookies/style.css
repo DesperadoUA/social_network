@@ -1,0 +1,53 @@
+.cookies_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cookies_wrapper {
+    width:800px;
+    max-width: 90%;
+    background: #fff;
+    padding: 55px 65px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.cookies_title {
+    font-family: 'Noah-regular';
+    color: #333333;
+    font-size: 42px;
+}
+.cookies_desc {
+    margin-top: 20px;
+    color: #333333;
+    font-size: 18px;
+    font-family: 'Noah-regular';
+}
+.cookies_desc a {
+    color: #00a1b9;
+}
+.cookies_button {
+    background-image: -webkit-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    font-family: 'Noah-regular';
+    color: #333333;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .cookies_wrapper {
+        width: 300px;
+        padding: 20px;
+    }
+    .cookies_title {
+        font-size: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .cookies_wrapper {
+        width: 600px;
+    }
+}

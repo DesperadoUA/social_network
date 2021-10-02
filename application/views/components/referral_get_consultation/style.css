@@ -1,0 +1,73 @@
+.referral_get_consultation {
+    padding-top: 110px;
+    padding-bottom: 90px;
+}
+.referral_get_consultation_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+.referral_get_consultation_left, .referral_get_consultation_right {
+    width: 50%;
+}
+.referral_get_consultation_desc {
+    position: relative;
+    padding: 75px 75px 35px 75px;
+    background: #00a1b9;
+    color: white;
+    border-radius: 20px;
+}
+.referral_get_consultation_desc p {
+    font-family: 'Noah-Grotesque';
+    font-size: 18px;
+    padding-bottom: 35px;
+}
+.referral_get_consultation_desc p b {
+    font-size: 31px;
+    font-weight: 900;
+}
+@media (min-width: 1200px) {
+    .referral_get_consultation {
+        background: url("/uploads/stories.jpg") no-repeat 0% 100%;
+        min-height: 500px;
+    }
+    .referral_get_consultation_desc:before {
+        content:'';
+        width: 178px;
+        height: 90px;
+        background: url("/uploads/triangle.png") no-repeat 100% 100%;
+        background-size: cover;
+        position: absolute;
+        top:178px;
+        left:-168px;
+    }
+    .referral_get_consultation_desc:after {
+        content: '';
+        height: 100px;
+        width: 4px;
+        background: #00a1b9;
+        position: absolute;
+        bottom:-115px;
+        left:50%;
+    }
+}
+.referral_get_consultation_btn_row {
+    display: flex;
+    justify-content: center;
+    margin-top: 145px;
+    box-sizing: border-box;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .referral_get_consultation {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .referral_get_consultation_desc {
+        padding: 15px 15px 0px 15px;
+    }
+    .referral_get_consultation_left, .referral_get_consultation_right {
+        width: 100%;
+    }
+    .referral_get_consultation_btn_row {
+        margin-top: 20px;
+    }
+}

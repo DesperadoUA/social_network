@@ -1,6 +1,7 @@
 <section class="research_loop">
     <?php
 	foreach ($research as $item) {
+	    $paid = $item['paid'] === "1" ? TRANSLATE['YES'][LANG] : TRANSLATE['NO'][LANG];
 	    echo "<div class='research_loop_item'>
                 <div class='container'>
                     <div class='research_loop_item_title'>
@@ -19,6 +20,11 @@
                     <div class='research_loop_item_row'>
                         <div class='research_loop_item_left'>".TRANSLATE['THERAPEUTIC_AREA'][LANG]."</div>
                         <div class='research_loop_item_right'>{$item['therapeutic_area']}</div>
+                        <div class='research_line'></div>
+                    </div>
+                    <div class='research_loop_item_row'>
+                        <div class='research_loop_item_left'>".TRANSLATE['PAID'][LANG]."</div>
+                        <div class='research_loop_item_right'>{$paid}</div>
                         <div class='research_line'></div>
                     </div>
                     <div class='research_loop_item_row'>

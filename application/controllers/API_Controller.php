@@ -1,13 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+include ROOT.'/application/helpers/CardBuilder.php';
 class API_Controller extends CI_Controller
 {
+    const DIR_DOWNLOADS_ANALYZES = '/uploads/analyzes/';
 	public function __construct() {
 		parent::__construct();
 		$_POST = !empty($_POST) ? $_POST : json_decode(file_get_contents('php://input'), true);
 		$this->load->model('options');
 		$this->load->model('research');
+		$this->load->model('stories');
 		$this->load->model('research_meta');
 		$this->load->model('relative_research');
 		$this->load->model('post');
@@ -40,6 +42,36 @@ class API_Controller extends CI_Controller
 			$message .= "City: {$mail_data['city']}\n\r";
 			$message .= "Age: {$mail_data['age']}\n\r";
 			$message .= "Research: {$research['title']}\n\r";
+			foreach ($mails as $item) mail($item['text'], $subject, $message);
+			$confirm['status'] = 'ok';
+		}
+		echo json_encode($confirm);
+	}
+	public function analyzes(){
+		$confirm['status'] = 'error';
+		$folderPath = $_SERVER['DOCUMENT_ROOT'].self::DIR_DOWNLOADS_ANALYZES;
+		$file_data = $_POST['file'];
+		$image_parts = explode(";base64,", $file_data['base64']);
+		$image_base64 = base64_decode($image_parts[1]);
+		$file_path = time().$_POST['file']['name'];
+		$file = $folderPath .$file_path;
+
+		file_put_contents($file, $image_base64);
+		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
+		$mails = $mails['list'];
+		$confirm['status'] = 'error';
+		$mail_data = [
+			'form' => isset($_POST['form']) ? $_POST['form'] : '',
+			'name' => isset($_POST['name']) ? $_POST['name'] : '',
+			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+			'file' => 'https://'.$_SERVER['SERVER_NAME'].self::DIR_DOWNLOADS_ANALYZES.$file_path
+
+		];
+		if(!empty($mails)) {
+			$subject = "Заявка с формы {$mail_data['form']}";
+			$message = "Name: {$mail_data['name']}\n\r";
+			$message .= "Phone: {$mail_data['phone']}\n\r";
+			$message .= "File: {$mail_data['file']}\n\r";
 			foreach ($mails as $item) mail($item['text'], $subject, $message);
 			$confirm['status'] = 'ok';
 		}
@@ -182,26 +214,19 @@ class API_Controller extends CI_Controller
 			}
 
 			if($this->input->post('region') !== TRANSLATE['CHOOSE_REGION'][$this->input->post('lang')]) {
-				$strQuery .= " AND t2.region = '{$this->input->post('region')}' ";
+				$strQuery .= " AND t2.region LIKE '%{$this->input->post('region')}%' ";
 			}
 
 			if($this->input->post('disease') !== TRANSLATE['DISEASE'][$this->input->post('lang')]) {
-				$strQuery .= " AND t2.disease = '{$this->input->post('disease')}' ";
+				$strQuery .= " AND t2.disease LIKE '%{$this->input->post('disease')}%' ";
 			}
 
-			if($this->input->post('open') === TRANSLATE['OPEN_SET'][$this->input->post('lang')]) {
-				$strQuery .= " AND t2.open_set = '1' ";
-			}
-			else {
-				$strQuery .= " AND t2.for_volunteers = '1' ";
+			$strQuery .= " AND t2.paid = '".$this->input->post('paid')."' ";
+
+			if($this->input->post('therapeutic_area') !== TRANSLATE['THERAPEUTIC_AREA'][$this->input->post('lang')]) {
+				$strQuery .= " AND t2.therapeutic_area LIKE '%{$this->input->post('therapeutic_area')}%' ";
 			}
 
-			if($this->input->post('held') === TRANSLATE['HELD'][$this->input->post('lang')]) {
-				$strQuery .= " AND t2.active = '1' ";
-			}
-			else {
-				$strQuery .= " AND t2.active = '0' ";
-			}
 
 			$confirm['status'] = 'ok';
 			if(empty($_POST['clinic'])) {
@@ -266,6 +291,98 @@ class API_Controller extends CI_Controller
 		else {
 			echo "error Post - empty";
 		}
+	}
+	public function subscription(){
+		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
+		$mails = $mails['list'];
+		$confirm['status'] = 'error';
+
+		$mail_data = [
+			'form' => isset($_POST['form']) ? $_POST['form'] : '',
+			'name' => isset($_POST['name']) ? $_POST['name'] : '',
+			'email' => isset($_POST['email']) ? $_POST['email'] : '',
+			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+			'gender' => isset($_POST['gender']) ? $_POST['gender'] : '',
+			'city' => isset($_POST['city']) ? $_POST['city'] : '',
+			'age' => isset($_POST['age']) ? $_POST['age'] : ''
+		];
+		//$this->mails->insert($mail_data);
+		if(!empty($mails)) {
+			$subject = "Заявка с формы {$mail_data['form']}";
+			$message = "Name: {$mail_data['name']}\n\r";
+			$message .= "Email: {$mail_data['email']}\n\r";
+			$message .= "Phone: {$mail_data['phone']}\n\r";
+			$message .= "Gender: {$mail_data['gender']}\n\r";
+			$message .= "City: {$mail_data['city']}\n\r";
+			$message .= "Age: {$mail_data['age']}\n\r";
+			foreach ($mails as $item) mail($item['text'], $subject, $message);
+			$confirm['status'] = 'ok';
+		}
+		echo json_encode($confirm);
+	}
+	public function subscriptionMain(){
+		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
+		$mails = $mails['list'];
+		$confirm['status'] = 'error';
+
+		$mail_data = [
+			'form' => isset($_POST['form']) ? $_POST['form'] : '',
+			'name' => isset($_POST['name']) ? $_POST['name'] : '',
+			'email' => isset($_POST['email']) ? $_POST['email'] : '',
+			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+			'gender' => isset($_POST['gender']) ? $_POST['gender'] : '',
+			'city' => isset($_POST['city']) ? $_POST['city'] : '',
+			'age' => isset($_POST['age']) ? $_POST['age'] : '',
+			'diagnosis' => isset($_POST['diagnosis']) ? $_POST['diagnosis'] : '',
+			'relocate' => isset($_POST['relocate']) ? $_POST['relocate'] : ''
+		];
+		//$this->mails->insert($mail_data);
+		if(!empty($mails)) {
+			$subject = "Заявка с формы {$mail_data['form']}";
+			$message = "Name: {$mail_data['name']}\n\r";
+			$message .= "Email: {$mail_data['email']}\n\r";
+			$message .= "City: {$mail_data['city']}\n\r";
+			$message .= "Diagnosis: {$mail_data['diagnosis']}\n\r";
+			$message .= "Relocate: {$mail_data['relocate']}\n\r";
+			foreach ($mails as $item) mail($item['text'], $subject, $message);
+			$confirm['status'] = 'ok';
+		}
+		echo json_encode($confirm);
+	}
+	public function contacts() {
+		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
+		$mails = $mails['list'];
+		$confirm['status'] = 'error';
+
+		$mail_data = [
+			'form' => isset($_POST['form']) ? $_POST['form'] : '',
+			'name' => isset($_POST['name']) ? $_POST['name'] : '',
+			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+			'city' => isset($_POST['city']) ? $_POST['city'] : '',
+		];
+		if(!empty($mails)) {
+			$subject = "Заявка с формы {$mail_data['form']}";
+			$message = "Name: {$mail_data['name']}\n\r";
+			$message .= "Phone: {$mail_data['phone']}\n\r";
+			$message .= "City: {$mail_data['city']}\n\r";
+			foreach ($mails as $item) mail($item['text'], $subject, $message);
+			$confirm['status'] = 'ok';
+		}
+		echo json_encode($confirm);
+	}
+	public function stories() {
+		$confirm['status'] = 'error';
+		$lang = $this->input->post('lang');
+		$offset = $this->input->post('offset');
+		$limit = 10000;
+		$posts = $this->stories->getPublicPosts($offset, $limit, $lang);
+		if($this->input->post('lang') === 'ua') $lang_prefix = '';
+		else $lang_prefix = '/ru';
+		if(!empty($posts)) {
+			$confirm['data'] = CardBuilder::storiesCard($posts, $lang_prefix);
+		}
+		$confirm['status'] = 'ok';
+		echo json_encode($confirm);
 	}
 }
 

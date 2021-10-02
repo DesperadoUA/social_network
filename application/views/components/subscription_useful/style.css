@@ -1,24 +1,48 @@
-.subscription_description {
+.subscription_useful {
     padding-top: 45px;
     padding-bottom: 45px;
 }
-.row_subscription_description {
+.row_subscription_useful {
     display: flex;
     flex-wrap: wrap;
 }
-.subscription_description_item {
-    width: 50%;
+.subscription_useful_item {
+    width: 25%;
     padding: 40px 25px;
     box-sizing: border-box;
     text-align: center;
 }
-.subscription_description_item_text {
+.subscription_useful_item_text {
     font-family: 'Noah-Grotesque';
     font-size: 20px;
     margin-top: 15px;
 }
+.subscription_useful_ttl {
+    font-size: 42px;
+    font-weight: 100;
+    line-height: 42px;
+    position: relative;
+    margin-bottom: 65px;
+    text-align: center;
+    font-family: 'Noah-Grotesque';
+}
+.subscription_useful_ttl::before {
+    content: '';
+    width: 80px;
+    height: 5px;
+    background: #fa5e66;
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%);
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5e66', endColorstr='#00beb0',GradientType=1 );
+    position: absolute;
+    left: -20px;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 @media (min-width: 320px) and (max-width: 767px) {
-    .subscription_description_item {
+    .subscription_useful_item {
         width: 100%;
     }
 }

@@ -1,13 +1,13 @@
 export const initial = function() {
-	const genderCheckbox = document.querySelectorAll('.js_search_checkbox_open')
-	if(genderCheckbox.length !== 0) {
-		genderCheckbox.forEach(item => {
+	const paidCheckbox = document.querySelectorAll('.js_search_checkbox_paid')
+	if(paidCheckbox.length !== 0) {
+		paidCheckbox.forEach(item => {
 			item.addEventListener('click', (event)=>{
-				genderCheckbox.forEach(item => {
-					item.classList.remove('js_open_research')
+				paidCheckbox.forEach(item => {
+					item.classList.remove('js_paid_research')
 					item.classList.remove('active_checkbox')
 				})
-				event.target.classList.add('js_open_research')
+				event.target.classList.add('js_paid_research')
 				event.target.classList.add('active_checkbox')
 
 			})
@@ -52,6 +52,22 @@ export const initial = function() {
 				'ru': 'Заболевание',
 				'ua': 'Захворювання'
 			},
+			PAID: {
+				'ru': 'Платное',
+				'ua': 'Платне'
+			},
+			FREE: {
+				ru: 'Бесплатное',
+				ua: 'Безкоштовне'
+			},
+			YES: {
+		    	ru: 'Да',
+				ua: 'Так'
+			},
+			NO: {
+				ru: 'Нет',
+				ua: 'Ні'
+			}
 	}
 
 	if(btnSearch) {
@@ -62,9 +78,9 @@ export const initial = function() {
 				city: document.querySelector('.js_search_research_city').value,
 				keyword: document.querySelector('.js_search_research_keyword').value,
 				disease: document.querySelector('.js_search_research_disease').value,
-				held: document.querySelector('.js_search_research_held').value,
+				therapeutic_area: document.querySelector('.js_search_research_therapeutic_area').value,
 				clinic: document.querySelector('.js_search_research_clinic').value,
-				open: document.querySelector('.js_open_research').dataset.value
+				paid: document.querySelector('.js_paid_research').dataset.value
 			}
 
 			fetch(API_URL, {
@@ -75,7 +91,6 @@ export const initial = function() {
 					return response.json();
 				})
 				.then((data) => {
-					console.log(data)
 					if(data.status === 'ok') {
 						if(data.data.length !==0) {
 							console.log(container)
@@ -109,21 +124,21 @@ export const initial = function() {
 				optionsDisease[i].selected = optionsDisease[i].defaultSelected
 			}
 
-			const optionsHeld = document.querySelectorAll('.js_search_research_held option');
-			for (let i = 0, l = optionsHeld.length; i < l; i++) {
-				optionsHeld[i].selected = optionsHeld[i].defaultSelected
+			const therapeuticArea = document.querySelectorAll('.js_search_research_therapeutic_area option');
+			for (let i = 0, l = therapeuticArea.length; i < l; i++) {
+				therapeuticArea[i].selected = therapeuticArea[i].defaultSelected
 			}
 
 			const optionsClinic = document.querySelectorAll('.js_search_research_clinic option');
 			for (let i = 0, l = optionsClinic.length; i < l; i++) {
 				optionsClinic[i].selected = optionsClinic[i].defaultSelected
 			}
-			
-			genderCheckbox[0].classList.add('js_open_research')
-			genderCheckbox[0].classList.add('active_checkbox')
 
-			genderCheckbox[1].classList.remove('js_open_research')
-			genderCheckbox[1].classList.remove('active_checkbox')
+			paidCheckbox[0].classList.add('js_paid_research')
+			paidCheckbox[0].classList.add('active_checkbox')
+
+			paidCheckbox[1].classList.remove('js_paid_research')
+			paidCheckbox[1].classList.remove('active_checkbox')
 			
 		})
 	}
@@ -157,6 +172,13 @@ export const initial = function() {
 								<div class="research_loop_item_row">
 									<div class="research_loop_item_left">${TRANSLATE.THERAPEUTIC_AREA[LANG]}</div>
 									<div class="research_loop_item_right">${item.therapeutic_area}</div>
+									<div class="research_line"></div>
+								</div>
+								<div class="research_loop_item_row">
+									<div class="research_loop_item_left">${TRANSLATE.PAID[LANG]}</div>
+									<div class="research_loop_item_right">
+                                        ${item.paid === "1" ? TRANSLATE.YES[LANG] : TRANSLATE.NO[LANG]}
+                                    </div>
 									<div class="research_line"></div>
 								</div>
 								<div class="research_loop_item_row">

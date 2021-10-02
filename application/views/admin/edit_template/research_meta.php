@@ -39,6 +39,13 @@
 		'class_wrapper_input' => 'full_size'
 	];
 	MM_Module_Input::create('data_finish', $settings, $data_finish); ?>
+	<?php
+	$settings = [
+		'module_title' => 'Платное исследование',
+		'title' => 'Платное исследование',
+	];
+	MM_Module_Checkbox::create('paid', $settings, $paid);
+	?>
     <?php
 	$settings = [
 		'module_title' => 'Активность',
@@ -121,6 +128,13 @@
 		'module_title' => 'Города'
 	];
 	MM_Module_Relative::create('relative_city', $settings, $relative_cityes);
+	?>
+	<?php
+	$settings = [
+		'class_wrapper' => 'full_size',
+		'module_title' => 'Исследования'
+	];
+	MM_Module_Relative::create('relative_research', $settings, $relative_research);
 	?>
 	<?php
 	$settings = [

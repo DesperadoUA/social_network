@@ -5,6 +5,7 @@ include ROOT.'/application/core/Front_Controller.php';
 class Main extends Front_Controller
 {
 	const LIMIT_MAIN = 6;
+	const LIMIT_SUBSCRIPTION = 2;
 	public function index() {
 		if(base_url() === current_url() or base_url().'ru' === current_url()) $PAGE_SEGMENT = 1;
 		else LANG === 'ru' ? $PAGE_SEGMENT = 2 : $PAGE_SEGMENT = 1;
@@ -32,7 +33,16 @@ class Main extends Front_Controller
 				$this->data['research'][$i]['thumbnail'] = json_decode($this->data['research'][$i]['thumbnail'], true);
 			}
 		}
-
+		if($data['post_type'] === 'subscription') {
+			$this->data['research'] = $this->research->getPublicPosts(0, self::LIMIT_SUBSCRIPTION, LANG);
+			for($i = 0; $i<count($this->data['research']); $i++) {
+				$this->data['research'][$i]['thumbnail'] = json_decode($this->data['research'][$i]['thumbnail'], true);
+				$this->data['research'][$i]['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['research'][$i]['post_type'].'/'.$this->data['research'][$i]['permalink'];
+			}
+		}
+		if($data['post_type'] === 'security') {
+			$this->data['body']['content_2'] = $this->data['settings']['security']['text'];
+		}
 		$this->load->view('static_page/'.$data['post_type'], $this->data);
 	}
 	public function show_404(){

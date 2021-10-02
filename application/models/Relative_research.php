@@ -85,6 +85,11 @@ class Relative_Research extends CI_Model
 		$this->db->where('post_id', $post_id);
 		$this->db->delete(self::NAME_DB);
 	}
+	public function deleteByPostIdKey($post_id, $key) {
+		$this->db->where('value', $post_id);
+		$this->db->where('key_meta', $key);
+		$this->db->delete(self::NAME_DB);
+	}
 	public function updateTranslateById($post_id, $relative_id) {
 		$old_relative_id = $this->getDataByKey($post_id, 'translate');
 		if($old_relative_id === NULL) {

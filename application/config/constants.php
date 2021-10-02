@@ -91,6 +91,7 @@ define( 'ARRAY_LANG', include $_SERVER['DOCUMENT_ROOT'].'/application/views/comp
 define( 'LANG_PREFIX_LINK', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/languages/lang_prefix_link.php');
 define( 'DEFAULT_LANG', 'ua');
 define( 'DEFAULT_STATUS', '1');
+define( 'DEFAULT_PAID', '0');
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT']);
 define( 'ROOT_COMPONENTS', $_SERVER['DOCUMENT_ROOT'].'/application/views/components/');
 define( 'IS_MOBILE', include $_SERVER['DOCUMENT_ROOT'].'/application/views/components/check_mobile/index.php');

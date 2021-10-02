@@ -178,7 +178,6 @@ class Admin_Research extends Admin_Controller
 	}
 	public function single($id) {
 		$data = $this->research->getDataByID($id);
-	
 		if(empty($data)) show_404();
 		else {
 			$data = $data[0];
@@ -193,6 +192,20 @@ class Admin_Research extends Admin_Controller
 			$data['relative_clinics'] = [
 				'all_data' => $relative_clinics,
 				'id' => $this->relative_research->getArrByKey($id, 'clinic_id')
+			];
+
+			$research = $this->research->getPostsByLang($data['lang']);
+			$relative_research = [];
+			foreach ($research as $item) {
+				$relative_research[] = [
+					'id' => $item['id'],
+					'post_title' => $item['title']
+				];
+			}
+
+			$data['relative_research'] = [
+				'all_data' => $relative_research,
+				'id' => $this->relative_research->getArrByKey($id, 'research_id')
 			];
 
 			$cities = $this->post->getPostsByLang('city', $data['lang']);
@@ -287,18 +300,21 @@ class Admin_Research extends Admin_Controller
 		$data_meta['clinic_name'] = MM_Module_Input::getData('clinic_name');
 		$data_meta['open_set'] = MM_Module_Checkbox::getData('open_set');
 		$data_meta['for_volunteers'] = MM_Module_Checkbox::getData('for_volunteers');
+		$data_meta['paid'] = MM_Module_Checkbox::getData('paid');
 		$data_meta['additional_fields'] = json_encode(MM_Module_Two_Input::getData('additional_fields'), JSON_UNESCAPED_UNICODE);
 		
 		//--------- Post relative -----------//
 
 		$data_relative['clinic'] = MM_Module_Relative::getData('relative_clinic');
 		$data_relative['city'] = MM_Module_Relative::getData('relative_city');
+		$data_relative['research'] = MM_Module_Relative::getData('relative_research');
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
 		
 		$this->research->updateDateById($id, $data);
 		$this->research_meta->updateDateByForeignId($id, $data_meta);
 		$this->relative_research->addArrByKey($id, 'city_id', $data_relative['city']);
 		$this->relative_research->addArrByKey($id, 'clinic_id', $data_relative['clinic']);
+		$this->relative_research->addArrByKey($id, 'research_id', $data_relative['research']);
 		$this->relative_research->updateTranslateById($id, $data_relative['translate']);
 		redirect('/admin/research/'.$id, 'location', 301);
 	}
@@ -340,6 +356,7 @@ class Admin_Research extends Admin_Controller
 		$data_meta['clinic_name'] = MM_Module_Input::getData('clinic_name');
 		$data_meta['open_set'] = MM_Module_Checkbox::getData('open_set');
 		$data_meta['for_volunteers'] = MM_Module_Checkbox::getData('for_volunteers');
+		$data_meta['paid'] = MM_Module_Checkbox::getData('paid');
 		$data_meta['additional_fields'] = json_encode(MM_Module_Two_Input::getData('additional_fields'), JSON_UNESCAPED_UNICODE);
 
 		$insert_id = $this->research->insert($data);
@@ -349,8 +366,9 @@ class Admin_Research extends Admin_Controller
 		
 	}
 	public function delete(){
-		$this->research->delete($_POST['id']);
 		$this->relative_research->deleteTranslateById($_POST['id']);
+		$this->relative_research->deleteByPostIdKey($_POST['id'], 'research_id');
+		$this->research->delete($_POST['id']);
 		redirect('/admin/research/', 'location', 301);
 	}
 	private static function checkData($data){

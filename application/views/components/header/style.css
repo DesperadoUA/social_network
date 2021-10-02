@@ -109,6 +109,7 @@ header {
         margin-top: 20px;
         margin-bottom: 20px;
         box-sizing: border-box;
+        text-align: center;
     }
     .header_nav li {
         display: block;
@@ -121,6 +122,37 @@ header {
         display: flex;
         justify-content: center;
         box-sizing: border-box;
+    }
+    .mobile_menu .btn_profile_wrapper a {
+        width: 100%;
+        text-align: center;
+        border-radius: 8px;
+    }
+    .mobile_phone {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        width: 100%;
+        display: inline-block;
+        margin-top: 25px;
+        color: #333;
+        text-decoration: none;
+        font-family: 'Noah-Bold';
+    }
+    .schedule {
+        margin-top: 10px;
+        color: #333;
+        font-family: 'Noah-regular';
+        font-size: 18px;
+        text-align: center;
+    }
+    .mobile_social {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .mobile_social img {
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 @media (min-width: 768px) and (max-width: 1200px) {

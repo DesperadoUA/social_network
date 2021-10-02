@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include ROOT.'/application/core/Admin_Controller.php';
 include ROOT.'/admin_modules/index.php';
 
-class Admin_Research extends Admin_Controller
+class Admin_Stories extends Admin_Controller
 {
 	const ARR_KEY = [
 		[
@@ -93,139 +93,35 @@ class Admin_Research extends Admin_Controller
 			],
 			[
 				'type' => 'string',
-				'editor' => 'MM_Module_Textarea',
-				'key' => 'protocol_name',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
 				'editor' => 'MM_Module_Input',
-				'key' => 'therapeutic_area',
+				'key' => 'name',
 				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Textarea',
-				'key' => 'name_organization',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'data_start',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'data_finish',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Relative',
-				'key' => 'relative_clinic',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Relative',
-				'key' => 'relative_city',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Checkbox',
-				'key' => 'active',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'region',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'city',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'disease',
-				'JSON' => false
-			],
-			[
-				'type' => 'string',
-				'editor' => 'MM_Module_Input',
-				'key' => 'researchers',
-				'JSON' => false
-			],
+			]
+
 		],
 	];
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('post');
-		$this->load->model('research_meta');
-		$this->load->model('relative_research');
+		$this->load->model('stories');
+		$this->load->model('stories_meta');
+		$this->load->model('relative_stories');
 	}
 	public function index() {
-		$data['title'] = 'Исследования';
-		$data['pages'] = $this->research->getAllPages();
+		$data['title'] = 'Истории';
+		$data['pages'] = $this->stories->getAllPages();
 		$this->load->view('admin/page', $data);
 	}
 	public function single($id) {
-		$data = $this->research->getDataByID($id);
+		$data = $this->stories->getDataByID($id);
 		if(empty($data)) show_404();
 		else {
 			$data = $data[0];
-			$clinics = $this->post->getPostsByLang('clinic', $data['lang']);
-			$relative_clinics = [];
-			foreach ($clinics as $clinic) {
-				$relative_clinics[] = [
-					'id' => $clinic['id'],
-					'post_title' => $clinic['title']
-				];
-			}
-			$data['relative_clinics'] = [
-				'all_data' => $relative_clinics,
-				'id' => $this->relative_research->getArrByKey($id, 'clinic_id')
-			];
-
-			$research = $this->research->getPostsByLang($data['lang']);
-			$relative_research = [];
-			foreach ($research as $item) {
-				$relative_research[] = [
-					'id' => $item['id'],
-					'post_title' => $item['title']
-				];
-			}
-
-			$data['relative_research'] = [
-				'all_data' => $relative_research,
-				'id' => $this->relative_research->getArrByKey($id, 'research_id')
-			];
-
-			$cities = $this->post->getPostsByLang('city', $data['lang']);
-			$relative_city = [];
-			foreach ($cities as $city) {
-				$relative_city[] = [
-					'id' => $city['id'],
-					'post_title' => $city['title']
-				];
-			}
-			$data['relative_cityes'] = [
-				'all_data' => $relative_city,
-				'id' => $this->relative_research->getArrByKey($id, 'city_id')
-			];
 
 			if($data['lang'] === 'ru') $lang_translate = 'ua';
 			else $lang_translate = 'ru';
 
-			$post_without_translate = $this->research->getPostWithOutTranslate($lang_translate);
-			$current_translate = $this->relative_research->getDataByKey($data['id'], 'translate');
+			$post_without_translate = $this->stories->getPostWithOutTranslate($lang_translate);
+			$current_translate = $this->relative_stories->getDataByKey($data['id'], 'translate');
 			$post_translate = [];
 			foreach ($post_without_translate as $post) {
 				$post_translate[] = [
@@ -241,7 +137,7 @@ class Admin_Research extends Admin_Controller
 				];
 			}
 			else {
-				$current = $this->research->getDataById($current_translate);
+				$current = $this->stories->getDataById($current_translate);
 				if(!empty($current)) {
 					$current_post_translate = [
 						'id' => $current[0]['id'],
@@ -261,14 +157,10 @@ class Admin_Research extends Admin_Controller
 
 			}
 
-			if(empty($data['additional_fields'])) $data['additional_fields'] = [];
-			else $data['additional_fields'] = json_decode($data['additional_fields'], true);
-
-			$this->load->view('admin/edit_template/research', $data);
+			$this->load->view('admin/edit_template/stories', $data);
 		}
 	}
 	public function update() {
-
 		$id = $_POST['id'];
 		$candidate = MM_Module_Input::getData('permalink');
 		$data['permalink'] = $this->permalinkUpdate('research', $candidate, $id);
@@ -283,51 +175,29 @@ class Admin_Research extends Admin_Controller
 		$data['data_change'] = MM_Module_Input::getData('data_change');
 		$data['content'] = MM_Module_Rich_Text::getData('main_content');
 		$data['thumbnail'] = json_encode(MM_Module_Image::getData('thumbnail'), JSON_UNESCAPED_UNICODE);
-		//$data['lang'] = MM_Module_Radio_Button::getData('lang');
 
 		//--------- Post meta -----------//
 
-		$data_meta['protocol_name'] = MM_Module_Textarea::getData('protocol_name');
-		$data_meta['therapeutic_area'] = MM_Module_Input::getData('therapeutic_area');
-		$data_meta['name_organization'] = MM_Module_Textarea::getData('name_organization');
-		$data_meta['data_start'] = MM_Module_Input::getData('data_start');
-		$data_meta['data_finish'] = MM_Module_Input::getData('data_finish');
-		$data_meta['active'] = MM_Module_Checkbox::getData('active');
-		$data_meta['region'] = MM_Module_Input::getData('region');
-		$data_meta['city'] = MM_Module_Input::getData('city');
-		$data_meta['disease'] = MM_Module_Input::getData('disease');
-		$data_meta['researchers'] = MM_Module_Input::getData('researchers');
-		$data_meta['clinic_name'] = MM_Module_Input::getData('clinic_name');
-		$data_meta['open_set'] = MM_Module_Checkbox::getData('open_set');
-		$data_meta['for_volunteers'] = MM_Module_Checkbox::getData('for_volunteers');
-		$data_meta['paid'] = MM_Module_Checkbox::getData('paid');
-		$data_meta['additional_fields'] = json_encode(MM_Module_Two_Input::getData('additional_fields'), JSON_UNESCAPED_UNICODE);
-		
+		$data_meta['name'] = MM_Module_Input::getData('name');
+
 		//--------- Post relative -----------//
 
-		$data_relative['clinic'] = MM_Module_Relative::getData('relative_clinic');
-		$data_relative['city'] = MM_Module_Relative::getData('relative_city');
-		$data_relative['research'] = MM_Module_Relative::getData('relative_research');
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
 		
-		$this->research->updateDateById($id, $data);
-		$this->research_meta->updateDateByForeignId($id, $data_meta);
-		$this->relative_research->addArrByKey($id, 'city_id', $data_relative['city']);
-		$this->relative_research->addArrByKey($id, 'clinic_id', $data_relative['clinic']);
-		$this->relative_research->addArrByKey($id, 'research_id', $data_relative['research']);
-		$this->relative_research->updateTranslateById($id, $data_relative['translate']);
-		redirect('/admin/research/'.$id, 'location', 301);
+		$this->stories->updateDateById($id, $data);
+		$this->stories_meta->updateDateByForeignId($id, $data_meta);
+		$this->relative_stories->updateTranslateById($id, $data_relative['translate']);
+		redirect('/admin/stories/'.$id, 'location', 301);
 	}
 	public function add() {
-		$data['title'] = "Добавить исследование";
+		$data['title'] = "Добавить историю";
 		$data['current_date'] = date("Y-m-d H:i:s");
 		$data['thumbnail'] = '';
-		$this->load->view('admin/add_template/research', $data);
+		$this->load->view('admin/add_template/stories', $data);
 	}
 	public function addPost(){
-		
 		$data['title'] = MM_Module_Cyr_To_Lat::getData('title');
-		$data['permalink'] = $this->newPermalink('research', MM_Module_Cyr_To_Lat::getData('permalink'));
+		$data['permalink'] = $this->newPermalink('stories', MM_Module_Cyr_To_Lat::getData('permalink'));
 		$data['status'] = MM_Module_Checkbox::getData('public');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['meta_title'] = MM_Module_Input::getData('meta_title');
@@ -343,33 +213,18 @@ class Admin_Research extends Admin_Controller
 
 		//--------- Post meta -----------//
 
-		$data_meta['protocol_name'] = MM_Module_Textarea::getData('protocol_name');
-		$data_meta['therapeutic_area'] = MM_Module_Input::getData('therapeutic_area');
-		$data_meta['name_organization'] = MM_Module_Textarea::getData('name_organization');
-		$data_meta['data_start'] = MM_Module_Input::getData('data_start');
-		$data_meta['data_finish'] = MM_Module_Input::getData('data_finish');
-		$data_meta['active'] = MM_Module_Checkbox::getData('active');
-		$data_meta['region'] = MM_Module_Input::getData('region');
-		$data_meta['city'] = MM_Module_Input::getData('city');
-		$data_meta['disease'] = MM_Module_Input::getData('disease');
-		$data_meta['researchers'] = MM_Module_Input::getData('researchers');
-		$data_meta['clinic_name'] = MM_Module_Input::getData('clinic_name');
-		$data_meta['open_set'] = MM_Module_Checkbox::getData('open_set');
-		$data_meta['for_volunteers'] = MM_Module_Checkbox::getData('for_volunteers');
-		$data_meta['paid'] = MM_Module_Checkbox::getData('paid');
-		$data_meta['additional_fields'] = json_encode(MM_Module_Two_Input::getData('additional_fields'), JSON_UNESCAPED_UNICODE);
+		$data_meta['name'] = MM_Module_Input::getData('name');
 
-		$insert_id = $this->research->insert($data);
-		$this->research_meta->updateDateByForeignId($insert_id, $data_meta);
-		$this->relative_research->addDataByKey($insert_id, 'translate', '0');
-		redirect('/admin/research/'.$insert_id, 'location', 301);
+		$insert_id = $this->stories->insert($data);
+		$this->stories_meta->updateDateByForeignId($insert_id, $data_meta);
+		$this->relative_stories->addDataByKey($insert_id, 'translate', '0');
+		redirect('/admin/stories/'.$insert_id, 'location', 301);
 		
 	}
 	public function delete(){
-		$this->research->delete($_POST['id']);
-		$this->relative_research->deleteTranslateById($_POST['id']);
-		$this->relative_research->deleteByPostIdKey($_POST['id'], 'research_id');
-		redirect('/admin/research/', 'location', 301);
+		$this->relative_stories->deleteTranslateById($_POST['id']);
+		$this->stories->delete($_POST['id']);
+		redirect('/admin/stories', 'location', 301);
 	}
 	private static function checkData($data){
 		return "Check";

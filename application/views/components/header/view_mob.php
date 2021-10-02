@@ -15,16 +15,33 @@
 				<img src="/uploads/burger_close.png" class="burger_img"/>
 			</div>
 			<div class="mobile_menu">
-				<div class="lang">
+                <?php
+				if(!empty($body['translate'])) {?>
+				  <div class="lang">
 					<ul class="lang_list">
 						<li class="lang_item">
-							<a href='/'>ru</a>
-						</li>
-						<li class="lang_item">
-							<a href='/ua'>ua</a>
-						</li>
-					</ul>
-				</div>
+                          <?php  if(LANG === 'ru') {
+                            echo "<a href='{$body['permalink']}'>ru</a>";
+                            } else {
+                              if(!empty($body['translate'])){
+								  echo "<a href='{$body['translate']}'>ru</a>";
+                              }
+                            }
+                            ?>
+                    </li>
+                    <li class="lang_item">
+                        <?php  if(LANG === 'ua') {
+                            echo "<a href='{$body['permalink']}'>ua</a>";
+                        } else {
+                            if(!empty($body['translate'])){
+                                echo "<a href='{$body['translate']}'>ua</a>";
+                            }
+                        }
+                        ?>
+                    </li>
+                    </ul>
+                  </div>
+             <?php   } ?>
 				<?php
 				if(!empty($settings['header_menu']['menu'])) {
 					echo "<nav>
@@ -43,6 +60,34 @@
 						<?= TRANSLATE['BTN_PROFILE'][LANG]; ?>
 					</a>
 				</div>
+                <?php
+                    if(!empty($options['phone']['text'])) {
+                        echo "<a href='tel:+{$options['phone']['text']}' class='mobile_phone'>
+                                 {$options['phone']['text']}
+                              </a>";
+                        echo "<p class='schedule'>".TRANSLATE['RECEIVING_CALLS'][LANG]."</p>";
+                        echo "<p class='schedule'>".$settings['sheduler']['text']."</p>";
+                    }
+                ?>
+                <div class="mobile_social">
+                    <?php
+                        if(!empty($options['telegram']['text'])) {
+                            echo "<a href='https://telegram.im/{$options['telegram']['text']}'
+                                     target='_blank' class=''>
+                                     <img src='/uploads/telega.png' class=''>
+                                  </a>";
+                        }
+                    ?>
+					<?php
+					if(!empty($options['viber']['text'])) {
+						echo "<a href='{$options['viber']['text']}'
+                                     target='_blank' class=''>
+                                     <img src='/uploads/viber.png' class=''>
+                                  </a>";
+					}
+					?>
+
+                </div>
 			</div>
 		</div>
 	</div>

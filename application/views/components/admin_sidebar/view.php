@@ -49,13 +49,20 @@
                 </ul>
             </li>
             <li class="menu_item">
-                <span>7</span>Settings
+                <span>7</span>Истории
+                <ul class="drop_down_menu">
+                    <li><a href="/admin/stories">Все истории</a></li>
+                    <li><a href="/admin/stories/add">Добавить историю</a></li>
+                </ul>
+            </li>
+            <li class="menu_item">
+                <span>8</span>Settings
                 <ul class="drop_down_menu">
                     <li><a href="/admin/settings">Все настройки</a></li>
                 </ul>
             </li>
             <li class="menu_item">
-                <span>8</span>Options
+                <span>9</span>Options
                 <ul class="drop_down_menu">
                     <li><a href="/admin/options">Все опции</a></li>
                 </ul>

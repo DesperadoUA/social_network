@@ -1,7 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Костя
- * Date: 25.09.2021
- * Time: 11:00
- */
+<section class="contacts_main_screen">
+	<div class="container">
+		<?= $body['content']['text']; ?>
+	</div>
+    <div class="container">
+        <?php $this->load->view('components/forms/contacts.php'); ?>
+    </div>
+</section>

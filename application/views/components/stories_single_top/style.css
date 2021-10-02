@@ -1,15 +1,15 @@
-.blog_single_top {
+.stories_single_top {
     padding-top: 110px;
     padding-bottom: 70px;
 }
-.blog_single_top_title {
+.stories_single_top_title {
     font-family: 'Noah-Grotesque';
     font-size: 52px;
     margin-bottom: 75px;
     position: relative;
     font-weight: 100;
 }
-.blog_single_top_title:before {
+.stories_single_top_title:before {
     content: '';
     width: 80px;
     height: 5px;
@@ -22,17 +22,17 @@
     left: -30px;
     bottom: -30px;
 }
-.blog_single_top_row {
+.stories_single_top_row {
     display: flex;
 }
-.blog_single_top_img {
+.stories_single_top_img {
     min-width: 380px;
     position: relative;
     max-height: 220px;
     width: 380px;
     height: 220px;
 }
-.blog_single_top_img img {
+.stories_single_top_img img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: block;
@@ -41,51 +41,51 @@
     height: 100%;
     object-fit: cover;
 }
-.blog_single_top_text {
+.stories_single_top_text {
     padding-left: 50px;
 }
 @media (min-width: 767px) {
-    .blog_single_top {
-        background: url("/uploads/blog_bg.png") no-repeat top center;
+    .stories_single_top {
+        background: url("/uploads/stories_bg.png") no-repeat top center;
     }
 }
 @media (min-width: 320px) and (max-width: 767px) {
-    .blog_single_top {
+    .stories_single_top {
         padding-top: 30px;
         padding-bottom: 30px;
     }
-    .blog_single_top_title {
+    .stories_single_top_title {
         line-height: 45px;
         text-align: center;
     }
-    .blog_single_top_title:before {
+    .stories_single_top_title:before {
         left: 50%;
         transform: translateX(-50%);
     }
-    .blog_single_top_row {
+    .stories_single_top_row {
         flex-wrap: wrap;
     }
-    .blog_single_top_img {
+    .stories_single_top_img {
         min-width: auto;
         margin-bottom: 20px;
     }
-    .blog_single_top_text {
+    .stories_single_top_text {
         padding-left: 0px;
     }
 }
 @media (min-width: 768px) and (max-width: 1200px) {
-    .blog_single_top {
+    .stories_single_top {
         padding-top: 60px;
         padding-bottom: 60px;
     }
-    .blog_single_top_row {
+    .stories_single_top_row {
         flex-wrap: wrap;
     }
-    .blog_single_top_img {
+    .stories_single_top_img {
         max-height: none;
         margin-bottom: 20px;
     }
-    .blog_single_top_text {
+    .stories_single_top_text {
         padding-left: 0px;
     }
 }

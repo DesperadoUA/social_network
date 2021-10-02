@@ -102,6 +102,13 @@
 	?>
 	<?php
 	$settings = [
+		'module_title' => 'Платное исследование',
+		'title' => 'Платное исследование',
+	];
+	MM_Module_Checkbox::create('paid', $settings, DEFAULT_PAID);
+	?>
+	<?php
+	$settings = [
 		'module_title' => 'Дополнительные поля исследования',
 		'title' => ['text 1', 'text 2']
 	];

@@ -1,7 +1,12 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Костя
- * Date: 25.09.2021
- * Time: 18:38
- */
+<section class="stories_main_screen">
+	<div class="container">
+		<div class="stories_main_screen_wrapper">
+			<div class="stories_main_screen_left"></div>
+			<div class="stories_main_screen_right">
+				<div class="stories_main_screen_desc">
+					<?= $body['short_desc']; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

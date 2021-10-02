@@ -44,6 +44,16 @@
     background-image: -ms-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
     background-size: cover;
 }
+.revers .research_loop_item:nth-child(even) {
+    background-image: -moz-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-size: cover;
+}
+.revers .research_loop_item:nth-child(odd) {
+    background: transparent;
+}
+
 .research_loop_btn {
     padding: 28px;
     border-radius: 50px;
@@ -59,6 +69,7 @@
     font-size: 13px;
     margin-right: 25px;
 }
+
 .research_loop_item_row_btn {
     margin-top: 35px;
     display: flex;

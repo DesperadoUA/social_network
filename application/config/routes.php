@@ -67,11 +67,19 @@ $route['bezopasnost-patsientov-ua'] ='main';
 $route['ru/kontakty'] ='main';
 $route['kontakty-ua'] ='main';
 $route['ru'] ='main';
-
+$route['ru/subscription'] = 'main';
+$route['subscription-ua'] = 'main';
+$route['ru/referral'] = 'main';
+$route['referral-ua'] = 'main';
 
 $route['api/mailer'] = 'API_Controller/mailer';
+$route['api/analyzes'] = 'API_Controller/analyzes';
+$route['api/contacts'] = 'API_Controller/contacts';
 $route['api/clinics'] = 'API_Controller/clinics';
 $route['api/research'] = 'API_Controller/research';
+$route['api/subscription'] = 'API_Controller/subscription';
+$route['api/subscription-main'] = 'API_Controller/subscriptionMain';
+$route['api/stories'] = 'API_Controller/stories';
 
 $route['ru/research'] = 'Research_Controller';
 $route['research-ua'] = 'Research_Controller';
@@ -79,6 +87,11 @@ $route['ru/research/page/(:any)'] = 'Research_Controller';
 $route['research-ua/page/(:any)'] = 'Research_Controller';
 $route['ru/research/(:any)'] = 'Research_Controller/single/$1';
 $route['research/(:any)'] = 'Research_Controller/single/$1';
+
+$route['ru/stories'] = 'Stories_Controller';
+$route['stories-ua'] = 'Stories_Controller';
+$route['ru/stories/(:any)'] = 'Stories_Controller/single/$1';
+$route['stories/(:any)'] = 'Stories_Controller/single/$1';
 
 $route['ru/city/(:any)'] = 'City_Controller/single/$1';
 $route['city/(:any)'] = 'City_Controller/single/$1';
@@ -118,6 +131,13 @@ $route['admin/research/delete'] = 'admin_research/delete';
 $route['admin/research/add'] = 'admin_research/add';
 $route['admin/research/add-post'] = 'admin_research/addPost';
 $route['admin/research/(:any)'] = 'admin_research/single/$1';
+
+$route['admin/stories'] = 'Admin_stories';
+$route['admin/stories/update'] = 'admin_stories/update';
+$route['admin/stories/delete'] = 'admin_stories/delete';
+$route['admin/stories/add'] = 'admin_stories/add';
+$route['admin/stories/add-post'] = 'admin_stories/addPost';
+$route['admin/stories/(:any)'] = 'admin_stories/single/$1';
 
 $route['admin/post/update'] = 'admin_post/update';
 $route['admin/post/delete'] = 'admin_post/delete';

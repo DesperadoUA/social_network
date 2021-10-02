@@ -88,8 +88,10 @@
         </div>
     </div>
     <?php
-	include ROOT_COMPONENTS . 'forms/research.php';
-	include ROOT_COMPONENTS . 'forms/participate.php';
+	$this->load->view('components/forms/research.php');
+	$this->load->view('components/forms/participate.php');
+	$this->load->view('components/forms/analyzes.php');
+	$this->load->view('components/cookies/index.php');
     ?>
 </footer>
 <script src="/js/script.js" ></script>

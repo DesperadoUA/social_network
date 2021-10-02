@@ -39,3 +39,12 @@ button {
 .pt-30 {
     padding-top: 30px;
 }
+.color_black {
+    color: #333!important;
+}
+.text_left {
+    text-align: left!important;
+}
+.bg_gray {
+    background: #f4f5f5!important;
+}

@@ -23,6 +23,36 @@ h1, h2, h3, h4, h5, h6 {
 .content li, .style_content li {
     margin-bottom: 7px;
 }
+.content-referral {
+    background-image: -moz-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -webkit-linear-gradient(
+            0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-size: cover;
+}
+.content-referral-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.referral-btn {
+    padding: 28px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    background: white;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    white-space: nowrap;
+    font-family: 'Noah-Bold';
+    font-size: 13px;
+}
+.referral-btn::before {
+    z-index: -1;
+    border-radius: 50px;
+}
 @media (min-width: 320px) and (max-width: 767px) {
     .content {
         padding-top: 60px;

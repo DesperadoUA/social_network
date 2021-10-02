@@ -1,22 +1,19 @@
-<section class="subscription_description">
+<section class="subscription_useful">
     <div class="container">
-        <div class="row_subscription_description">
-            <div class="subscription_description_item">
-                <img src="/uploads/viber.jpg" loading="lazy" height="130" width="130">
-                <p class="subscription_description_item_text">
-                    Каждый день мы ищем новые клинические исследования для бесплатного
-                    участия наших подписчиков и <b>собираем данных из различных
-                        реестров и баз данных Украины и других стран</b>
-                </p>
-            </div>
-            <div class="subscription_description_item">
-                <img src="/uploads/viber.jpg" loading="lazy" height="130" width="130">
-                <p class="subscription_description_item_text">
-                    Еженедельно алгоритм отбирает для подписчиков лучшие исследования по
-                    вашему диагнозу и присылает до 3-5  наиболее подходящих вашему диагнозу,
-                    стадии заболевания, возрасту и месту проживания
-                </p>
-            </div>
+        <div class="subscription_useful_ttl">
+            <?= TRANSLATE['SUBSCRIPTION_USEFUL_TITLE'][LANG]; ?>
+        </div>
+        <div class="row_subscription_useful">
+            <?php
+                foreach ($settings['subscription_useful']['images_and_text'] as $item) {
+                    echo "<div class='subscription_useful_item'>
+                            <img src='{$item['src']}' loading='lazy' height='100' width='100'>
+                            <p class='subscription_useful_item_text'>
+                                {$item['description']}
+                            </p>
+                        </div>";
+                }
+            ?>
         </div>
     </div>
 </section>

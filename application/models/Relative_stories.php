@@ -1,12 +1,12 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Relative_Research extends CI_Model
+class Relative_Stories extends CI_Model
 {
-	const NAME_DB = 'relative_research';
+	const NAME_DB = 'relative_stories';
 	public function __construct() {
 		$this->load->database();
 	}
-	public function getDataById($id) {
+	public function _getDataById($id) {
 		$query = $this->db->get_where(
 			self::NAME_DB,
 			array(
@@ -26,7 +26,7 @@ class Relative_Research extends CI_Model
 		if(empty($query->result_array())) return NULL;
 		return $query->result_array()[0]['value'];
 	}
-	public function getArrByKey($id, $key) {
+	public function _getArrByKey($id, $key) {
 		$query = $this->db->get_where(
 			self::NAME_DB,
 			array(
@@ -39,7 +39,7 @@ class Relative_Research extends CI_Model
 		foreach ($query->result_array() as $item) $data[] = $item['value'];
 		return $data;
 	}
-	public function getArrByKeyValue($key, $value) {
+	public function _getArrByKeyValue($key, $value) {
 		$query = $this->db->get_where(
 			self::NAME_DB,
 			array(
@@ -67,7 +67,7 @@ class Relative_Research extends CI_Model
 			$this->db->update(self::NAME_DB);
 		}
 	}
-	public function addArrByKey($post_id, $key, $data) {
+	public function _addArrByKey($post_id, $key, $data) {
 		$this->db->where('post_id', $post_id);
 		$this->db->where('key_meta', $key);
 		$this->db->delete(self::NAME_DB);
@@ -81,11 +81,11 @@ class Relative_Research extends CI_Model
 			$this->db->insert(self::NAME_DB, $obj_data);
 		}
 	}
-	public function delete($post_id) {
+	public function _delete($post_id) {
 		$this->db->where('post_id', $post_id);
 		$this->db->delete(self::NAME_DB);
 	}
-	public function deleteByPostIdKey($post_id, $key) {
+	public function _deleteByPostIdKey($post_id, $key) {
 		$this->db->where('value', $post_id);
 		$this->db->where('key_meta', $key);
 		$this->db->delete(self::NAME_DB);
@@ -123,6 +123,7 @@ class Relative_Research extends CI_Model
 	}
 	public function deleteTranslateById($post_id){
 		$old_relative_id = $this->getDataByKey($post_id, 'translate');
+		echo $old_relative_id;
 		if(!empty($old_relative_id)) {
 			$this->db->set('value', 0);
 			$this->db->where('post_id', $old_relative_id);
