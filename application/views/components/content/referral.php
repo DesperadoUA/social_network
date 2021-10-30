@@ -3,8 +3,8 @@
 		<?= $body['content']['text']; ?>
 	</div>
 	<div class="content-referral-btn">
-		<button class='referral-btn border_gradient'>
-		 <?= TRANSLATE['WANT_PARTICIPATE'][LANG]; ?>
-		</button>
+		<a href="<?= $options['ref']['text'] ?>" target="_blank" class='referral-btn border_gradient'>
+			<?= TRANSLATE['BRING_FRIEND'][LANG] ?>
+		</a>
 	</div>
 </section>

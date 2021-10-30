@@ -98,5 +98,6 @@
 <script async src="https://crm.streamtele.com/widget/getwidget/743fa3a587babcc683e775673ad9d339"
         type="text/javascript" charset="UTF-8"></script>
 <script async defer data-domain="luckytrials.com" src="https://plausible.io/js/plausible.js"></script>
+<script charset="UTF-8" src="https://web.webpushs.com/js/push/1456f863e0f2f4e1d51914b25adaf8fd_1.js" async></script>
 </body>
 </html>

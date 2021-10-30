@@ -7,7 +7,7 @@
 					<?= $body['short_desc']; ?>
                 </div>
                 <div class="row_referral_buttons">
-                    <a href="<?= $options['google_doc']['text'] ?>" target="_blank" class="profile_ad_btn search_btn">
+                    <a href="<?= $options['ref']['text'] ?>" target="_blank" class="profile_ad_btn search_btn">
 						<?= TRANSLATE['BRING_FRIEND'][LANG] ?>
                     </a>
                 </div>

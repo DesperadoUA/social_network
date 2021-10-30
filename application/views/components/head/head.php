@@ -8,6 +8,7 @@
     <title><?= $body['meta_title']; ?></title>
     <meta name="keywords" content="<?= $body['keywords']; ?>" />
     <meta name="description" content="<?= $body['description']; ?>" />
+    <meta name="google-site-verification" content="2fi_ej5nKMJvNz6jI9eJBsWwnZMEDsZQot-ObPR9o3s" />
     <link rel="icon" href="<?= $options['icon']['image']['src']; ?>" sizes="32x32" />
     <?php
     if($options['indexing']['status'] === 0) {

@@ -37,7 +37,7 @@
         background: url("/uploads/triangle.png") no-repeat 100% 100%;
         background-size: cover;
         position: absolute;
-        top:178px;
+        top:150px;
         left:-168px;
     }
     .referral_get_consultation_desc:after {

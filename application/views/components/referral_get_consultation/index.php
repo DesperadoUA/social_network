@@ -7,9 +7,9 @@
 					<p><b><?= TRANSLATE['DESC_REFERRAL'][LANG]; ?></b></p>
 				</div>
 				<div class="referral_get_consultation_btn_row">
-					<button class="search_btn">
+					<a href="<?= $options['ref']['text'] ?>" target="_blank" class="search_btn">
 						<?= TRANSLATE['BRING_FRIEND'][LANG]; ?>
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>

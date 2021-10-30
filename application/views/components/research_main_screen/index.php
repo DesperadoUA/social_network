@@ -66,16 +66,16 @@
                         <div class="research_main_item_checkbox_wrapper">
                             <div class="custom_checkbox border_gradient">
                                 <span class="checkbox_body active_checkbox js_paid_research js_search_checkbox_paid"
-                                    data-value="1"
+                                    data-value="0"
                                 ></span>
-                            </div> <?= TRANSLATE['PAID'][LANG]; ?>
+                            </div> <?= TRANSLATE['FREE'][LANG]; ?>
                             </div>
                         <div class="research_main_item_checkbox_wrapper">
                             <div class="custom_checkbox border_gradient">
                                 <span class="checkbox_body js_search_checkbox_paid"
-                                      data-value="0"
+                                      data-value="1"
                                 ></span>
-                            </div> <?= TRANSLATE['FREE'][LANG]; ?>
+                            </div> <?= TRANSLATE['PAID'][LANG]; ?>
                         </div>
 					</div>
 				</div>
