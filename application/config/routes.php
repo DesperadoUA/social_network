@@ -139,6 +139,13 @@ $route['admin/stories/add'] = 'admin_stories/add';
 $route['admin/stories/add-post'] = 'admin_stories/addPost';
 $route['admin/stories/(:any)'] = 'admin_stories/single/$1';
 
+$route['admin/healing'] = 'Admin_healing';
+$route['admin/healing/update'] = 'admin_healing/update';
+$route['admin/healing/delete'] = 'admin_healing/delete';
+$route['admin/healing/add'] = 'admin_healing/add';
+$route['admin/healing/add-post'] = 'admin_healing/addPost';
+$route['admin/healing/(:any)'] = 'admin_healing/single/$1';
+
 $route['admin/post/update'] = 'admin_post/update';
 $route['admin/post/delete'] = 'admin_post/delete';
 $route['admin/post/add-post'] = 'admin_post/addPost';

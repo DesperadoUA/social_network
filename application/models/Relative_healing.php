@@ -1,8 +1,8 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Relative_Stories extends CI_Model
+class Relative_Healing extends CI_Model
 {
-	const NAME_DB = 'relative_stories';
+	const NAME_DB = 'relative_healing';
 	public function __construct() {
 		$this->load->database();
 	}
@@ -66,7 +66,7 @@ class Relative_Stories extends CI_Model
 			}
 		}
 	}
-	public function deleteTranslateById($post_id){
+	public function deleteTranslateById($post_id) {
 		$old_relative_id = $this->getDataByKey($post_id, 'translate');
 		if(!empty($old_relative_id)) {
 			$this->db->set('value', 0);

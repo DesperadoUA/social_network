@@ -1,8 +1,8 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Stories_Meta extends CI_Model
+class Healing_Meta extends CI_Model
 {
-	const NAME_DB = 'stories_meta';
+	const NAME_DB = 'healing_meta';
 	public function __construct() {
 		$this->load->database();
 	}

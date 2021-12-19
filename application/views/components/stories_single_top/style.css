@@ -46,7 +46,7 @@
 }
 @media (min-width: 767px) {
     .stories_single_top {
-        background: url("/uploads/stories_bg.png") no-repeat top center;
+        background: url("/uploads/blog_bg.png") no-repeat top center;
     }
 }
 @media (min-width: 320px) and (max-width: 767px) {

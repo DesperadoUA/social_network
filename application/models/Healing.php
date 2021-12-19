@@ -1,10 +1,10 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Stories extends CI_Model
+class Healing extends CI_Model
 {
-	const NAME_DB = 'stories';
-	const NAME_META_DB = 'stories_meta';
-	const NAME_RELATIVE_DB = 'relative_stories';
+	const NAME_DB = 'healing';
+	const NAME_META_DB = 'healing_meta';
+	const NAME_RELATIVE_DB = 'relative_healing';
 	const ALL_FIELDS = [
 		't1.id',
 		'post_type',
@@ -84,11 +84,12 @@ class Stories extends CI_Model
 		return $query->num_rows();
 	}
 	public function getDataByPermalink($permalink, $lang) {
+		
 		$this->db->select(implode(',', self::ALL_FIELDS))
 		->from(self::NAME_DB.' as t1')
 		->where('t1.status', 1)
 		->where('t1.permalink', $permalink)
-			->where('t1.lang', $lang)
+		->where('t1.lang', $lang)
 		->join(self::NAME_META_DB.' as t2', "t1.id = t2.post_id");
 		$query = $this->db->get();
 		return $query->result_array();

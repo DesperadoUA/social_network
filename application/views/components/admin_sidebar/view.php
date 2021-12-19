@@ -56,13 +56,20 @@
                 </ul>
             </li>
             <li class="menu_item">
-                <span>8</span>Settings
+                <span>8</span>Лечение
+                <ul class="drop_down_menu">
+                    <li><a href="/admin/healing">Все лечения</a></li>
+                    <li><a href="/admin/healing/add">Добавить лечение</a></li>
+                </ul>
+            </li>
+            <li class="menu_item">
+                <span>9</span>Settings
                 <ul class="drop_down_menu">
                     <li><a href="/admin/settings">Все настройки</a></li>
                 </ul>
             </li>
             <li class="menu_item">
-                <span>9</span>Options
+                <span>10</span>Options
                 <ul class="drop_down_menu">
                     <li><a href="/admin/options">Все опции</a></li>
                 </ul>
