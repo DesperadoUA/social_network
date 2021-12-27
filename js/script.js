@@ -21,4 +21,6 @@
 	cookies.initial()
 	const storiesDownload = await import('/src_js/stories_download/script.js')
 	storiesDownload.initial()
+	const searchHealing = await import('/src_js/search_healing/script.js')
+	searchHealing.initial()
 })()

@@ -371,7 +371,4 @@ class Admin_Research extends Admin_Controller
 		$this->research->delete($_POST['id']);
 		redirect('/admin/research/', 'location', 301);
 	}
-	private static function checkData($data){
-		return "Check";
-	}
 }

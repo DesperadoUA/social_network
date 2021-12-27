@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include ROOT.'/application/core/Admin_Controller.php';
 include ROOT.'/admin_modules/index.php';
 
-class Admin_Stories extends Admin_Controller
+class Admin_Disease extends Admin_Controller
 {
 	const ARR_KEY = [
 		[
@@ -102,17 +102,18 @@ class Admin_Stories extends Admin_Controller
 	];
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('stories');
-		$this->load->model('stories_meta');
-		$this->load->model('relative_stories');
+		$this->load->model('disease');
+		$this->load->model('disease_meta');
+		$this->load->model('relative_disease');
+		$this->load->model('relative_healing');
 	}
 	public function index() {
-		$data['title'] = 'Истории';
-		$data['pages'] = $this->stories->getAllPages();
+		$data['title'] = 'Заболевания';
+		$data['pages'] = $this->disease->getAllPages();
 		$this->load->view('admin/page', $data);
 	}
 	public function single($id) {
-		$data = $this->stories->getDataByID($id);
+		$data = $this->disease->getDataByID($id);
 		if(empty($data)) show_404();
 		else {
 			$data = $data[0];
@@ -120,8 +121,8 @@ class Admin_Stories extends Admin_Controller
 			if($data['lang'] === 'ru') $lang_translate = 'ua';
 			else $lang_translate = 'ru';
 
-			$post_without_translate = $this->stories->getPostWithOutTranslate($lang_translate);
-			$current_translate = $this->relative_stories->getDataByKey($data['id'], 'translate');
+			$post_without_translate = $this->disease->getPostWithOutTranslate($lang_translate);
+			$current_translate = $this->relative_disease->getDataByKey($data['id'], 'translate');
 			$post_translate = [];
 			foreach ($post_without_translate as $post) {
 				$post_translate[] = [
@@ -137,7 +138,7 @@ class Admin_Stories extends Admin_Controller
 				];
 			}
 			else {
-				$current = $this->stories->getDataById($current_translate);
+				$current = $this->disease->getDataById($current_translate);
 				if(!empty($current)) {
 					$current_post_translate = [
 						'id' => $current[0]['id'],
@@ -157,13 +158,14 @@ class Admin_Stories extends Admin_Controller
 
 			}
 
-			$this->load->view('admin/edit_template/stories', $data);
+			$this->load->view('admin/edit_template/disease', $data);
 		}
 	}
 	public function update() {
+		
 		$id = $_POST['id'];
 		$candidate = MM_Module_Input::getData('permalink');
-		$data['permalink'] = $this->permalinkUpdate('stories', $candidate, $id);
+		$data['permalink'] = $this->permalinkUpdate('disease', $candidate, $id);
 		$data['title'] = MM_Module_Input::getData('title');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['status'] = MM_Module_Checkbox::getData('public');
@@ -184,20 +186,21 @@ class Admin_Stories extends Admin_Controller
 
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
 		
-		$this->stories->updateDateById($id, $data);
-		$this->stories_meta->updateDateByForeignId($id, $data_meta);
-		$this->relative_stories->updateTranslateById($id, $data_relative['translate']);
-		redirect('/admin/stories/'.$id, 'location', 301);
+		$this->disease->updateDateById($id, $data);
+		$this->disease_meta->updateDateByForeignId($id, $data_meta);
+		$this->relative_disease->updateTranslateById($id, $data_relative['translate']);
+		redirect('/admin/disease/'.$id, 'location', 301);
 	}
 	public function add() {
-		$data['title'] = "Добавить историю";
+		$data['title'] = "Добавить заболевание";
 		$data['current_date'] = date("Y-m-d H:i:s");
 		$data['thumbnail'] = '';
-		$this->load->view('admin/add_template/stories', $data);
+		$this->load->view('admin/add_template/disease', $data);
 	}
 	public function addPost(){
+		
 		$data['title'] = MM_Module_Cyr_To_Lat::getData('title');
-		$data['permalink'] = $this->newPermalink('stories', MM_Module_Cyr_To_Lat::getData('permalink'));
+		$data['permalink'] = $this->newPermalink('disease', MM_Module_Cyr_To_Lat::getData('permalink'));
 		$data['status'] = MM_Module_Checkbox::getData('public');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['meta_title'] = MM_Module_Input::getData('meta_title');
@@ -215,18 +218,16 @@ class Admin_Stories extends Admin_Controller
 
 		$data_meta['name'] = MM_Module_Input::getData('name');
 
-		$insert_id = $this->stories->insert($data);
-		$this->stories_meta->updateDateByForeignId($insert_id, $data_meta);
-		$this->relative_stories->addDataByKey($insert_id, 'translate', '0');
-		redirect('/admin/stories/'.$insert_id, 'location', 301);
+		$insert_id = $this->disease->insert($data);
+		$this->disease_meta->updateDateByForeignId($insert_id, $data_meta);
+		$this->relative_disease->addDataByKey($insert_id, 'translate', '0');
+		redirect('/admin/disease/'.$insert_id, 'location', 301);
 		
 	}
 	public function delete(){
-		$this->relative_stories->deleteTranslateById($_POST['id']);
-		$this->stories->delete($_POST['id']);
-		redirect('/admin/stories', 'location', 301);
-	}
-	private static function checkData($data){
-		return "Check";
+		$this->relative_healing->deleteByPostIdKey($_POST['id'], 'disease');
+		$this->relative_disease->deleteTranslateById($_POST['id']);
+		$this->disease->delete($_POST['id']);
+		redirect('/admin/disease', 'location', 301);
 	}
 }

@@ -1,0 +1,54 @@
+.healing_loop_item {
+    padding: 25px 50px;
+    transition: 0.7s;
+    border-radius: 8px;
+}
+.healing_loop_item:hover {
+    background-image: -moz-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    background-size: cover;
+}
+.healing_loop_wrapper {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.healing_loop_item_title {
+    margin-bottom: 15px;
+    font-family: Noah-bold;
+}
+.empty_result {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #00a2b4;
+    text-decoration: none;
+    font-size: 40px;
+    font-family: Noah-regular;
+}
+.row_healing_loop_item_disease {
+    display:flex;
+    flex-wrap: wrap;
+}
+.item_disease {
+    padding: 10px 15px;
+}
+.item_disease a {
+    color: #00a2b4;
+    font-size: 18px;
+    font-family: Noah-regular;
+}
+.item_disease a:hover {
+    color: #fa5e66;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .healing_loop_item_characters_left {
+        min-width: 130px;
+    }
+    .healing_loop_item {
+        padding: 15px;
+    }
+    .healing_loop_wrapper {
+        padding-top: 0px;
+        padding-bottom: 30px;
+    }
+}

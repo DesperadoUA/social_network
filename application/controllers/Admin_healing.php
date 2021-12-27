@@ -105,6 +105,7 @@ class Admin_Healing extends Admin_Controller
 		$this->load->model('healing');
 		$this->load->model('healing_meta');
 		$this->load->model('relative_healing');
+		$this->load->model('disease');
 	}
 	public function index() {
 		$data['title'] = 'Лечение';
@@ -158,6 +159,18 @@ class Admin_Healing extends Admin_Controller
 
 			}
 
+			$disease = $this->disease->getPostsByLang($data['lang']);
+			$relative_disease = [];
+			foreach ($disease as $item) {
+				$relative_disease[] = [
+					'id' => $item['id'],
+					'post_title' => $item['title']
+				];
+			}
+			$data['relative_disease'] = [
+				'all_data' => $relative_disease,
+				'id' => $this->relative_healing->getArrByKey($id, 'disease')
+			];
 			$this->load->view('admin/edit_template/healing', $data);
 		}
 	}
@@ -165,7 +178,7 @@ class Admin_Healing extends Admin_Controller
 		
 		$id = $_POST['id'];
 		$candidate = MM_Module_Input::getData('permalink');
-		$data['permalink'] = $this->permalinkUpdate('research', $candidate, $id);
+		$data['permalink'] = $this->permalinkUpdate('healing', $candidate, $id);
 		$data['title'] = MM_Module_Input::getData('title');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['status'] = MM_Module_Checkbox::getData('public');
@@ -185,10 +198,12 @@ class Admin_Healing extends Admin_Controller
 		//--------- Post relative -----------//
 
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
+		$data_relative['disease'] = MM_Module_Relative::getData('relative_disease');
 		
 		$this->healing->updateDateById($id, $data);
 		$this->healing_meta->updateDateByForeignId($id, $data_meta);
 		$this->relative_healing->updateTranslateById($id, $data_relative['translate']);
+		$this->relative_healing->addArrByKey($id, 'disease', $data_relative['disease']);
 		redirect('/admin/healing/'.$id, 'location', 301);
 	}
 	public function add() {

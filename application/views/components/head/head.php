@@ -107,6 +107,12 @@
             $this->load->view('components/referral_main_screen/style.css');
             $this->load->view('components/referral_get_consultation/style.css');
         }
+        elseif ($body['post_type'] === 'healing') {
+          $this->load->view('components/healing_main_screen/style.css');
+          $this->load->view('components/healing_loop/style.css');
+          $this->load->view('components/pagination/style.css');
+          $this->load->view('components/stories_single_top/style.css');
+      }
     ?>
     </style>
 </head>

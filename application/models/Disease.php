@@ -1,10 +1,10 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Healing extends CI_Model
+class Disease extends CI_Model
 {
-	const NAME_DB = 'healing';
-	const NAME_META_DB = 'healing_meta';
-	const NAME_RELATIVE_DB = 'relative_healing';
+	const NAME_DB = 'disease';
+	const NAME_META_DB = 'disease_meta';
+	const NAME_RELATIVE_DB = 'relative_disease';
 	const ALL_FIELDS = [
 		't1.id',
 		'post_type',
@@ -73,15 +73,6 @@ class Healing extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	}
-	public function getPublicPostsByArrId($arr_id){
-		if(!empty($arr_id)) {
-			$this->db->where_in('id', $arr_id);
-			$this->db->where(['status' => 1]);
-			$query = $this->db->get(self::NAME_DB);
-			return $query->result_array();
-		}
-		return [];
-	}
 	public function getTotalPublicPostsByLang($lang) {
 		$this->db->where(
 			array(
@@ -108,6 +99,25 @@ class Healing extends CI_Model
 			->from(self::NAME_DB.' as t1')
 			->where(['status' => 1, 'lang' => $lang])
 			->join(self::NAME_RELATIVE_DB.' as t2', "t1.id = t2.post_id AND t2.key_meta = 'translate' AND t2.value = 0");
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function getPostsByLang($lang) {
+		$query = $this->db
+		              ->select('id, title')
+					  ->where(['lang' => $lang])
+					  ->get(self::NAME_DB);
+		return $query->result_array();
+	}
+	public function getSearchPublicPosts($lang, $keywords) {
+		$this->db->select(implode(',', self::ALL_FIELDS))
+			->from(self::NAME_DB.' as t1')
+			->where('t1.lang', $lang)
+			->where('t1.status', '1')
+			->like('title', $keywords)
+			->join(self::NAME_META_DB." as t2", "t1.id = t2.post_id")
+		    ->order_by('data_publick', 'DESC');
+
 		$query = $this->db->get();
 		return $query->result_array();
 	}

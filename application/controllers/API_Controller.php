@@ -15,6 +15,9 @@ class API_Controller extends CI_Controller
 		$this->load->model('post');
 		$this->load->model('post_meta');
 		$this->load->model('mails');
+		$this->load->model('disease');
+		$this->load->model('healing');
+		$this->load->model('relative_healing');
 	}
 	public function mailer() {
 		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
@@ -380,6 +383,40 @@ class API_Controller extends CI_Controller
 		else $lang_prefix = '/ru';
 		if(!empty($posts)) {
 			$confirm['data'] = CardBuilder::storiesCard($posts, $lang_prefix);
+		}
+		$confirm['status'] = 'ok';
+		echo json_encode($confirm);
+	}
+	public function healing() {
+		$confirm['status'] = 'error';
+		$confirm['data'] = [];
+		$lang = $this->input->post('lang');
+		$keyword = $this->input->post('keyword');
+	
+		$posts = $this->disease->getSearchPublicPosts($lang, $keyword);
+		if($this->input->post('lang') === 'ua') $lang_prefix = '';
+		else $lang_prefix = '/ru';
+		if(!empty($posts)) {
+			for($i = 0; $i<count($posts); $i++) {
+				$confirm['data'][$i]['title'] = $posts[$i]['title'];
+				$confirm['data'][$i]['permalink'] = $lang_prefix.'/'.$posts[$i]['slug'].'/'.$posts[$i]['permalink'];
+				$confirm['data'][$i]['child'] = [];
+				$child = $this->relative_healing->getArrByKeyValue('disease', $posts[$i]['id']);
+
+				if(!empty($child)) {
+					$arr_id = [];
+					foreach($child as $item) $arr_id[] = $item['post_id'];
+					$healings = $this->healing->getPublicPostsByArrId($arr_id);
+					if(!empty($healings)) {
+						foreach($healings as $item) {
+							$confirm['data'][$i]['child'][] = [
+								'title' => $item['title'],
+								'permalink' => $lang_prefix.'/'.$item['slug'].'/'.$item['permalink']
+							];
+						}
+					}
+				}
+			}
 		}
 		$confirm['status'] = 'ok';
 		echo json_encode($confirm);
