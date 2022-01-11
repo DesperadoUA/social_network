@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include ROOT.'/application/core/Admin_Controller.php';
 include ROOT.'/admin_modules/index.php';
 
-class Admin_Healing extends Admin_Controller
+class Admin_Doctor extends Admin_Controller
 {
 	const ARR_KEY = [
 		[
@@ -96,36 +96,65 @@ class Admin_Healing extends Admin_Controller
 				'editor' => 'MM_Module_Input',
 				'key' => 'name',
 				'JSON' => false
+			],
+			[
+				'type' => 'string',
+				'editor' => 'MM_Module_Input',
+				'key' => 'education',
+				'JSON' => false
 			]
-
 		],
 	];
-	const DB = 'healing';
+	const DB = 'doctors';
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('healing');
-		$this->load->model('healing_meta');
-		$this->load->model('relative_healing');
-		$this->load->model('disease');
+		$this->load->model('post');
 		$this->load->model('doctors');
+		$this->load->model('doctors_meta');
+		$this->load->model('relative_doctors');
+		$this->load->model('relative_research');
+		$this->load->model('relative_healing');
 	}
 	public function index() {
-		$data['title'] = 'Лечение';
-		$data['pages'] = $this->healing->getAllPages();
+		$data['title'] = 'Врачи';
+		$data['pages'] = $this->doctors->getAllPages();
 		$this->load->view('admin/page', $data);
 	}
 	public function single($id) {
-		
-		$data = $this->healing->getDataByID($id);
+		$data = $this->doctors->getDataByID($id);
 		if(empty($data)) show_404();
 		else {
 			$data = $data[0];
+			$clinics = $this->post->getPostsByLang('clinic', $data['lang']);
+			$relative_clinics = [];
+			foreach ($clinics as $clinic) {
+				$relative_clinics[] = [
+					'id' => $clinic['id'],
+					'post_title' => $clinic['title']
+				];
+			}
+			$data['relative_clinics'] = [
+				'all_data' => $relative_clinics,
+				'id' => $this->relative_doctors->getArrByKey($id, 'clinic_id')
+			];
+
+			$cities = $this->post->getPostsByLang('city', $data['lang']);
+			$relative_city = [];
+			foreach ($cities as $city) {
+				$relative_city[] = [
+					'id' => $city['id'],
+					'post_title' => $city['title']
+				];
+			}
+			$data['relative_cityes'] = [
+				'all_data' => $relative_city,
+				'id' => $this->relative_doctors->getArrByKey($id, 'city_id')
+			];
 
 			if($data['lang'] === 'ru') $lang_translate = 'ua';
 			else $lang_translate = 'ru';
-
-			$post_without_translate = $this->healing->getPostWithOutTranslate($lang_translate);
-			$current_translate = $this->relative_healing->getDataByKey($data['id'], 'translate');
+			$post_without_translate = $this->doctors->getPostWithOutTranslate($lang_translate);
+			$current_translate = $this->relative_doctors->getDataByKey($data['id'], 'translate');
 			$post_translate = [];
 			foreach ($post_without_translate as $post) {
 				$post_translate[] = [
@@ -141,7 +170,7 @@ class Admin_Healing extends Admin_Controller
 				];
 			}
 			else {
-				$current = $this->healing->getDataById($current_translate);
+				$current = $this->doctors->getDataById($current_translate);
 				if(!empty($current)) {
 					$current_post_translate = [
 						'id' => $current[0]['id'],
@@ -161,33 +190,7 @@ class Admin_Healing extends Admin_Controller
 
 			}
 
-			$disease = $this->disease->getPostsByLang($data['lang']);
-			$relative_disease = [];
-			foreach ($disease as $item) {
-				$relative_disease[] = [
-					'id' => $item['id'],
-					'post_title' => $item['title']
-				];
-			}
-			$data['relative_disease'] = [
-				'all_data' => $relative_disease,
-				'id' => $this->relative_healing->getArrByKey($id, 'disease')
-			];
-
-			$doctors = $this->doctors->getPostsByLang($data['lang']);
-			$relative_doctors = [];
-			foreach ($doctors as $item) {
-				$relative_doctors[] = [
-					'id' => $item['id'],
-					'post_title' => $item['title']
-				];
-			}
-			$data['relative_doctors'] = [
-				'all_data' => $relative_doctors,
-				'id' => $this->relative_healing->getArrByKey($id, 'doctor_id')
-			];
-
-			$this->load->view('admin/edit_template/healing', $data);
+			$this->load->view('admin/edit_template/doctor', $data);
 		}
 	}
 	public function update() {
@@ -210,25 +213,31 @@ class Admin_Healing extends Admin_Controller
 		//--------- Post meta -----------//
 
 		$data_meta['name'] = MM_Module_Input::getData('name');
+		$data_meta['education'] = MM_Module_Input::getData('education');
+		$data_meta['degree'] = MM_Module_Input::getData('degree');
+		$data_meta['specialization'] = MM_Module_Input::getData('specialization');
+		$data_meta['experience'] = MM_Module_Input::getData('experience');
+		$data_meta['experience_cr'] = MM_Module_Input::getData('experience_cr');
+		$data_meta['region'] = MM_Module_Input::getData('region');
 
 		//--------- Post relative -----------//
 
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
-		$data_relative['disease'] = MM_Module_Relative::getData('relative_disease');
-		$data_relative['doctors'] = MM_Module_Relative::getData('relative_doctors');
+		$data_relative['clinic'] = MM_Module_Relative::getData('relative_clinic');
+		$data_relative['city'] = MM_Module_Relative::getData('relative_city');
 		
-		$this->healing->updateDateById($id, $data);
-		$this->healing_meta->updateDateByForeignId($id, $data_meta);
-		$this->relative_healing->updateTranslateById($id, $data_relative['translate']);
-		$this->relative_healing->addArrByKey($id, 'disease', $data_relative['disease']);
-		$this->relative_healing->addArrByKey($id, 'doctor_id', $data_relative['doctors']);
-		redirect('/admin/healing/'.$id, 'location', 301);
+		$this->doctors->updateDateById($id, $data);
+		$this->doctors_meta->updateDateByForeignId($id, $data_meta);
+		$this->relative_doctors->updateTranslateById($id, $data_relative['translate']);
+		$this->relative_doctors->addArrByKey($id, 'clinic_id', $data_relative['clinic']);
+		$this->relative_doctors->addArrByKey($id, 'city_id', $data_relative['city']);
+		redirect('/admin/doctor/'.$id, 'location', 301);
 	}
 	public function add() {
-		$data['title'] = "Добавить лучение";
+		$data['title'] = "Добавить врача";
 		$data['current_date'] = date("Y-m-d H:i:s");
 		$data['thumbnail'] = '';
-		$this->load->view('admin/add_template/healing', $data);
+		$this->load->view('admin/add_template/doctor', $data);
 	}
 	public function addPost(){
 		
@@ -250,17 +259,23 @@ class Admin_Healing extends Admin_Controller
 		//--------- Post meta -----------//
 
 		$data_meta['name'] = MM_Module_Input::getData('name');
+		$data_meta['education'] = MM_Module_Input::getData('education');
+		$data_meta['degree'] = MM_Module_Input::getData('degree');
+		$data_meta['specialization'] = MM_Module_Input::getData('specialization');
+		$data_meta['experience'] = MM_Module_Input::getData('experience');
+		$data_meta['experience_cr'] = MM_Module_Input::getData('experience_cr');
+		$data_meta['region'] = MM_Module_Input::getData('region');
 
-		$insert_id = $this->healing->insert($data);
-		$this->healing_meta->updateDateByForeignId($insert_id, $data_meta);
-		$this->relative_healing->addDataByKey($insert_id, 'translate', '0');
-		redirect('/admin/healing/'.$insert_id, 'location', 301);
-		
+		$insert_id = $this->doctors->insert($data);
+		$this->doctors_meta->updateDateByForeignId($insert_id, $data_meta);
+		$this->relative_doctors->addDataByKey($insert_id, 'translate', '0');
+		redirect('/admin/doctor/'.$insert_id, 'location', 301);
 	}
-	public function delete(){
-		
-		$this->relative_healing->deleteTranslateById($_POST['id']);
-		$this->healing->delete($_POST['id']);
-		redirect('/admin/healing', 'location', 301);
+	public function delete() {
+		$this->relative_research->deleteByPostIdKey($_POST['id'], 'doctor_id');
+		$this->relative_healing->deleteByPostIdKey($_POST['id'], 'doctor_id');
+		$this->relative_doctors->deleteTranslateById($_POST['id']);
+		$this->doctors->delete($_POST['id']);
+		redirect('/admin/doctor', 'location', 301);
 	}
 }

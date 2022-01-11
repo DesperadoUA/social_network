@@ -11,6 +11,8 @@
 	searchClinic.initial()
 	const searchResearch = await import('/src_js/search_research/script.js?v=1')
 	searchResearch.initial()
+	const searchDoctors = await import('/src_js/search_doctors/script.js')
+	searchDoctors.initial()
 	const formSubscription = await import('/src_js/form_subscription/script.js')
 	formSubscription.initial()
 	const formSubscriptionMain = await import('/src_js/form_subscription_main/script.js')

@@ -170,6 +170,7 @@ class Admin_Research extends Admin_Controller
 		$this->load->model('post');
 		$this->load->model('research_meta');
 		$this->load->model('relative_research');
+		$this->load->model('doctors');
 	}
 	public function index() {
 		$data['title'] = 'Исследования';
@@ -221,6 +222,19 @@ class Admin_Research extends Admin_Controller
 				'id' => $this->relative_research->getArrByKey($id, 'city_id')
 			];
 
+			$doctors = $this->doctors->getPostsByLang($data['lang']);
+			$relative_doctors = [];
+			foreach ($doctors as $doctor) {
+				$relative_doctors[] = [
+					'id' => $doctor['id'],
+					'post_title' => $doctor['title']
+				];
+			}
+			$data['relative_doctors'] = [
+				'all_data' => $relative_doctors,
+				'id' => $this->relative_research->getArrByKey($id, 'doctor_id')
+			];
+
 			if($data['lang'] === 'ru') $lang_translate = 'ua';
 			else $lang_translate = 'ru';
 
@@ -263,7 +277,6 @@ class Admin_Research extends Admin_Controller
 
 			if(empty($data['additional_fields'])) $data['additional_fields'] = [];
 			else $data['additional_fields'] = json_decode($data['additional_fields'], true);
-
 			$this->load->view('admin/edit_template/research', $data);
 		}
 	}
@@ -308,6 +321,7 @@ class Admin_Research extends Admin_Controller
 		$data_relative['clinic'] = MM_Module_Relative::getData('relative_clinic');
 		$data_relative['city'] = MM_Module_Relative::getData('relative_city');
 		$data_relative['research'] = MM_Module_Relative::getData('relative_research');
+		$data_relative['doctors'] = MM_Module_Relative::getData('relative_doctors');
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
 		
 		$this->research->updateDateById($id, $data);
@@ -315,6 +329,7 @@ class Admin_Research extends Admin_Controller
 		$this->relative_research->addArrByKey($id, 'city_id', $data_relative['city']);
 		$this->relative_research->addArrByKey($id, 'clinic_id', $data_relative['clinic']);
 		$this->relative_research->addArrByKey($id, 'research_id', $data_relative['research']);
+		$this->relative_research->addArrByKey($id, 'doctor_id', $data_relative['doctors']);
 		$this->relative_research->updateTranslateById($id, $data_relative['translate']);
 		redirect('/admin/research/'.$id, 'location', 301);
 	}

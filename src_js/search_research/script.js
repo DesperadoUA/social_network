@@ -105,42 +105,42 @@ export const initial = function() {
 					}
 				})
 		})
-	}
-	if(clearFilters){
-		clearFilters.addEventListener('click', () => {
-			const optionsRegion = document.querySelectorAll('.js_search_research_region option');
-			for (let i = 0, l = optionsRegion.length; i < l; i++) {
-				optionsRegion[i].selected = optionsRegion[i].defaultSelected
-			}
-
-			const optionsCity = document.querySelectorAll('.js_search_research_city option');
-			for (let i = 0, l = optionsCity.length; i < l; i++) {
-				optionsCity[i].selected = optionsCity[i].defaultSelected
-			}
-			document.querySelector('.js_search_research_keyword').value = ''
-
-			const optionsDisease = document.querySelectorAll('.js_search_research_disease option');
-			for (let i = 0, l = optionsDisease.length; i < l; i++) {
-				optionsDisease[i].selected = optionsDisease[i].defaultSelected
-			}
-
-			const therapeuticArea = document.querySelectorAll('.js_search_research_therapeutic_area option');
-			for (let i = 0, l = therapeuticArea.length; i < l; i++) {
-				therapeuticArea[i].selected = therapeuticArea[i].defaultSelected
-			}
-
-			const optionsClinic = document.querySelectorAll('.js_search_research_clinic option');
-			for (let i = 0, l = optionsClinic.length; i < l; i++) {
-				optionsClinic[i].selected = optionsClinic[i].defaultSelected
-			}
-
-			paidCheckbox[0].classList.add('js_paid_research')
-			paidCheckbox[0].classList.add('active_checkbox')
-
-			paidCheckbox[1].classList.remove('js_paid_research')
-			paidCheckbox[1].classList.remove('active_checkbox')
-			
-		})
+		if(clearFilters){
+			clearFilters.addEventListener('click', () => {
+				const optionsRegion = document.querySelectorAll('.js_search_research_region option');
+				for (let i = 0, l = optionsRegion.length; i < l; i++) {
+					optionsRegion[i].selected = optionsRegion[i].defaultSelected
+				}
+	
+				const optionsCity = document.querySelectorAll('.js_search_research_city option');
+				for (let i = 0, l = optionsCity.length; i < l; i++) {
+					optionsCity[i].selected = optionsCity[i].defaultSelected
+				}
+				document.querySelector('.js_search_research_keyword').value = ''
+	
+				const optionsDisease = document.querySelectorAll('.js_search_research_disease option');
+				for (let i = 0, l = optionsDisease.length; i < l; i++) {
+					optionsDisease[i].selected = optionsDisease[i].defaultSelected
+				}
+	
+				const therapeuticArea = document.querySelectorAll('.js_search_research_therapeutic_area option');
+				for (let i = 0, l = therapeuticArea.length; i < l; i++) {
+					therapeuticArea[i].selected = therapeuticArea[i].defaultSelected
+				}
+	
+				const optionsClinic = document.querySelectorAll('.js_search_research_clinic option');
+				for (let i = 0, l = optionsClinic.length; i < l; i++) {
+					optionsClinic[i].selected = optionsClinic[i].defaultSelected
+				}
+	
+				paidCheckbox[0].classList.add('js_paid_research')
+				paidCheckbox[0].classList.add('active_checkbox')
+	
+				paidCheckbox[1].classList.remove('js_paid_research')
+				paidCheckbox[1].classList.remove('active_checkbox')
+				
+			})
+		}
 	}
 	function removePagination(){
 		const pagination = document.querySelector('.pagination')

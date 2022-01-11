@@ -139,6 +139,13 @@
 	<?php
 	$settings = [
 		'class_wrapper' => 'full_size',
+		'module_title' => 'Врачи'
+	];
+	MM_Module_Relative::create('relative_doctors', $settings, $relative_doctors);
+	?>
+	<?php
+	$settings = [
+		'class_wrapper' => 'full_size',
 		'module_title' => 'Переводы'
 	];
 	MM_Module_Select::create('translate', $settings, $post_translate);

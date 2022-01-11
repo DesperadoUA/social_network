@@ -81,6 +81,7 @@ $route['api/subscription'] = 'API_Controller/subscription';
 $route['api/subscription-main'] = 'API_Controller/subscriptionMain';
 $route['api/stories'] = 'API_Controller/stories';
 $route['api/healing'] = 'API_Controller/healing';
+$route['api/doctors'] = 'API_Controller/doctors';
 
 $route['ru/research'] = 'Research_Controller';
 $route['research-ua'] = 'Research_Controller';
@@ -122,6 +123,13 @@ $route['healing-ua/page/(:any)'] = 'Healing_Controller/index';
 $route['ru/healing/(:any)'] = 'Healing_Controller/single/$1';
 $route['healing/(:any)'] = 'Healing_Controller/single/$1';
 
+$route['ru/doctors'] = 'Doctor_Contorller/index';
+$route['doctors-ua'] = 'Doctor_Contorller/index';
+$route['ru/doctors/page/(:any)'] = 'Doctor_Contorller/index';
+$route['doctors-ua/page/(:any)'] = 'Doctor_Contorller/index';
+$route['ru/doctor/(:any)'] = 'Doctor_Contorller/single/$1';
+$route['doctor/(:any)'] = 'Doctor_Contorller/single/$1';
+
 /* Admin */
 $route['admin/static-page/update'] = 'admin/staticPageUpdate';
 $route['admin/static-page/(:any)'] = 'admin/pageEdit/$1';
@@ -152,6 +160,13 @@ $route['admin/healing/delete'] = 'admin_healing/delete';
 $route['admin/healing/add'] = 'admin_healing/add';
 $route['admin/healing/add-post'] = 'admin_healing/addPost';
 $route['admin/healing/(:any)'] = 'admin_healing/single/$1';
+
+$route['admin/doctor'] = 'Admin_doctor';
+$route['admin/doctor/update'] = 'admin_doctor/update';
+$route['admin/doctor/delete'] = 'admin_doctor/delete';
+$route['admin/doctor/add'] = 'admin_doctor/add';
+$route['admin/doctor/add-post'] = 'admin_doctor/addPost';
+$route['admin/doctor/(:any)'] = 'admin_doctor/single/$1';
 
 $route['admin/disease'] = 'Admin_disease';
 $route['admin/disease/update'] = 'admin_disease/update';

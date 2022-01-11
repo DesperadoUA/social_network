@@ -112,7 +112,19 @@
           $this->load->view('components/healing_loop/style.css');
           $this->load->view('components/pagination/style.css');
           $this->load->view('components/stories_single_top/style.css');
-      }
+       }
+       elseif ($body['post_type'] === 'doctors') {
+          $this->load->view('components/doctors_main_screen/style.css');
+          $this->load->view('components/doctors_loop/style.css');
+          $this->load->view('components/pagination/style.css');
+       }
+       elseif ($body['post_type'] === 'doctor') {
+          $this->load->view('components/doctors_loop/style.css');
+          $this->load->view('components/pagination/style.css');
+          $this->load->view('components/doctors_single_top/style.css');
+          $this->load->view('components/research_loop/style.css');
+          $this->load->view('components/title_section/style.css');
+       }
     ?>
     </style>
 </head>

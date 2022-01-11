@@ -100,6 +100,7 @@ class Admin_Disease extends Admin_Controller
 
 		],
 	];
+	const DB = 'disease';
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('disease');
@@ -165,7 +166,7 @@ class Admin_Disease extends Admin_Controller
 		
 		$id = $_POST['id'];
 		$candidate = MM_Module_Input::getData('permalink');
-		$data['permalink'] = $this->permalinkUpdate('disease', $candidate, $id);
+		$data['permalink'] = $this->permalinkUpdate(self::DB, $candidate, $id);
 		$data['title'] = MM_Module_Input::getData('title');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['status'] = MM_Module_Checkbox::getData('public');
@@ -200,7 +201,7 @@ class Admin_Disease extends Admin_Controller
 	public function addPost(){
 		
 		$data['title'] = MM_Module_Cyr_To_Lat::getData('title');
-		$data['permalink'] = $this->newPermalink('disease', MM_Module_Cyr_To_Lat::getData('permalink'));
+		$data['permalink'] = $this->newPermalink(self::DB, MM_Module_Cyr_To_Lat::getData('permalink'));
 		$data['status'] = MM_Module_Checkbox::getData('public');
 		$data['h1'] = MM_Module_Input::getData('h1');
 		$data['meta_title'] = MM_Module_Input::getData('meta_title');

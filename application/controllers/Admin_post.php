@@ -56,6 +56,8 @@ class Admin_Post extends Admin_Controller
 		parent::__construct();
 		$this->load->model('post');
 		$this->load->model('post_meta');
+		$this->load->model('relative_research');
+		$this->load->model('relative_doctors');
 	}
 	public function index() {
 		$data['title'] = 'Посты';
@@ -183,6 +185,10 @@ class Admin_Post extends Admin_Controller
 		$id = $_POST['id'];
 		$post_type = $this->post->getPostTypeById($id);
 		$this->relative_post->deleteTranslateById($id);
+		$this->relative_research->deleteByPostIdKey($_POST['id'], 'city_id');
+		$this->relative_research->deleteByPostIdKey($_POST['id'], 'clinic_id');
+		$this->relative_doctors->deleteByPostIdKey($_POST['id'], 'clinic_id');
+		$this->relative_doctors->deleteByPostIdKey($_POST['id'], 'city_id');
 		$this->post->delete($id);
 		redirect('/admin/'.$post_type.'/', 'location', 301);
 	}

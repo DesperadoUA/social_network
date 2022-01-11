@@ -19,4 +19,23 @@ class CardBuilder
 		}
 		return $newPosts;
 	}
+	static function researchCard($posts, $lang_prefix){
+		if(empty($posts)) return [];
+		$newPosts = [];
+		foreach($posts as $item) {
+			$newPosts[] = [
+				'id' => $item['id'],
+				'title' => $item['title'],
+				'permalink' => $lang_prefix.'/'.$item['slug'].'/'.$item['permalink'],
+				'data_start' => substr($item['data_start'], 0, 10),
+			    'data_finish' => substr($item['data_finish'], 0, 10),
+				'paid' => $item['paid'],
+				'protocol_name' => $item['protocol_name'],
+				'disease' => $item['disease'],
+				'therapeutic_area' => $item['therapeutic_area'],
+				'name_organization' => $item['name_organization']
+			];
+		}
+		return $newPosts;
+	}
 }

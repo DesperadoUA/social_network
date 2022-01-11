@@ -18,6 +18,8 @@ class API_Controller extends CI_Controller
 		$this->load->model('disease');
 		$this->load->model('healing');
 		$this->load->model('relative_healing');
+		$this->load->model('doctors');
+		$this->load->model('relative_doctors');
 	}
 	public function mailer() {
 		$mails = json_decode($this->options->getDataByType('mails')[0]['content'], true);
@@ -419,6 +421,72 @@ class API_Controller extends CI_Controller
 			}
 		}
 		$confirm['status'] = 'ok';
+		echo json_encode($confirm);
+	}
+	public function doctors() {
+		$confirm['status'] = 'error';
+		$lang = $this->input->post('lang');
+		$region_form = $this->input->post('region');
+		$city_form = $this->input->post('city');
+		$name_form = $this->input->post('name');
+		$specialization_form = $this->input->post('specialization');
+		$clinics_form = $this->input->post('clinics');
+		$cr_experience_form = $this->input->post('cr_experience');
+
+		if($this->input->post('lang') === 'ua') $lang_prefix = '';
+		else $lang_prefix = '/ru';
+
+		$all_posts = $this->doctors->getPublicPosts(0, 1000, $lang);
+		$response = [];
+		$post_data = [];
+		foreach($all_posts as $item) {
+			$city_id = $this->relative_doctors->getDataByKey($item['id'], 'city_id');
+			$clinic_id = $this->relative_doctors->getDataByKey($item['id'], 'clinic_id');
+			$city_arr = $this->post->getPublicPostsByArrId($city_id);
+			$clinic_arr = $this->post->getPublicPostsByArrId($clinic_id);
+			$city = empty($city_arr) ? '' : $city_arr[0]['title'];
+			$clinic = empty($clinic_arr) ? '' : $clinic_arr[0]['title'];
+
+			$research_arr = $this->relative_research->getArrByKeyValue('doctor_id', $item['id']);
+			$research_id = [];
+			foreach($research_arr as $id) $research_id[] = $id['post_id'];
+			$research = $this->research->getPostsByArrId($research_id);
+
+			$year = ($item['experience_cr'] > 4) 
+				        ? $item['experience_cr']." ".TRANSLATE['YEAR_PLURAL'][LANG] 
+						: $item['experience_cr']." ".TRANSLATE['YEAR'][LANG];
+
+			$post_data[] = array_merge($item, [
+				'permalink' => $lang_prefix.'/'.$item['slug'].'/'.$item['permalink'],
+				'city' => $city,
+				'clinic' => $clinic,
+				'experience_cr' => $year,
+				'count_research' => count($research)
+			]);
+		}
+		foreach($post_data as $item) {
+			if($region_form !== TRANSLATE['CHOOSE_REGION'][$lang]) {
+				if(stristr($item['region'], $region_form, true) === FALSE) continue;
+			}
+			if($city_form !== TRANSLATE['CHOOSE_CITY'][$lang]) {
+				if(stristr($item['city'], $city_form, true) === FALSE) continue;
+			}
+			if($specialization_form !== TRANSLATE['SPECIALIZATION'][$lang]) {
+				if(stristr($item['specialization'], $specialization_form, true) === FALSE) continue;
+			}
+			if(!empty($name_form)) {
+				if(stristr($item['name'], $name_form, true) === FALSE) continue;
+			}
+			if(!empty($clinics_form)) {
+				if(stristr($item['clinic'], $clinics_form, true) === FALSE) continue;
+			}
+			if(!empty($cr_experience_form)) {
+				if($item['experience_cr'] != $cr_experience_form) continue;
+			}
+			$response[] = $item;
+		}
+        $confirm['status'] = 'ok';
+		$confirm['data'] = $response;
 		echo json_encode($confirm);
 	}
 }

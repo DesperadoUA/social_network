@@ -70,13 +70,20 @@
                 </ul>
             </li>
             <li class="menu_item">
-                <span>10</span>Settings
+                <span>10</span>Врачи
+                <ul class="drop_down_menu">
+                    <li><a href="/admin/doctor">Все врачи</a></li>
+                    <li><a href="/admin/doctor/add">Добавить врача</a></li>
+                </ul>
+            </li>
+            <li class="menu_item">
+                <span>11</span>Settings
                 <ul class="drop_down_menu">
                     <li><a href="/admin/settings">Все настройки</a></li>
                 </ul>
             </li>
             <li class="menu_item">
-                <span>11</span>Options
+                <span>12</span>Options
                 <ul class="drop_down_menu">
                     <li><a href="/admin/options">Все опции</a></li>
                 </ul>

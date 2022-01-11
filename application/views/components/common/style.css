@@ -48,3 +48,19 @@ button {
 .bg_gray {
     background: #f4f5f5!important;
 }
+.gradient_line {
+    height: 1px;
+    width: 100%;
+    background: #fa5e66;
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%);
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+}
+.empty_result {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #00a2b4;
+    text-decoration: none;
+    font-size: 40px;
+    font-family: Noah-regular;
+}
