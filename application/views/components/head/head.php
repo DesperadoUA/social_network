@@ -112,6 +112,7 @@
           $this->load->view('components/healing_loop/style.css');
           $this->load->view('components/pagination/style.css');
           $this->load->view('components/stories_single_top/style.css');
+          $this->load->view('components/healing_autor/style.css');
        }
        elseif ($body['post_type'] === 'doctors') {
           $this->load->view('components/doctors_main_screen/style.css');

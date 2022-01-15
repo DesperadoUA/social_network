@@ -22,7 +22,11 @@ class Healing extends CI_Model
 		'data_change',
 		'slug',
 		'lang',
-		'name'
+		'autor_name',
+		'autor_experience',
+		'autor_specialization',
+		'autor_clinic',
+		'autor_thumbnail'
 	];
 	public function __construct() {
 		$this->load->database();

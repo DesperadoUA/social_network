@@ -1,0 +1,98 @@
+.healing_autor {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.healing_autor_card {
+    background-image: -webkit-linear-gradient( 0deg, rgba(250,94,102,0.102) 0%, rgba(0,120,186,0.102) 50%, rgba(0,190,176,0.102) 100%);
+    padding: 50px 88px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    width: 900px;
+    max-width: 100%;
+    display: flex;
+}
+.healing_autor_card_left {
+    width: 200px;
+}
+.healing_autor_card_left img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+.healing_autor_card_right {
+    flex-grow: 1;
+    padding-left: 40px;
+}
+.healing_autor_card_title {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 25px;
+    font-family: 'Noah-Grotesque';
+    font-size: 32px;
+    font-weight: 100;
+    line-height: 32px;
+    position: relative;
+}
+.healing_autor_card_title::before {
+    content: '';
+    width: 80px;
+    height: 5px;
+    background: #fa5e66;
+    background: -moz-linear-gradient(left, #fa5e66 0%, #0078ba 50%, #00beb0 100%, #207cca 100%, #7db9e8 100%, #00beb0 100%);
+    background: -webkit-linear-gradient(left, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    background: linear-gradient(to right, #fa5e66 0%,#0078ba 50%,#00beb0 100%,#207cca 100%,#7db9e8 100%,#00beb0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5e66', endColorstr='#00beb0',GradientType=1 );
+    position: absolute;
+    left: -20px;
+    bottom: -20px;
+ }
+ .healing_autor_card_text {
+     display: flex;
+ }
+ .healing_autor_card_text_left, .healing_autor_card_text_right {
+     padding: 5px 5px 5px 0px;
+     font-family: 'Noah-Grotesque';
+     font-size: 18px;
+
+ }
+ .healing_autor_card_text_left {
+    font-weight: bold;
+    width: 170px;
+ }
+ .healing_autor_card_text_right {
+    font-weight: normal;
+ }
+ @media (min-width: 319px) and (max-width: 767px) {
+    .healing_autor_card {
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+    .healing_autor_card_left {
+        width: 100%;
+        text-align: center;
+    }
+    .healing_autor_card_text_left, .healing_autor_card_text_right {
+        width: 100%;
+    }
+    .healing_autor_card_right {
+        margin-top: 25px;
+        padding-left: 0px;
+    }
+    .healing_autor_card_title {
+        text-align: center;
+    }
+    .healing_autor_card_title:before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .healing_autor_card_text {
+        flex-wrap: wrap;
+    }
+    .healing_autor_card_text_left, .healing_autor_card_text_right {
+        width: 100%;
+    }
+ }
+ @media (min-width: 768px) and (max-width: 1200px) {
+    .healing_autor_card {
+        padding: 15px;
+    }
+ }

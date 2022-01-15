@@ -94,10 +94,27 @@ class Admin_Healing extends Admin_Controller
 			[
 				'type' => 'string',
 				'editor' => 'MM_Module_Input',
-				'key' => 'name',
+				'key' => 'autor_name',
 				'JSON' => false
+			],
+			[
+				'type' => 'string',
+				'editor' => 'MM_Module_Input',
+				'key' => 'autor_experience',
+				'JSON' => false
+			],
+			[
+				'type' => 'string',
+				'editor' => 'MM_Module_Input',
+				'key' => 'autor_specialization',
+				'JSON' => false
+			],
+			[
+				'type' => 'string',
+				'editor' => 'MM_Module_Image',
+				'key' => 'autor_thumbnail',
+				'JSON' => true
 			]
-
 		],
 	];
 	const DB = 'healing';
@@ -209,8 +226,11 @@ class Admin_Healing extends Admin_Controller
 
 		//--------- Post meta -----------//
 
-		$data_meta['name'] = MM_Module_Input::getData('name');
-
+		$data_meta['autor_name'] = MM_Module_Input::getData('autor_name');
+		$data_meta['autor_experience'] = MM_Module_Input::getData('autor_experience');
+		$data_meta['autor_specialization'] = MM_Module_Input::getData('autor_specialization');
+		$data_meta['autor_clinic'] = MM_Module_Input::getData('autor_clinic');
+		$data_meta['autor_thumbnail'] = json_encode(MM_Module_Image::getData('autor_thumbnail'), JSON_UNESCAPED_UNICODE);
 		//--------- Post relative -----------//
 
 		$data_relative['translate'] = MM_Module_Select::getData('translate');
@@ -249,7 +269,11 @@ class Admin_Healing extends Admin_Controller
 
 		//--------- Post meta -----------//
 
-		$data_meta['name'] = MM_Module_Input::getData('name');
+		$data_meta['autor_name'] = MM_Module_Input::getData('autor_name');
+		$data_meta['autor_experience'] = MM_Module_Input::getData('autor_experience');
+		$data_meta['autor_specialization'] = MM_Module_Input::getData('autor_specialization');
+		$data_meta['autor_clinic'] = MM_Module_Input::getData('autor_clinic');
+		$data_meta['autor_thumbnail'] = json_encode(MM_Module_Image::getData('autor_thumbnail'), JSON_UNESCAPED_UNICODE);
 
 		$insert_id = $this->healing->insert($data);
 		$this->healing_meta->updateDateByForeignId($insert_id, $data_meta);

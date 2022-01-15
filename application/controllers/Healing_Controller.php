@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include ROOT.'/application/core/Front_Controller.php';
+include ROOT.'/application/helpers/CardBuilder.php';
 
 class Healing_Controller extends Front_Controller
 {
@@ -11,6 +12,9 @@ class Healing_Controller extends Front_Controller
 		$this->load->model('disease');
 		$this->load->model('healing');
 		$this->load->model('relative_healing');
+		$this->load->model('doctors');
+		$this->load->model('relative_doctors');
+		$this->load->model('post');
 	}
 
 	public function index() {
@@ -98,6 +102,30 @@ class Healing_Controller extends Front_Controller
 			$translate_id = $this->relative_healing->getDataByKey($data['id'], 'translate');
 			if(!empty($translate_id)) {
 				$translate = $this->healing->getPublicDataById($translate_id);
+				$doctor_id = $this->relative_healing->getDataByKey($data['id'], 'doctor_id');
+				$doctor = $this->doctors->getPublicDataById($doctor_id);
+				$this->data['body']['autor'] = [];
+				if(!empty($doctor)) {
+					$clinic_id = $this->relative_doctors->getDataByKey($doctor_id, 'clinic_id');
+			        $clinic_arr = $this->post->getPublicPostsByArrId($clinic_id);
+			        $clinic = empty($clinic_arr) ? '' : $clinic_arr[0]['title'];
+					$doctor[0]['clinic'] = $clinic;
+					$this->data['body']['autor'] = CardBuilder::articleDoctorCard($doctor);
+				} else {
+					$year = ($data['autor_experience'] > 4) 
+				        ? $data['autor_experience']." ".TRANSLATE['YEAR_PLURAL'][LANG] 
+						: $data['autor_experience']." ".TRANSLATE['YEAR'][LANG];
+					if(!empty($data['autor_name'])) {
+						$this->data['body']['autor'][] = [
+							'permalink' => '',
+							'title' => $data['autor_name'],
+							'experience' => $year,
+							'clinic' => $data['autor_clinic'],
+							'specialization' => $data['autor_specialization'],
+							'thumbnail' => json_decode($data['autor_thumbnail'], true)
+						];
+					}
+				}
 				if(!empty($translate)) {
 					$this->data['body']['permalink'] = LANG_PREFIX_LINK.'/'.$this->data['body']['slug'].'/'.$this->data['body']['permalink'];
 					LANG === 'ru' ? $PREFIX_TRANSLATE = '' : $PREFIX_TRANSLATE = '/ru';

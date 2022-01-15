@@ -38,4 +38,23 @@ class CardBuilder
 		}
 		return $newPosts;
 	}
+	static function articleDoctorCard($posts) {
+		if(empty($posts)) return [];
+		$new_posts = [];
+		foreach($posts as $item) {
+			$lang_prefix = $item['lang'] = 'ua' ? '' : '/ru';
+			$year = ($item['experience'] > 4) 
+				        ? $item['experience']." ".TRANSLATE['YEAR_PLURAL'][LANG] 
+						: $item['experience']." ".TRANSLATE['YEAR'][LANG];
+			$new_posts[] = [
+				'title' => $item['title'],
+				'specialization' => $item['specialization'],
+				'permalink' => $lang_prefix.'/'.$item['slug'].'/'.$item['permalink'],
+				'experience' => $year,
+				'clinic' => $item['clinic'],
+				'thumbnail' => json_decode($item['thumbnail'], true)
+			];
+		}
+		return $new_posts;
+	}
 }
